@@ -1,0 +1,6 @@
+buildlog*
+archlinux-linux/
+src/
+linux-*.tar.lz
+linux-*.tar.zst
+src-cache/
