@@ -1,7 +1,7 @@
 pkgbase = linux-mainline
 	pkgdesc = Linux Mainline
 	pkgver = 5.13rc7
-	pkgrel = 1
+	pkgrel = 2
 	url = https://kernel.org/
 	arch = x86_64
 	license = GPL2
@@ -19,6 +19,7 @@ pkgbase = linux-mainline
 	source = linux-mainline::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v5.13-rc7
 	source = config
 	source = 5.14-ACPI-processor-idle-Fix-up-C-state-latency-if-not-ordered.patch
+	source = PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch
 	source = 5.14-nvme-pci-look-for-StorageD3Enable-on-companion-ACPI-device.patch
 	source = 5.14-ACPI-Check-StorageD3Enable_DSD-property-in-AHCI-mode.patch
 	source = 5.14-ACPI-Add-quirks-for-AMD-Renoir+Lucienne-CPUs-to-force-the-D3-hint.patch
@@ -40,6 +41,7 @@ pkgbase = linux-mainline
 	sha256sums = SKIP
 	sha256sums = 6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef
 	sha256sums = b4a563ef30f86b9af0932c00bb3422b95eedbda1ff40a1a725c22a0ae9ab7084
+	sha256sums = dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79
 	sha256sums = 9e83c46bed9059ba78df6c17a2f7c80a1cdb6efbdf64ec643f68573ede891b95
 	sha256sums = 6c5538dc21a139a4475af6c1acc5d2761923173992568f7c159db971ff3167cd
 	sha256sums = 84119c2d2beb6d7dc56389f2d1be8052b4fd23022e15edd86ee59130adcd9ab7

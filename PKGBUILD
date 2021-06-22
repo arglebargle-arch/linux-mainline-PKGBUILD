@@ -10,7 +10,7 @@ pkgbase=linux-mainline               # Build stock -ARCH kernel
 #pkgbase=linux-custom       # Build kernel with a different name
 _tag=v5.13-rc7
 pkgver=5.13rc7
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -26,12 +26,8 @@ source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   config         # the main kernel config file
 
-  #"5.13-acpi-1of2-turn-off-unused.patch"::"https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/patch/?id=4b9ee772eaa82188b0eb8e05bdd1707c2a992004"
-  ##"5.13-acpi-2of2-turn-off-unconditionally.patch"::"https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/patch/?id=7e4fdeafa61f2b653fcf9678f09935e55756aed2"
-  #"5.13-acpi-refine-turning-off-unused-power-resources.patch"
-
   "5.14-ACPI-processor-idle-Fix-up-C-state-latency-if-not-ordered.patch"
-  #"PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
+  "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
   "5.14-nvme-pci-look-for-StorageD3Enable-on-companion-ACPI-device.patch"
   "5.14-ACPI-Check-StorageD3Enable_DSD-property-in-AHCI-mode.patch"
   "5.14-ACPI-Add-quirks-for-AMD-Renoir+Lucienne-CPUs-to-force-the-D3-hint.patch"
@@ -57,6 +53,7 @@ validpgpkeys=(
 sha256sums=('SKIP'
             '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
             'b4a563ef30f86b9af0932c00bb3422b95eedbda1ff40a1a725c22a0ae9ab7084'
+            'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
             '9e83c46bed9059ba78df6c17a2f7c80a1cdb6efbdf64ec643f68573ede891b95'
             '6c5538dc21a139a4475af6c1acc5d2761923173992568f7c159db971ff3167cd'
             '84119c2d2beb6d7dc56389f2d1be8052b4fd23022e15edd86ee59130adcd9ab7'
