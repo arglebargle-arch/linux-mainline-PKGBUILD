@@ -6,11 +6,10 @@
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 
-pkgbase=linux-mainline               # Build stock -ARCH kernel
-#pkgbase=linux-custom       # Build kernel with a different name
+pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13-rc7
 pkgver=5.13rc7
-pkgrel=2
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -25,6 +24,9 @@ _srcname=linux-mainline
 source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   config         # the main kernel config file
+
+  "revert-4cbbe34807938e6e494e535a68d5ff64edac3f20.patch"
+  "revert-1c0b0efd148d5b24c4932ddb3fa03c8edd6097b3.patch"
 
   "5.14-ACPI-processor-idle-Fix-up-C-state-latency-if-not-ordered.patch"
   "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
@@ -52,6 +54,8 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
+            'e03b26bbfd6d7a3fffa290346f96e6f4376e09ac3a76bc658eaab0cd8b486ddd'
+            '3cff17ff6953eef7c17d066d56e510713f2692efac90c61b748d9d38b318f5c8'
             'b4a563ef30f86b9af0932c00bb3422b95eedbda1ff40a1a725c22a0ae9ab7084'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
             '9e83c46bed9059ba78df6c17a2f7c80a1cdb6efbdf64ec643f68573ede891b95'
