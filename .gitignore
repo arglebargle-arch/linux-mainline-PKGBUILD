@@ -1,6 +1,8 @@
-buildlog*
 archlinux-linux/
 src/
+pkg/
+src-cache/
 linux-*.tar.lz
 linux-*.tar.zst
-src-cache/
+buildlog
+foolog
