@@ -9,7 +9,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13
 pkgver=5.13
-pkgrel=1.1                        # 1.1: amd_pmc v1 -> v5
+pkgrel=1.2                        # 1.2: graysky uarch patch
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -18,12 +18,17 @@ makedepends=(
   bc kmod libelf pahole cpio perl tar xz
   xmlto
   git
+  "gcc>=11.0"
 )
 options=('!strip')
 _srcname=linux-mainline
 source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   config         # the main kernel config file
+
+  # graysky's uarch optimization patch
+  "choose-gcc-optimization.sh"
+  "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
   # backported s0ix enablement patches, d3hot quirk and amd_pmc debugging
   "backport-from-5.14-s0ix-enablement-no-d3hot.diff"
@@ -37,6 +42,8 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
+            '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
+            'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
             'b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe')
@@ -44,6 +51,10 @@ sha256sums=('SKIP'
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
+
+# default to x86-64-v3 microarch if not set
+# other notable values: 14, Zen2; 15, Zen3; 38, Skylake (& Comet Lake); 98, Intel Native; 99 AMD Native
+_microarchitecture=${_microarchitecture:-'93'}
 
 prepare() {
   cd $_srcname
@@ -64,7 +75,11 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
+
   make olddefconfig
+
+  # let user choose microarchitecture optimization in GCC; run after make olddefconfig so our new uarch macros exist
+  sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"

@@ -1,7 +1,7 @@
 pkgbase = linux-mainline-amd-s0ix
 	pkgdesc = Linux Mainline
 	pkgver = 5.13
-	pkgrel = 1.1
+	pkgrel = 1.2
 	url = https://kernel.org/
 	arch = x86_64
 	license = GPL2
@@ -15,9 +15,12 @@ pkgbase = linux-mainline-amd-s0ix
 	makedepends = xz
 	makedepends = xmlto
 	makedepends = git
+	makedepends = gcc>=11.0
 	options = !strip
 	source = linux-mainline::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v5.13
 	source = config
+	source = choose-gcc-optimization.sh
+	source = more-uarches-for-kernel-5.8+.patch::https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch
 	source = backport-from-5.14-s0ix-enablement-no-d3hot.diff
 	source = PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch
 	source = v5-platform-x86-amd-pmc-s0ix+smu-counters.diff
@@ -26,6 +29,8 @@ pkgbase = linux-mainline-amd-s0ix
 	validpgpkeys = A2FF3A36AAA56654109064AB19802F8B0D70FC30
 	sha256sums = SKIP
 	sha256sums = 6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef
+	sha256sums = 1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee
+	sha256sums = fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0
 	sha256sums = e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273
 	sha256sums = dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79
 	sha256sums = b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe
