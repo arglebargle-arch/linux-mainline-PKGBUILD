@@ -89,10 +89,58 @@ prepare() {
   # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
   sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
 
+  ## CONFIG_STACK_VALIDATION gives better stack traces. Also is enabled in all official kernel packages by Archlinux team
+  scripts/config --enable CONFIG_STACK_VALIDATION
+
+  ## Enable IKCONFIG following Arch's philosophy
+  scripts/config --enable CONFIG_IKCONFIG \
+                 --enable CONFIG_IKCONFIG_PROC
+
+  # enable scheduler autogrouping
+  scripts/config --enable CONFIG_SCHED_AUTOGROUP_DEFAULT_ENABLED
+  # larger log buffer
+  scripts/config --set-val CONFIG_LOG_BUF_SHIFT 18
+  # msr as a module
+  scripts/config --module CONFIG_X86_MSR
+  # enable EFI var access
+  scripts/config --enable CONFIG_EFI_VARS
+  # turn a few non-default options into modules
+  scripts/config --module CONFIG_MQ_IOSCHED_DEADLINE
+  scripts/config --module CONFIG_MQ_IOSCHED_KYBER
+  scripts/config --module CONFIG_BINFMT_MISC
+  scripts/config --module CONFIG_ZBUD
+  scripts/config --module CONFIG_ZSMALLOC
+  # enable module versioning
+  scripts/config --enable CONFIG_MODVERSIONS
+  # usb bbr by default; bbr2 would be better but we'll take what we can get
+  scripts/config --module CONFIG_TCP_CONG_CUBIC
+  scripts/config --enable CONFIG_TCP_CONG_BBR
+  scripts/config --disable CONFIG_DEFAULT_CUBIC
+  scripts/config --enable CONFIG_DEFAULT_BBR
+  scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
+  # use a smaller connection tracking table
+  scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
+  # use fq_pie by default
+  scripts/config --module CONFIG_NET_SCH_FQ_CODEL
+  scripts/config --enable CONFIG_NET_SCH_PIE
+  scripts/config --enable CONFIG_NET_SCH_FQ_PIE
+  scripts/config --disable CONFIG_DEFAULT_FQ_CODEL
+  scripts/config --enable CONFIG_DEFAULT_FQ_PIE
+  scripts/config --set-str CONFIG_DEFAULT_NET_SCH "fq_pie"
+  # enable bluetooth high speed
+  scripts/config --enable CONFIG_BT_HS
+  # nein
+  scripts/config --disable CONFIG_UEVENT_HELPER
+  scripts/config --disable CONFIG_FW_LOADER_USER_HELPER
+  # enable zram memory tracking
+  scripts/config --enable CONFIG_ZRAM_MEMORY_TRACKING
   # --
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
+
+  # retain config for re-use
+  cat .config > "${startdir}/config.last"
 }
 
 build() {
