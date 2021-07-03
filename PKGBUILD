@@ -1,7 +1,8 @@
 #
-# Maintainer: Mikael Eriksson <mikael_eriksson@miffe.org>
+# Maintainer: Arglebargle <arglebargle AT arglebargle DOT dev>
 #
 # Based on the linux package by:
+# Maintainer: Mikael Eriksson <mikael_eriksson@miffe.org>
 # Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
@@ -26,7 +27,7 @@ source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   config         # the main kernel config file
 
-  # graysky's uarch optimization patch
+  # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
@@ -53,7 +54,11 @@ export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 # default to x86-64-v3 microarch if not set
-# other notable values: 14, Zen2; 15, Zen3; 38, Skylake (& Comet Lake); 98, Intel Native; 99 AMD Native
+# other notable values:
+#  Zen2: 14
+#  Zen3: 15
+#  Skylake & Comet Lake: 38
+#  Intel/AMD Native: 98/99
 _microarchitecture=${_microarchitecture:-'93'}
 
 prepare() {
@@ -75,11 +80,14 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
-
   make olddefconfig
 
-  # let user choose microarchitecture optimization in GCC; run after make olddefconfig so our new uarch macros exist
+  # -- make any configuration changes that involve our added patches here:
+
+  # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
   sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
+
+  # --
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
