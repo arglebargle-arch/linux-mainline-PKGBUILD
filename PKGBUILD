@@ -10,7 +10,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13
 pkgver=5.13
-pkgrel=1.2                        # 1.2: graysky uarch patch
+pkgrel=1.3                        # update s0ix patches
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -35,6 +35,7 @@ source=(
   "backport-from-5.14-s0ix-enablement-no-d3hot.diff"
   "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
   "v5-platform-x86-amd-pmc-s0ix+smu-counters.diff"
+  "ACPI-PM-Only-mark-EC-GPE-for-wakeup-on-Intel-systems.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -47,7 +48,8 @@ sha256sums=('SKIP'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
-            'b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe')
+            'b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe'
+            '30c3ebf86e6b70ca9e35b5b9bcf39a3b3d14cb9ca18b261016b7d02ed37a0c4b')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
