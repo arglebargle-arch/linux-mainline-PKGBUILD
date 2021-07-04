@@ -10,7 +10,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13
 pkgver=5.13
-pkgrel=1.3                        # update s0ix patches
+pkgrel=1.4                        # apply asus rog enablement patches
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -36,6 +36,17 @@ source=(
   "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
   "v5-platform-x86-amd-pmc-s0ix+smu-counters.diff"
   "ACPI-PM-Only-mark-EC-GPE-for-wakeup-on-Intel-systems.patch"
+
+  # ROG enablement patches; commented patches have hit upstream already
+  "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
+  "0002-asus-wmi-Add-dgpu-disable-method.patch"
+  "0003-asus-wmi-Add-egpu-enable-method.patch"
+  #"0004-HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"
+  #"0005-HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
+  "0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
+  "0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
+  #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
+  #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -49,7 +60,12 @@ sha256sums=('SKIP'
             'e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
             'b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe'
-            '30c3ebf86e6b70ca9e35b5b9bcf39a3b3d14cb9ca18b261016b7d02ed37a0c4b')
+            '30c3ebf86e6b70ca9e35b5b9bcf39a3b3d14cb9ca18b261016b7d02ed37a0c4b'
+            '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
+            '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
+            '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
+            '034743a640c26deca0a8276fa98634e7eac1328d50798a3454c4662cff97ccc9'
+            '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
