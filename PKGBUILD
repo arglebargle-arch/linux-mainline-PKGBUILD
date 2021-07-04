@@ -27,6 +27,9 @@ source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   config         # the main kernel config file
 
+  # USER_NS_UNPRIVILEGED security option from the Zen kernel
+  "ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"
+
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
@@ -55,6 +58,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
+            '5723f61e6811cd3db649f08aafb7b1cd08cd5e66433d349bf2500d7beabbd0cd'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273'
@@ -112,6 +116,10 @@ prepare() {
   scripts/config --enable CONFIG_IKCONFIG \
                  --enable CONFIG_IKCONFIG_PROC
 
+  ## Disallow unprivileged namespaces
+  #scripts/config --disable USER_NS_UNPRIVILEGED
+
+  # --
   # enable scheduler autogrouping
   scripts/config --enable CONFIG_SCHED_AUTOGROUP_DEFAULT_ENABLED
   # larger log buffer
