@@ -10,7 +10,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13
 pkgver=5.13
-pkgrel=1.4                        # apply asus rog enablement patches
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -25,20 +25,20 @@ options=('!strip')
 _srcname=linux-mainline
 source=(
   "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
-  config         # the main kernel config file
+  config              # the main kernel config file
+
+  myconfig-fragment   # kernel config customizations
 
   # USER_NS_UNPRIVILEGED security option from the Zen kernel
-  "ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"
+  #"ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"            # XXX: <-- this is causing build failures; not sure why
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
-  # backported s0ix enablement patches, d3hot quirk and amd_pmc debugging
-  "backport-from-5.14-s0ix-enablement-no-d3hot.diff"
+  # backported s0ix enablement patches through 2021-06-30, includes v5 amd_pmc patch series & EC GPE patch
+  "backport-from-5.14-s0ix-enablement-no-d3hot-2021-06-30.patch"
   "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
-  "v5-platform-x86-amd-pmc-s0ix+smu-counters.diff"
-  "ACPI-PM-Only-mark-EC-GPE-for-wakeup-on-Intel-systems.patch"
 
   # ROG enablement patches; commented patches have hit upstream already
   "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
@@ -58,13 +58,11 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
-            '5723f61e6811cd3db649f08aafb7b1cd08cd5e66433d349bf2500d7beabbd0cd'
+            'c43d97768e5961ed3d53ae2328a711cee1eddcc64ce7cd1091a9c41759b95ab3'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
-            'e4cbedbcf939961af425135bb208266c726178c4017309719341f8c37f65c273'
+            'ea96d0cc98ba34396a100f0afc10e392c60415f08c4b1ddfd99f2ca532d5ac12'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
-            'b108959c4a53d771eb2d860a7d52b4a6701e0af9405bef325905c0e273b4d4fe'
-            '30c3ebf86e6b70ca9e35b5b9bcf39a3b3d14cb9ca18b261016b7d02ed37a0c4b'
             '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
             '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
             '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
@@ -104,8 +102,6 @@ prepare() {
   cp ../config .config
   make olddefconfig
 
-  # -- make any configuration changes that involve our added patches here:
-
   # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
   sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
 
@@ -116,49 +112,11 @@ prepare() {
   scripts/config --enable CONFIG_IKCONFIG \
                  --enable CONFIG_IKCONFIG_PROC
 
-  ## Disallow unprivileged namespaces
-  #scripts/config --disable USER_NS_UNPRIVILEGED
-
-  # --
-  # enable scheduler autogrouping
-  scripts/config --enable CONFIG_SCHED_AUTOGROUP_DEFAULT_ENABLED
-  # larger log buffer
-  scripts/config --set-val CONFIG_LOG_BUF_SHIFT 18
-  # msr as a module
-  scripts/config --module CONFIG_X86_MSR
-  # enable EFI var access
-  scripts/config --enable CONFIG_EFI_VARS
-  # turn a few non-default options into modules
-  scripts/config --module CONFIG_MQ_IOSCHED_DEADLINE
-  scripts/config --module CONFIG_MQ_IOSCHED_KYBER
-  scripts/config --module CONFIG_BINFMT_MISC
-  scripts/config --module CONFIG_ZBUD
-  scripts/config --module CONFIG_ZSMALLOC
-  # enable module versioning
-  scripts/config --enable CONFIG_MODVERSIONS
-  # usb bbr by default; bbr2 would be better but we'll take what we can get
-  scripts/config --module CONFIG_TCP_CONG_CUBIC
-  scripts/config --enable CONFIG_TCP_CONG_BBR
-  scripts/config --disable CONFIG_DEFAULT_CUBIC
-  scripts/config --enable CONFIG_DEFAULT_BBR
-  scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
-  # use a smaller connection tracking table
-  scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
-  # use fq_pie by default
-  scripts/config --module CONFIG_NET_SCH_FQ_CODEL
-  scripts/config --enable CONFIG_NET_SCH_PIE
-  scripts/config --enable CONFIG_NET_SCH_FQ_PIE
-  scripts/config --disable CONFIG_DEFAULT_FQ_CODEL
-  scripts/config --enable CONFIG_DEFAULT_FQ_PIE
-  scripts/config --set-str CONFIG_DEFAULT_NET_SCH "fq_pie"
-  # enable bluetooth high speed
-  scripts/config --enable CONFIG_BT_HS
-  # nein
-  scripts/config --disable CONFIG_UEVENT_HELPER
-  scripts/config --disable CONFIG_FW_LOADER_USER_HELPER
-  # enable zram memory tracking
-  scripts/config --enable CONFIG_ZRAM_MEMORY_TRACKING
-  # --
+  ## apply any user config customizations
+  if [[ -s ${startdir}/myconfig-fragment ]]; then
+    msg2 "Applying config fragment..."
+    bash -x ${startdir}/myconfig-fragment
+  fi
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
