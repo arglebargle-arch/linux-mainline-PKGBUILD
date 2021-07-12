@@ -10,7 +10,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.13
 pkgver=5.13
-pkgrel=2
+pkgrel=3
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -30,7 +30,7 @@ source=(
   myconfig-fragment   # kernel config customizations
 
   # USER_NS_UNPRIVILEGED security option from the Zen kernel
-  #"ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"            # XXX: <-- this is causing build failures; not sure why
+  #"ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"            # XXX: <-- this is causing build failures; not sure why yet
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -39,6 +39,7 @@ source=(
   # backported s0ix enablement patches through 2021-06-30, includes v5 amd_pmc patch series & EC GPE patch
   "backport-from-5.14-s0ix-enablement-no-d3hot-2021-06-30.patch"
   "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
+  "platform-x86-amd-pmc-Use-return-code-on-suspend.patch"
 
   # ROG enablement patches; commented patches have hit upstream already
   "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
@@ -63,6 +64,7 @@ sha256sums=('SKIP'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'ea96d0cc98ba34396a100f0afc10e392c60415f08c4b1ddfd99f2ca532d5ac12'
             'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
+            '8825ad8161336d2f08b37b59bfe6c66a3c46e6e7d35dc19122fb92a2c1e4a447'
             '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
             '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
             '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
