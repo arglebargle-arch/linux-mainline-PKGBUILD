@@ -8,9 +8,9 @@
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.13
-pkgver=5.13
-pkgrel=3
+_tag=v5.14-rc1-s0ix
+pkgver=5.14rc1
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -22,24 +22,23 @@ makedepends=(
   "gcc>=11.0"
 )
 options=('!strip')
-_srcname=linux-mainline
+#_srcname=linux-mainline
+_srcname=linux-stable-s0ix
 source=(
-  "$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
+  #"$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
+  "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config              # the main kernel config file
-
   myconfig-fragment   # kernel config customizations
 
-  # USER_NS_UNPRIVILEGED security option from the Zen kernel
-  #"ZEN-disallow-unprivileged-CLONE_NEWUSER.patch"            # XXX: <-- this is causing build failures; not sure why yet
+  # hotfix 5.14-rc1; fix systemd-timesyncd & ntpsec
+  "hotfix-5.14rc1-net-core-fix-SO_TIMESTAMP_-option-setting.patch"
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
-  # backported s0ix enablement patches through 2021-06-30, includes v5 amd_pmc patch series & EC GPE patch
-  "backport-from-5.14-s0ix-enablement-no-d3hot-2021-06-30.patch"
-  "PCI-quirks-Quirk-PCI-d3hot-delay-for-AMD-xhci.patch"
-  "platform-x86-amd-pmc-Use-return-code-on-suspend.patch"
+  # NOTE: We're now pulling from a linux tree mirror with the s0ix patches integrated
+  #       builds include all neccessary s0ix patches as of the current PKGBUILD release
 
   # ROG enablement patches; commented patches have hit upstream already
   "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
@@ -58,13 +57,11 @@ validpgpkeys=(
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '6dde032690644a576fd36c4a7d3546d9cec0117dd3fb17cea6dc95e907ef9bef'
+            '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
             'c43d97768e5961ed3d53ae2328a711cee1eddcc64ce7cd1091a9c41759b95ab3'
+            '832a1634953ab063f5ce0fbe624baf3f943443c3a0acf80c146e4f30b8a7ac11'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
-            'ea96d0cc98ba34396a100f0afc10e392c60415f08c4b1ddfd99f2ca532d5ac12'
-            'dab4db308ede1aa35166f31671572eeccf0e7637b3218ce3ae519c2705934f79'
-            '8825ad8161336d2f08b37b59bfe6c66a3c46e6e7d35dc19122fb92a2c1e4a447'
             '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
             '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
             '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
