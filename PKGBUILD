@@ -10,7 +10,7 @@
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc1-s0ix
 pkgver=5.14rc1
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -40,6 +40,10 @@ source=(
   # NOTE: We're now pulling from a linux tree mirror with the s0ix patches integrated
   #       builds include all neccessary s0ix patches as of the current PKGBUILD release
 
+  # k10temp support for Zen3 APUs
+  #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
+  "8002-hwmon-k10temp-support-Zen3-APUs.patch"
+
   # ROG enablement patches; commented patches have hit upstream already
   "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
   "0002-asus-wmi-Add-dgpu-disable-method.patch"
@@ -62,6 +66,7 @@ sha256sums=('SKIP'
             '832a1634953ab063f5ce0fbe624baf3f943443c3a0acf80c146e4f30b8a7ac11'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
+            'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
             '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
             '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
             '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
