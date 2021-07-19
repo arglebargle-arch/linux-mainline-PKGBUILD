@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc2-s0ix
 pkgver=5.14rc2
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -54,7 +54,7 @@ source=(
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
 
   # improve mediatek mt7921 bt/wifi support
-  #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14rc1
+  #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14
   #"8011-Bluetooth-btusb-Add-support-for-Lite-On-Mediatek-Chi.patch"
   #"8012-mt76-mt7921-continue-to-probe-driver-when-fw-already.patch"
   "8013-mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
