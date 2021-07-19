@@ -7,10 +7,11 @@
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 
+_pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc1-s0ix
 pkgver=5.14rc1
-pkgrel=2
+pkgrel=3
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -31,7 +32,7 @@ source=(
   myconfig-fragment   # kernel config customizations
 
   # hotfix 5.14-rc1; fix systemd-timesyncd & ntpsec
-  "hotfix-5.14rc1-net-core-fix-SO_TIMESTAMP_-option-setting.patch"
+  "hotfix-5.14rc1-sock-fix-error-in-sock_setsockopt.patch"
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -45,15 +46,22 @@ source=(
   "8002-hwmon-k10temp-support-Zen3-APUs.patch"
 
   # ROG enablement patches; commented patches have hit upstream already
-  "0001-asus-wmi-Add-panel-overdrive-functionality.patch"
-  "0002-asus-wmi-Add-dgpu-disable-method.patch"
-  "0003-asus-wmi-Add-egpu-enable-method.patch"
+  "0101-asus-wmi-Add-panel-overdrive-functionality.patch"                   # scheduled for 5.15?
+  "0102-asus-wmi-Add-dgpu-disable-method.patch"
+  "0103-asus-wmi-Add-egpu-enable-method.patch"
   #"0004-HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"
   #"0005-HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
   "0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
   "0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
   #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
+
+  # improve mediatek mt7921 bt/wifi support
+  #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14rc1
+  #"8011-Bluetooth-btusb-Add-support-for-Lite-On-Mediatek-Chi.patch"
+  "8012-mt76-mt7921-continue-to-probe-driver-when-fw-already.patch"
+  "8013-mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
+  "8014-mt76-mt7921-Add-mt7922-support.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -63,15 +71,18 @@ validpgpkeys=(
 sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
             'c43d97768e5961ed3d53ae2328a711cee1eddcc64ce7cd1091a9c41759b95ab3'
-            '832a1634953ab063f5ce0fbe624baf3f943443c3a0acf80c146e4f30b8a7ac11'
+            '410bcdcec7d16d2a5a5d646915ab9c34c0929c1af6d51f2fe239695d448e3346'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
-            '09cf9fa947e58aacf25ff5c36854b82d97ad8bda166a7e00d0f3f4df7f60a695'
-            '7a685e2e2889af744618a95ef49593463cd7e12ae323f964476ee9564c208b77'
-            '663b664f4a138ccca6c4edcefde6a045b79a629d3b721bfa7b9cc115f704456e'
+            '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
+            '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
+            'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
             '034743a640c26deca0a8276fa98634e7eac1328d50798a3454c4662cff97ccc9'
-            '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1')
+            '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1'
+            '13f1c3a15fb1418b4aee0594e1f7871151303ca4f7eaab3c6f2ea21af965d85b'
+            '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
+            'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -140,7 +151,7 @@ _package() {
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
-  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE)
+  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE ${_pkgbase})
   replaces=(virtualbox-guest-modules-mainline wireguard-maineline)
 
   cd $_srcname
@@ -165,6 +176,7 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
   depends=(pahole)
+  provides=(${_pkgbase}-headers)
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
