@@ -37,9 +37,7 @@ source=(
 
   # NOTE: We're now pulling from a linux tree mirror with the s0ix patches integrated
   #       builds include all neccessary s0ix patches as of the current PKGBUILD release
-
-  # amd-pmc debugging patch per Mario Limonciello @AMD
-  #"9100-amd-pmc-smu-register-dump-for-diagnostics.patch"                   # rolled into smu-test branch directly
+  #       the SMU debugging patch is included for now
 
   # k10temp support for Zen3 APUs
   #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
