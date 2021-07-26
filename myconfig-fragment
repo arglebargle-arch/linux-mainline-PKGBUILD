@@ -5,6 +5,15 @@
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
 
+# enable ACPI debugging; this helps with PM/s0ix diagnosis
+scripts/config --enable CONFIG_ACPI_DEBUGGER \
+               --enable CONFIG_ACPI_DEBUGGER_USER \
+               --module CONFIG_ACPI_EC_DEBUGFS \
+               --enable CONFIG_ACPI_DEBUG \
+               --module CONFIG_ACPI_APEI_ERST_DEBUG \
+               --disable CONFIG_THINKPAD_ACPI_DEBUGFACILITIES \
+               --disable CONFIG_THINKPAD_ACPI_DEBUG
+
 # enable scheduler autogrouping
 scripts/config --enable CONFIG_SCHED_AUTOGROUP \
                --enable CONFIG_SCHED_AUTOGROUP_DEFAULT_ENABLED

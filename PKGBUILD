@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc2-s0ix
-pkgver=5.14rc2
-pkgrel=2
+_tag=v5.14-rc3-s0ix
+pkgver=5.14rc3
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -67,7 +67,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
-            'c43d97768e5961ed3d53ae2328a711cee1eddcc64ce7cd1091a9c41759b95ab3'
+            'cc410cb1ea72add1d4c90344e2cbc337b89ee2cfbd4290bd20c43c55c0227fce'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
