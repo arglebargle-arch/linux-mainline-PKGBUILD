@@ -9,8 +9,8 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc3-s0ix-smu-test
-pkgver=5.14rc3.smutest
+_tag=v5.14-rc4-s0ix-smu-test
+pkgver=5.14rc4.smutest
 pkgrel=10
 pkgdesc="Linux Mainline"
 arch=(x86_64)
@@ -49,7 +49,7 @@ source=(
   "0103-asus-wmi-Add-egpu-enable-method.patch"
   #"0004-HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"
   #"0005-HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
-  "0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
+  #"0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
   "0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
   #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
@@ -75,7 +75,6 @@ sha256sums=('SKIP'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
-            '034743a640c26deca0a8276fa98634e7eac1328d50798a3454c4662cff97ccc9'
             '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9')
