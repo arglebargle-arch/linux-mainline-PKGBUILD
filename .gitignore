@@ -3,7 +3,5 @@ src/
 pkg/
 src-cache/
 src-cache
-linux-*.tar.lz
-linux-*.tar.zst
-buildlog
-foolog
+*log
+*.pkg.tar.*
