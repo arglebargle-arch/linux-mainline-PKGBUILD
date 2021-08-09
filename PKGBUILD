@@ -9,8 +9,8 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc4-s0ix-smu-test
-pkgver=5.14rc4.smutest
+_tag=v5.14-rc5-s0ix-smu-test
+pkgver=5.14rc5.smutest
 pkgrel=10
 pkgdesc="Linux Mainline"
 arch=(x86_64)
