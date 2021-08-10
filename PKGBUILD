@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc5-s0ix-smu-test
 pkgver=5.14rc5.smutest
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -38,6 +38,8 @@ source=(
   # NOTE: We're now pulling from a linux tree mirror with the s0ix patches integrated
   #       builds include all neccessary s0ix patches as of the current PKGBUILD release
   #       the SMU debugging patch is included for now
+
+  "9002-ACPI-PM-s2idle-Invert-Microsoft-UUID-entry-and-exit.patch"
 
   # k10temp support for Zen3 APUs
   #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
@@ -71,6 +73,7 @@ sha256sums=('SKIP'
             'cc410cb1ea72add1d4c90344e2cbc337b89ee2cfbd4290bd20c43c55c0227fce'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
+            '5b7b8f450282a15d0832b171e82fc5639de1cb7aa495efe6e6c7989ebeb8ca36'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
