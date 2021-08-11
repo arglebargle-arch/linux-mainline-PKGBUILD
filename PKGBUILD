@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc5-s0ix-smu-test
+_tag=v5.14-rc5-s0ix-smu-test-2
 pkgver=5.14rc5
-pkgrel=2
+pkgrel=3
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -39,8 +39,7 @@ source=(
   #       builds include all neccessary s0ix patches as of the current PKGBUILD release
   #       the SMU debugging patch is included for now
 
-  "9002-ACPI-PM-s2idle-Invert-Microsoft-UUID-entry-and-exit.patch"
-
+  # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
 
   # k10temp support for Zen3 APUs
@@ -57,6 +56,8 @@ source=(
   "0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
   #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
+  "HID-asus-Prevent-Claymore-sending-suspend-event.patch"
+  "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
   # improve mediatek mt7921 bt/wifi support
   #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14
@@ -75,13 +76,14 @@ sha256sums=('SKIP'
             'cc410cb1ea72add1d4c90344e2cbc337b89ee2cfbd4290bd20c43c55c0227fce'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
-            '5b7b8f450282a15d0832b171e82fc5639de1cb7aa495efe6e6c7989ebeb8ca36'
             'b55f0d3d7aa3942e74fe2ef21e01d2168391233099fdda3ed1954849b4fe67d2'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
             '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1'
+            'ef8c99a47a0becb709c4bb9a471a999895bae285c8872a200e85f5bd3931fc8d'
+            'da11ffac9f6f71179028446b29d37d2778bfc9fa19d97b7f7c62de97e5ac92ec'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9')
 

@@ -1,0 +1,138 @@
+From patchwork Sat Aug  7 02:49:21 2021
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Patchwork-Submitter: "Luke D. Jones" <luke@ljones.dev>
+X-Patchwork-Id: 12424077
+X-Patchwork-Delegate: jikos@jikos.cz
+Return-Path: <linux-input-owner@kernel.org>
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11652C4338F
+	for <linux-input@archiver.kernel.org>; Sat,  7 Aug 2021 02:49:34 +0000 (UTC)
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by mail.kernel.org (Postfix) with ESMTP id D364E611C3
+	for <linux-input@archiver.kernel.org>; Sat,  7 Aug 2021 02:49:33 +0000 (UTC)
+Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
+        id S230113AbhHGCtt (ORCPT <rfc822;linux-input@archiver.kernel.org>);
+        Fri, 6 Aug 2021 22:49:49 -0400
+Received: from out2-smtp.messagingengine.com ([66.111.4.26]:39307 "EHLO
+        out2-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230053AbhHGCts (ORCPT
+        <rfc822;linux-input@vger.kernel.org>);
+        Fri, 6 Aug 2021 22:49:48 -0400
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+        by mailout.nyi.internal (Postfix) with ESMTP id 0EB0C5C00AA;
+        Fri,  6 Aug 2021 22:49:32 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute1.internal (MEProxy); Fri, 06 Aug 2021 22:49:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+        :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=FPEgx3UpFhTAog451
+        MEpbDOpAUvEahxrQ+GthvwBlX8=; b=MuG+YzCdnb4HoYRhGePyijNGLu2dN92WI
+        URAOmKG2ULNcx6a8fI29tgEhMre2PfoZbdIPXR2u9gop4AwVAKDNtaNNs86aFs6t
+        6dslQHzS4vryw8nhPFyhC6mIrQu1H/MZMoJij57z3UfRoOhQzGQrQCmcez11vYYC
+        MYc9aPb3dOlIC+Ba8qBaZHjXSXKA0GNfKFSyiFym3ct9iV3AlIW4zZnqy80ZZ6oc
+        mYsFJLXo3UsWvLcr2oW3riloZ9pa0WVJ28q1cjbYmtCLfn5wZQNAkU566OSmxQDy
+        tkjmkw8ASY9CawuPc7JP6An1bhgKPwS7eq8FRg55JWmzM5Hy+wtxw==
+X-ME-Sender: <xms:u_QNYQ8DYR_mgc3S5CUsGfPjSOF2KRvx4-vfJjZaq9jzklII-L8JbQ>
+    <xme:u_QNYYvj16CdLa8VESkRIlK6u4qbZAmUP3IoRaJ0rM6X1XDBst9S9bHOZawg6jm8n
+    _7EgLwYAde0faqIQWc>
+X-ME-Received: 
+ <xmr:u_QNYWAc37cJR9T4IJnQl1jVPaIm40UlLoPatU0ic1HFpSTIIZykTt6ichOi>
+X-ME-Proxy-Cause: 
+ gggruggvucftvghtrhhoucdtuddrgedvtddrjedvgdehlecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
+    dtnecuhfhrohhmpedfnfhukhgvucffrdculfhonhgvshdfuceolhhukhgvsehljhhonhgv
+    shdruggvvheqnecuggftrfgrthhtvghrnheplefflefhledthfdtveeugfevueeukeegte
+    eigfeihffgjedvtedvueevtdfhvdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
+    rghmpehmrghilhhfrhhomheplhhukhgvsehljhhonhgvshdruggvvh
+X-ME-Proxy: <xmx:u_QNYQfB4Gr-jhBlRnhKZQ1W6o8pkNEZvBEssUb4_d9Z4JxATEd3vw>
+    <xmx:u_QNYVM-1q_aFLHbgrGd3q0KvrXsHVzm1sCwlBqxHcl4sULOPVzkpA>
+    <xmx:u_QNYam3oUntbDZMP4GjxScpFMQZXpuX-pgSFu-GtKwiAgoNMUqY8A>
+    <xmx:vPQNYeaiHQc3KXNjER83h162NhtI7KMCJzhII8cxMwi_QcDMMroDmA>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 6 Aug 2021 22:49:28 -0400 (EDT)
+From: "Luke D. Jones" <luke@ljones.dev>
+To: linux-input@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, jikos@kernel.org,
+        benjamin.tissoires@redhat.com, "Luke D. Jones" <luke@ljones.dev>
+Subject: [PATCH] HID: asus: Prevent Claymore sending suspend event
+Date: Sat,  7 Aug 2021 14:49:21 +1200
+Message-Id: <20210807024921.26479-1-luke@ljones.dev>
+X-Mailer: git-send-email 2.31.1
+MIME-Version: 1.0
+Precedence: bulk
+List-ID: <linux-input.vger.kernel.org>
+X-Mailing-List: linux-input@vger.kernel.org
+
+Prevent the ASUS Claymore keyboard from sending a suspend event
+when the device sleeps itself. The suspend event causes a system
+suspend if uncaught.
+
+Signed off by: Luke D Jones <luke@ljones.dev>
+---
+ drivers/hid/hid-asus.c | 15 +++++++++++++++
+ drivers/hid/hid-ids.h  |  1 +
+ 2 files changed, 16 insertions(+)
+
+diff --git a/drivers/hid/hid-asus.c b/drivers/hid/hid-asus.c
+index fca8fc78a78a..9de0129fc3d4 100644
+--- a/drivers/hid/hid-asus.c
++++ b/drivers/hid/hid-asus.c
+@@ -82,6 +82,7 @@ MODULE_DESCRIPTION("Asus HID Keyboard and TouchPad");
+ #define QUIRK_T90CHI			BIT(9)
+ #define QUIRK_MEDION_E1239T		BIT(10)
+ #define QUIRK_ROG_NKEY_KEYBOARD		BIT(11)
++#define QUIRK_ROG_CLAYMORE_II_KEYBOARD BIT(12)
+ 
+ #define I2C_KEYBOARD_QUIRKS			(QUIRK_FIX_NOTEBOOK_REPORT | \
+ 						 QUIRK_NO_INIT_REPORTS | \
+@@ -366,6 +367,17 @@ static int asus_raw_event(struct hid_device *hdev,
+ 
+ 	}
+ 
++	if (drvdata->quirks & QUIRK_ROG_CLAYMORE_II_KEYBOARD) {
++		/*
++		 * CLAYMORE II keyboard sends this packet when it goes to sleep
++		 * this causes the whole system to go into suspend.
++		*/
++
++		if(size == 2 && data[0] == 0x02 && data[1] == 0x00) {
++			return -1;
++		}
++	}
++
+ 	return 0;
+ }
+ 
+@@ -1228,6 +1240,9 @@ static const struct hid_device_id asus_devices[] = {
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_ASUSTEK,
+ 	    USB_DEVICE_ID_ASUSTEK_ROG_NKEY_KEYBOARD2),
+ 	  QUIRK_USE_KBD_BACKLIGHT | QUIRK_ROG_NKEY_KEYBOARD },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_ASUSTEK,
++	    USB_DEVICE_ID_ASUSTEK_ROG_CLAYMORE_II_KEYBOARD),
++	  QUIRK_ROG_CLAYMORE_II_KEYBOARD },
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_ASUSTEK,
+ 		USB_DEVICE_ID_ASUSTEK_T100TA_KEYBOARD),
+ 	  QUIRK_T100_KEYBOARD | QUIRK_NO_CONSUMER_USAGES },
+diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+index b84a0a11e05b..c5d5e6f269a0 100644
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -197,6 +197,7 @@
+ #define USB_DEVICE_ID_ASUSTEK_ROG_KEYBOARD3 0x1822
+ #define USB_DEVICE_ID_ASUSTEK_ROG_NKEY_KEYBOARD	0x1866
+ #define USB_DEVICE_ID_ASUSTEK_ROG_NKEY_KEYBOARD2	0x19b6
++#define USB_DEVICE_ID_ASUSTEK_ROG_CLAYMORE_II_KEYBOARD	0x196b
+ #define USB_DEVICE_ID_ASUSTEK_FX503VD_KEYBOARD	0x1869
+ 
+ #define USB_VENDOR_ID_ATEN		0x0557
