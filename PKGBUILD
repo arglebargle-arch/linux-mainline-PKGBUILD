@@ -35,9 +35,7 @@ source=(
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
-  # NOTE: We're now pulling from a linux tree mirror with the s0ix patches integrated
-  #       builds include all neccessary s0ix patches as of the current PKGBUILD release
-  #       the SMU debugging patch is included for now
+  ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
 
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
@@ -45,6 +43,8 @@ source=(
   # k10temp support for Zen3 APUs
   #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
   "8002-hwmon-k10temp-support-Zen3-APUs.patch"
+
+  ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
   # ROG enablement patches; commented patches have hit upstream already
   "0101-asus-wmi-Add-panel-overdrive-functionality.patch"                   # scheduled for 5.15?
