@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc5-s0ix-smu-test-2
-pkgver=5.14rc5
-pkgrel=3
+_tag=v5.14-rc6-s0ix-smu-test
+pkgver=5.14rc6
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -31,9 +31,15 @@ source=(
   config              # the main kernel config file
   myconfig-fragment   # kernel config customizations
 
+  # mainline HEAD 2021-08-15
+  #"0001-5.14-pre-rc6-squashed-2.patch"
+
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
+
+  # TCP BBRv2                       # TODO: <---
+  #"0001-tcp-bbrv2-squashed.patch"
 
   ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
 
@@ -53,7 +59,7 @@ source=(
   #"0004-HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"
   #"0005-HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
   #"0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
-  "0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
+  #"0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
   #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
   "HID-asus-Prevent-Claymore-sending-suspend-event.patch"
@@ -73,7 +79,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
-            'cc410cb1ea72add1d4c90344e2cbc337b89ee2cfbd4290bd20c43c55c0227fce'
+            'ece1e95ee9ab59969acc3fbe60963ba36a801c437f28a2ec12e3a254cf626a53'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
@@ -81,7 +87,6 @@ sha256sums=('SKIP'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
-            '32bbcde83406810f41c9ed61206a7596eb43707a912ec9d870fd94f160d247c1'
             'ec317cc2c2c8c1186c4f553fdd010adc013c37600a499802473653fd8e7564df'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'

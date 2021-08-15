@@ -10,9 +10,7 @@ scripts/config --enable CONFIG_ACPI_DEBUGGER \
                --enable CONFIG_ACPI_DEBUGGER_USER \
                --module CONFIG_ACPI_EC_DEBUGFS \
                --enable CONFIG_ACPI_DEBUG \
-               --module CONFIG_ACPI_APEI_ERST_DEBUG \
-               --disable CONFIG_THINKPAD_ACPI_DEBUGFACILITIES \
-               --disable CONFIG_THINKPAD_ACPI_DEBUG
+               --module CONFIG_ACPI_APEI_ERST_DEBUG
 
 # enable scheduler autogrouping
 scripts/config --enable CONFIG_SCHED_AUTOGROUP \
@@ -31,12 +29,20 @@ scripts/config --module CONFIG_ZBUD
 scripts/config --module CONFIG_ZSMALLOC
 # enable module versioning
 scripts/config --enable CONFIG_MODVERSIONS
+
 # usb bbr by default; bbr2 would be better but we'll take what we can get
 scripts/config --module CONFIG_TCP_CONG_CUBIC
 scripts/config --enable CONFIG_TCP_CONG_BBR
 scripts/config --disable CONFIG_DEFAULT_CUBIC
 scripts/config --enable CONFIG_DEFAULT_BBR
 scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
+
+# TODO:
+#scripts/config --module CONFIG_TCP_CONG_BBR
+#scripts/config --enable CONFIG_TCP_CONG_BBR2
+#scripts/config --enable CONFIG_DEFAULT_BBR2
+#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+
 # use a smaller connection tracking table
 scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
 # use fq_pie by default
