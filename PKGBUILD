@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc6-s0ix-smu-test
 pkgver=5.14rc6
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -45,6 +45,8 @@ source=(
 
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
+
+  "x86-ACPI-State-Optimize-C3-entry-on-AMD-CPUs.patch"
 
   # k10temp support for Zen3 APUs
   #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
@@ -83,6 +85,7 @@ sha256sums=('SKIP'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
+            '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
