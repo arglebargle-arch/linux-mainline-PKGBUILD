@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-rc6-s0ix-smu-test
-pkgver=5.14rc6
-pkgrel=2
+_tag=v5.14-rc7-s0ix-smu-test
+pkgver=5.14rc7
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -46,6 +46,7 @@ source=(
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
 
+  # AMD; don't drop shared caches on C3 state transitions
   "x86-ACPI-State-Optimize-C3-entry-on-AMD-CPUs.patch"
 
   # k10temp support for Zen3 APUs
