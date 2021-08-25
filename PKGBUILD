@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc7-s0ix-smu-test
 pkgver=5.14rc7
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -67,6 +67,8 @@ source=(
   #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
   "HID-asus-Prevent-Claymore-sending-suspend-event.patch"
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
+  "v5-0001-asus-wmi-Add-support-for-platform_profile.patch"
+  "v5-0001-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # improve mediatek mt7921 bt/wifi support
   #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14
@@ -93,6 +95,8 @@ sha256sums=('SKIP'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
             'ec317cc2c2c8c1186c4f553fdd010adc013c37600a499802473653fd8e7564df'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
+            '4ef12029ea73ca924b6397e1de4911e84d9e77ddaccdab1ef579823d848524e8'
+            '235cd11e8cad02ca19d3bca4b6a112d878110c3f66e24437810c11d3fd2f0b8d'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9')
 
