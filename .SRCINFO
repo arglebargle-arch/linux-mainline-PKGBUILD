@@ -20,6 +20,7 @@ pkgbase = linux-mainline-amd-s0ix
 	source = linux-stable-s0ix::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=v5.14-rc7-s0ix-smu-test
 	source = config
 	source = myconfig-fragment
+	source = 0001-amd-pmc-delay-test.patch
 	source = choose-gcc-optimization.sh
 	source = more-uarches-for-kernel-5.8+.patch::https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch
 	source = acpi-battery-Always-read-fresh-battery-state-on-update.patch
@@ -40,6 +41,7 @@ pkgbase = linux-mainline-amd-s0ix
 	sha256sums = SKIP
 	sha256sums = 6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84
 	sha256sums = ece1e95ee9ab59969acc3fbe60963ba36a801c437f28a2ec12e3a254cf626a53
+	sha256sums = d8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e
 	sha256sums = 1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee
 	sha256sums = fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0
 	sha256sums = f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90

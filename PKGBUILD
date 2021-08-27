@@ -31,8 +31,8 @@ source=(
   config              # the main kernel config file
   myconfig-fragment   # kernel config customizations
 
-  # mainline HEAD 2021-08-15
-  #"0001-5.14-pre-rc6-squashed-2.patch"
+  # test: suspend delay patch
+  "0001-amd-pmc-delay-test.patch"
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -85,6 +85,7 @@ validpgpkeys=(
 sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
             'ece1e95ee9ab59969acc3fbe60963ba36a801c437f28a2ec12e3a254cf626a53'
+            'd8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
