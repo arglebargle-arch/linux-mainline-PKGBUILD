@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14-rc7-s0ix-smu-test
 pkgver=5.14rc7
-pkgrel=5
+pkgrel=5.1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -97,7 +97,7 @@ sha256sums=('SKIP'
             'ec317cc2c2c8c1186c4f553fdd010adc013c37600a499802473653fd8e7564df'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '4ef12029ea73ca924b6397e1de4911e84d9e77ddaccdab1ef579823d848524e8'
-            '49637c2dd21aa6ad0b61eb4d34a25c85c05e0aebf606c348bbed482abae8c199'
+            '6fe5fe83e06d552f541bdca55d0d9e2cd6e70dd3047c01da749a0ff57fe706cc'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9')
 
