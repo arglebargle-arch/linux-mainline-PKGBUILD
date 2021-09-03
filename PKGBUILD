@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14-s0ix
-pkgver=5.14
-pkgrel=2
+_tag=v5.14.1-s0ix
+pkgver=5.14.1
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -33,8 +33,6 @@ source=(
 
   # test: suspend delay patch
   "0001-amd-pmc-delay-test.patch"
-  # test: call both microsoft and amd methods during suspend and resume
-  "s2idle-call-multiple-methods-test.diff"
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -88,7 +86,6 @@ sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
             'ece1e95ee9ab59969acc3fbe60963ba36a801c437f28a2ec12e3a254cf626a53'
             'd8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e'
-            '3be6f00a64a876a61546b9d7db6cb9f5f3e58d48d4cd3e8d72d9776f144b207e'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
