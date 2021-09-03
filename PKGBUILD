@@ -31,8 +31,8 @@ source=(
   config              # the main kernel config file
   myconfig-fragment   # kernel config customizations
 
-  # test: suspend delay patch
-  "0001-amd-pmc-delay-test.patch"
+  # delay hack adding micro delays during resume, drastically improves SMU stability on ASUS ROG G14/G15
+  "amd-pmc-delay-test.patch"
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -50,32 +50,32 @@ source=(
   "x86-ACPI-State-Optimize-C3-entry-on-AMD-CPUs.patch"
 
   # k10temp support for Zen3 APUs
-  #"8001-x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"             # included in 5.14
-  "8002-hwmon-k10temp-support-Zen3-APUs.patch"
+  #"x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"                  # included in 5.14
+  "hwmon-k10temp-support-Zen3-APUs.patch"
 
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
   # ROG enablement patches; commented patches have hit upstream already
-  "0101-asus-wmi-Add-panel-overdrive-functionality.patch"                   # scheduled for 5.15?
+  "0101-asus-wmi-Add-panel-overdrive-functionality.patch"
   "0102-asus-wmi-Add-dgpu-disable-method.patch"
   "0103-asus-wmi-Add-egpu-enable-method.patch"
-  #"0004-HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"
-  #"0005-HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
-  #"0006-HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
-  #"0007-ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
-  #"0008-ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
-  #"0009-Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
+  #"HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"                 # previously applied in mainline/stable
+  #"HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
+  #"HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
+  #"ALSA-hda-realtek-Fix-speakers-not-working-on-Asus-Fl.patch"
+  #"ACPI-video-use-native-backlight-for-GA401-GA502-GA50.patch"
+  #"Revert-platform-x86-asus-nb-wmi-Drop-duplicate-DMI-q.patch"
   "HID-asus-Prevent-Claymore-sending-suspend-event.patch"
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
-  "v5-0001-asus-wmi-Add-support-for-platform_profile.patch"
-  "v8-0001-asus-wmi-Add-support-for-custom-fan-curves.patch"
+  "v5-asus-wmi-Add-support-for-platform_profile.patch"
+  "v8-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # improve mediatek mt7921 bt/wifi support
-  #"8010-Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"        # included in 5.14
-  #"8011-Bluetooth-btusb-Add-support-for-Lite-On-Mediatek-Chi.patch"
-  #"8012-mt76-mt7921-continue-to-probe-driver-when-fw-already.patch"
-  "8013-mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
-  "8014-mt76-mt7921-Add-mt7922-support.patch"
+  #"Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"             # included in 5.14
+  #"Bluetooth-btusb-Add-support-for-Lite-On-Mediatek-Chi.patch"
+  #"mt76-mt7921-continue-to-probe-driver-when-fw-already.patch"
+  "mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
+  "mt76-mt7921-Add-mt7922-support.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
