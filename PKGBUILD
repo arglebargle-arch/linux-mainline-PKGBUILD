@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.14.1-s0ix
 pkgver=5.14.1
-pkgrel=4
+pkgrel=5
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -31,15 +31,12 @@ source=(
   config              # the main kernel config file
   myconfig-fragment   # kernel config customizations
 
-  # delay hack adding micro delays during resume, drastically improves SMU stability on ASUS ROG G14/G15
-  "amd-pmc-delay-test.patch"
-
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
-  # TCP BBRv2                       # TODO: <---
-  #"0001-tcp-bbrv2-squashed.patch"
+  # delay hack adding micro delays during resume, drastically improves SMU stability on ASUS ROG G14/G15
+  "amd-pmc-delay-test.patch"
 
   ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
 
@@ -52,6 +49,14 @@ source=(
   # k10temp support for Zen3 APUs
   #"x86-amd_nb-Add-AMD-family-19h-model-50h-PCI-ids.patch"                  # included in 5.14
   "hwmon-k10temp-support-Zen3-APUs.patch"
+
+  ## NOTE: Optional features; feel free to comment these out
+
+  # TCP BBRv2
+  "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
+
+  # Multigenerational LRU v4
+  "squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
 
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
@@ -93,13 +98,15 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '6030ad40747f2055165a6a9081122034ed45283b51533c9018eda6ebec200b84'
-            'ece1e95ee9ab59969acc3fbe60963ba36a801c437f28a2ec12e3a254cf626a53'
-            'd8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e'
+            '41394264dbda1c177aa6a2eba1afdbdc968a49824baac30c6b04b651ceb8a6e8'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
+            'd8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
+            'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
+            '69ecf5456468935958f2cbf35691c2533a56344005537902b6051b6323ffff1f'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'

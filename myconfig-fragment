@@ -30,18 +30,20 @@ scripts/config --module CONFIG_ZSMALLOC
 # enable module versioning
 scripts/config --enable CONFIG_MODVERSIONS
 
-# usb bbr by default; bbr2 would be better but we'll take what we can get
-scripts/config --module CONFIG_TCP_CONG_CUBIC
-scripts/config --enable CONFIG_TCP_CONG_BBR
-scripts/config --disable CONFIG_DEFAULT_CUBIC
-scripts/config --enable CONFIG_DEFAULT_BBR
-scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
+## use tcp_bbr by default
+#scripts/config --module CONFIG_TCP_CONG_CUBIC
+#scripts/config --enable CONFIG_TCP_CONG_BBR
+#scripts/config --disable CONFIG_DEFAULT_CUBIC
+#scripts/config --enable CONFIG_DEFAULT_BBR
+#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
 
-# TODO:
-#scripts/config --module CONFIG_TCP_CONG_BBR
-#scripts/config --enable CONFIG_TCP_CONG_BBR2
-#scripts/config --enable CONFIG_DEFAULT_BBR2
-#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+# use tcp_bbr2 by default
+scripts/config --module CONFIG_TCP_CONG_CUBIC
+scripts/config --module CONFIG_TCP_CONG_BBR
+scripts/config --enable CONFIG_TCP_CONG_BBR2
+scripts/config --disable CONFIG_DEFAULT_CUBIC
+scripts/config --enable CONFIG_DEFAULT_BBR2
+scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
 # use a smaller connection tracking table
 scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
@@ -60,3 +62,10 @@ scripts/config --disable CONFIG_FW_LOADER_USER_HELPER
 # enable zram memory tracking
 scripts/config --enable CONFIG_ZRAM_MEMORY_TRACKING
 
+
+# enable multigen LRU by default
+scripts/config --enable CONFIG_LRU_GEN
+scripts/config --disable LRU_GEN_STATS
+scripts/config --set-val NR_LRU_GENS 7
+scripts/config --set-val TIERS_PER_GEN 4
+scripts/config --enable CONFIG_LRU_GEN_ENABLED
