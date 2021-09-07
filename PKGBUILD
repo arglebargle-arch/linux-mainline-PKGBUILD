@@ -35,9 +35,6 @@ source=(
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.8+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/a8d200f422f4b2abeaa6cfcfa37136b308e6e33e/more-uarches-for-kernel-5.8%2B.patch"
 
-  # delay hack adding micro delays during resume, drastically improves SMU stability on ASUS ROG G14/G15
-  "amd-pmc-delay-test.patch"
-
   ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
 
   # patch from Chromium developers; more accurately report battery state changes
@@ -101,7 +98,6 @@ sha256sums=('SKIP'
             'c4007b9ecff34e970c77e52e85cead34d92d24b56c0d649e6036a295b517622e'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
-            'd8dd84c26a44af618c6d1b68723e3bf0f8f50165af04fe090256afb0f931713e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
