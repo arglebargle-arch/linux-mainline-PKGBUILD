@@ -61,9 +61,9 @@ source=(
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
   # ROG enablement patches; commented patches have hit upstream already
-  "0101-asus-wmi-Add-panel-overdrive-functionality.patch"
-  "0102-asus-wmi-Add-dgpu-disable-method.patch"
-  "0103-asus-wmi-Add-egpu-enable-method.patch"
+  "asus-wmi-Add-panel-overdrive-functionality.patch"
+  "asus-wmi-Add-dgpu-disable-method.patch"
+  "asus-wmi-Add-egpu-enable-method.patch"
   #"HID-asus-Filter-keyboard-EC-for-old-ROG-keyboard.patch"                 # previously applied in mainline/stable
   #"HID-asus-filter-G713-G733-key-event-to-prevent-shutd.patch"
   #"HID-asus-Remove-check-for-same-LED-brightness-on-set.patch"
