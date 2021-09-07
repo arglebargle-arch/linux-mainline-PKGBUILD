@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.14.1-s0ix
-pkgver=5.14.1
-pkgrel=5
+_tag=v5.14.2-s0ix
+pkgver=5.14.2
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
