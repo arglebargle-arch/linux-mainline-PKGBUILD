@@ -70,7 +70,7 @@ source=(
   "HID-asus-Prevent-Claymore-sending-suspend-event.patch"
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
   "v5-asus-wmi-Add-support-for-platform_profile.patch"
-  "v10-asus-wmi-Add-support-for-custom-fan-curves.patch"
+  "v11-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # improve mediatek mt7921 bt/wifi support
   #"Bluetooth-btusb-Fixed-too-many-in-token-issue-for-Me.patch"             # included in 5.14
@@ -109,7 +109,7 @@ sha256sums=('SKIP'
             'ec317cc2c2c8c1186c4f553fdd010adc013c37600a499802473653fd8e7564df'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '4ef12029ea73ca924b6397e1de4911e84d9e77ddaccdab1ef579823d848524e8'
-            'd35c8954099aa63df8cbbd1b0e4657b90e7729f50eb4c07f8edfeabd35a51b98'
+            '4640313efcffe48dc182486e1f948679ad92c1a4871a2140c1d4624526453497'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9'
             'ea1d552f8fe6907e4fbd374842a655a9a64529e021c45d8459a0595c739e5cc6'
