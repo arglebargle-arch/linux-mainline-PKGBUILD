@@ -55,6 +55,9 @@ source=(
   # Multigenerational LRU v4
   "squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
 
+  # AMD pstate cpufreq driver
+  "amd-pstate-v1.patch"
+
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
   # ROG enablement patches; commented patches have hit upstream already
@@ -95,7 +98,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             'ba0f9af0a6af0f2839daf3eef9bafeb6b6efc07455b05273f5398aca0ec8ab69'
-            'cfd5cff6cf3fb3a6c4773108df3370a5d09831dfa4544e99d88c11fc0369797f'
+            'e1546a72b40ae0d27844ececad7f57cb9f836ae43f11fc9eca52fa4ce8ec050f'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             'fa6cee9527d8e963d3398085d1862edc509a52e4540baec463edb8a9dd95bee0'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
@@ -103,6 +106,7 @@ sha256sums=('SKIP'
             'de8c9747637768c4356c06aa65c3f157c526aa420f21fdd5edd0ed06f720a62e'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
             '69ecf5456468935958f2cbf35691c2533a56344005537902b6051b6323ffff1f'
+            'e62cbe1cb1577b1d80095fbb566d0516592e6174e7740e61a340164aff9bf2ec'
             '1ab75535772c63567384eb2ac74753e4d5db2f3317cb265aedf6151b9f18c6c2'
             '8cc771f37ee08ad5796e6db64f180c1415a5f6e03eb3045272dade30ca754b53'
             'f3461e7cc759fd4cef2ec5c4fa15b80fa6d37e16008db223f77ed88a65aa938e'
