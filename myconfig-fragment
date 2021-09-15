@@ -67,12 +67,12 @@ scripts/config --disable CONFIG_DEFAULT_CUBIC
 scripts/config --enable CONFIG_DEFAULT_BBR2
 scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
-# enable multigen LRU by default
-scripts/config --enable CONFIG_LRU_GEN
-scripts/config --disable LRU_GEN_STATS
-scripts/config --set-val NR_LRU_GENS 7
-scripts/config --set-val TIERS_PER_GEN 4
-scripts/config --enable CONFIG_LRU_GEN_ENABLED
+## enable multigen LRU by default                        # TODO:
+#scripts/config --enable CONFIG_LRU_GEN
+#scripts/config --disable LRU_GEN_STATS
+#scripts/config --set-val NR_LRU_GENS 7
+#scripts/config --set-val TIERS_PER_GEN 4
+#scripts/config --enable CONFIG_LRU_GEN_ENABLED
 
 # AMD pstate
 scripts/config --enable CONFIG_X86_AMD_PSTATE
