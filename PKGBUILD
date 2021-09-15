@@ -60,7 +60,7 @@ source=(
 
   # ROG enablement patches; commented patches have hit upstream already
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
-  "v11-asus-wmi-Add-support-for-custom-fan-curves.patch"
+  "v14-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # improve mediatek mt7921 bt/wifi support
   "mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
@@ -90,7 +90,7 @@ sha256sums=('SKIP'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
             'e62cbe1cb1577b1d80095fbb566d0516592e6174e7740e61a340164aff9bf2ec'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
-            '4640313efcffe48dc182486e1f948679ad92c1a4871a2140c1d4624526453497'
+            '9d799be6d01a7438ca9999a10137be8fd95348610545c135c6dc9ce2b5afbe29'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
             'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9'
             '051769c129e0e3a5b516b8799712e1a39dd36216d77879b33b416c8e0fd67d7a'
