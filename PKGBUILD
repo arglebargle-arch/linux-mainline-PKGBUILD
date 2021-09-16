@@ -74,6 +74,8 @@ source=(
   "mt76-mt7921-fix-the-inconsistent-state-between-bind-and-unbind.patch"
   "mt76-mt7921-report-HE-MU-radiotap.patch"
   "v2-mt76-mt7921-fix-kernel-warning-from-cfg80211_calculate_bitrate.patch"
+  "1-2-mt76-mt7921-robustify-hardware-initialization-flow.patch"
+  "2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -100,7 +102,9 @@ sha256sums=('SKIP'
             'f075ac354acfd65dff4db49dc9798747cb9b7a3dd9839987bc46495bdbbd22dc'
             '1770fec49335bc93194e9e55ced49e1cb67f2df4bf6948e80712a0b2ba50fa49'
             '6da4010f86a74125969fd3dbc953da7b45209d33ff3d216474c3399e82e893ff'
-            'eb391b6d1ebf7ef99ece00b23609b94180a1f3c0149bcf05f6bbeb74d0b724c7')
+            'eb391b6d1ebf7ef99ece00b23609b94180a1f3c0149bcf05f6bbeb74d0b724c7'
+            'c368cc4eefff20b7ae904eec686b7e72b46ff02b32c8a4fbd6bd4039f087e7ba'
+            '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
