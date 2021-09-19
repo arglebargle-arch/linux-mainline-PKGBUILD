@@ -29,7 +29,6 @@ source=(
   #"$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config              # the main kernel config file
-  myconfig-fragment   # kernel config customizations
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -84,7 +83,6 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             'be9551f441bb1c01678d3877785666715b92c3874f19eab9cf766dacac15fcd7'
-            'ac8602f17f90049c6e1600af29b851d99044751a52051a0a411058876fbf5821'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
