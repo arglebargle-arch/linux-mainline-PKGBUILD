@@ -2,6 +2,11 @@
 
 ## tune kernel config here:
 
+## s0ix debugging
+scripts/config --enable CONFIG_CMDLINE_BOOL \
+               --set-str CONFIG_CMDLINE "pm_debug_messages amd_pmc.dyndbg=+p acpi.dyndbg=file drivers/acpi/x86/s2idle.c +p" \
+               --disable CMDLINE_OVERRIDE
+
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
 
@@ -76,3 +81,4 @@ scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
 # AMD pstate
 scripts/config --enable CONFIG_X86_AMD_PSTATE
+
