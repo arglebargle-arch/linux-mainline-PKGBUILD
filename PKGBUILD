@@ -75,6 +75,8 @@ source=(
   "v2-mt76-mt7921-fix-kernel-warning-from-cfg80211_calculate_bitrate.patch"
   "1-2-mt76-mt7921-robustify-hardware-initialization-flow.patch"
   "2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch"
+  "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
+  "2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -102,7 +104,9 @@ sha256sums=('SKIP'
             '6da4010f86a74125969fd3dbc953da7b45209d33ff3d216474c3399e82e893ff'
             'eb391b6d1ebf7ef99ece00b23609b94180a1f3c0149bcf05f6bbeb74d0b724c7'
             'c368cc4eefff20b7ae904eec686b7e72b46ff02b32c8a4fbd6bd4039f087e7ba'
-            '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098')
+            '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098'
+            '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
+            'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
