@@ -44,7 +44,7 @@ source=(
 
   # k10temp support for Zen3 APUs                                           # included in 5.14/5.15
 
-  ## NOTE: Optional features; feel free to comment these out
+  ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
   # TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
