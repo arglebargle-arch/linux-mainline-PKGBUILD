@@ -53,7 +53,7 @@ source=(
   #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"                  # TODO: not yet compatible with 5.15
 
   # AMD pstate cpufreq driver
-  "amd-pstate-v1.patch"
+  "amd-pstate-v2.patch"
 
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
@@ -90,7 +90,7 @@ sha256sums=('SKIP'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
-            'e62cbe1cb1577b1d80095fbb566d0516592e6174e7740e61a340164aff9bf2ec'
+            '9025ca0788fbacea25200e6ac17036960000424843f544cdd781052231da7903'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '9d799be6d01a7438ca9999a10137be8fd95348610545c135c6dc9ce2b5afbe29'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
