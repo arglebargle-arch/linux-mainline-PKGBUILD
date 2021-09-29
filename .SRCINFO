@@ -41,6 +41,7 @@ pkgbase = linux-mainline-amd-s0ix
 	source = 2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch
 	source = 1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch
 	source = 2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch
+	source = Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch
 	validpgpkeys = ABAF11C65A2970B130ABE3C479BE3E4300411886
 	validpgpkeys = 647F28654894E3BD457199BE38DBBDC86092693E
 	validpgpkeys = A2FF3A36AAA56654109064AB19802F8B0D70FC30
@@ -68,6 +69,7 @@ pkgbase = linux-mainline-amd-s0ix
 	sha256sums = 1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098
 	sha256sums = 236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9
 	sha256sums = cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b
+	sha256sums = 292a7e32b248c7eee6e2f5407d609d03d985f367d329adb02b9d6dba1f85b44c
 
 pkgname = linux-mainline-amd-s0ix
 	pkgdesc = The Linux Mainline kernel and modules

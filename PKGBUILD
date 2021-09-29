@@ -77,6 +77,7 @@ source=(
   "2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch"
   "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
   "2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch"
+  "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -106,7 +107,8 @@ sha256sums=('SKIP'
             'c368cc4eefff20b7ae904eec686b7e72b46ff02b32c8a4fbd6bd4039f087e7ba'
             '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
-            'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b')
+            'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
+            '292a7e32b248c7eee6e2f5407d609d03d985f367d329adb02b9d6dba1f85b44c')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
