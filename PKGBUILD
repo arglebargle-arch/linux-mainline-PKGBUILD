@@ -78,6 +78,8 @@ source=(
   "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
   "2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch"
   "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch"
+  "Bluetooth-btusb-Add-support-for-Foxconn-Mediatek-Chip.patch"
+  "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip-MT7921.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -108,7 +110,9 @@ sha256sums=('SKIP'
             '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
             'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
-            '292a7e32b248c7eee6e2f5407d609d03d985f367d329adb02b9d6dba1f85b44c')
+            '292a7e32b248c7eee6e2f5407d609d03d985f367d329adb02b9d6dba1f85b44c'
+            '7dbfdd120bc155cad1879579cb9dd1185eb5e37078c8c93fef604a275a163812'
+            '1444af2e125080934c67b6adb4561fd354a72ce47d3de393b24f53832ee492ac')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
