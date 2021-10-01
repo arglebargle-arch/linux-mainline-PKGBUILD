@@ -5,3 +5,4 @@ src-cache/
 src-cache
 *log
 *.pkg.tar.*
+config.last
