@@ -11,7 +11,7 @@ _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.15-rc4-s0ix
 pkgver=5.15rc4
-pkgrel=2
+pkgrel=3
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -55,6 +55,9 @@ source=(
   # AMD pstate cpufreq driver
   "amd-pstate-v2.patch"
 
+  # Updated zstd: v1.4.10
+  "zstd-v1.4.10-v12.patch"
+
   ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
 
   # ROG enablement patches; commented patches have hit upstream already
@@ -94,6 +97,7 @@ sha256sums=('SKIP'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
             '9025ca0788fbacea25200e6ac17036960000424843f544cdd781052231da7903'
+            'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '1e547bddf80d201f77da1d876cd280e4d40b377bbd8ebc218f0ba57cd959ff76'
             '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
