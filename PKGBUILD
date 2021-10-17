@@ -46,7 +46,7 @@ source=(
 
   ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
-  # TCP BBRv2
+  # Google's TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
 
   # Multigenerational LRU v4
