@@ -34,6 +34,10 @@ source=(
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/4b184fc25abff605d47695713471fddc8292cd94/more-uarches-for-kernel-5.15%2B.patch"
 
+  # optimization flags
+  "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
+  "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
+
   ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
 
   # patch from Chromium developers; more accurately report battery state changes
@@ -96,6 +100,8 @@ sha256sums=('SKIP'
             'be9551f441bb1c01678d3877785666715b92c3874f19eab9cf766dacac15fcd7'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
+            '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
+            '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
