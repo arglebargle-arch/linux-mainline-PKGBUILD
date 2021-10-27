@@ -2,10 +2,7 @@
 
 ## tune kernel config here:
 
-## s0ix debugging
-scripts/config --enable CONFIG_CMDLINE_BOOL \
-               --set-str CONFIG_CMDLINE "pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\'+p\\' acpi.dyndbg=\\'file drivers/acpi/x86/s2idle.c +p\\'" \
-               --disable CMDLINE_OVERRIDE
+## s0ix debugging moved into PKGBUILD
 
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED

@@ -177,6 +177,18 @@ prepare() {
     bash -x ${startdir}/myconfig-fragment
   fi
 
+  ## bake in s0ix debugging parameters
+  scripts/config  --enable CONFIG_CMDLINE_BOOL \
+                  --set-str CONFIG_CMDLINE "makepkgplaceholderyolo" \
+                  --disable CMDLINE_OVERRIDE
+
+  ## HACK: forcibly fixup CONFIG_CMDLINE as scripts/config mangles quote escapes
+
+  # note the double escaped quotes here, sed strips one;
+  # the final result in .config needs to look like CONFIG_CMDLINE="foo.dyndbg=\"+p\"" to avoid dyndbg parse errors at boot
+
+  sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
+
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 
