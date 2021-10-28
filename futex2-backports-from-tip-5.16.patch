@@ -1,12 +1,85 @@
-From ff8de0926789de69902d03686902f63dfc3d38a7 Mon Sep 17 00:00:00 2001
+From 6985266cd50a179179982a61f5b7e085246fb862 Mon Sep 17 00:00:00 2001
 From: Scott B <arglebargle@arglebargle.dev>
-Date: Sat, 16 Oct 2021 00:31:46 -0700
-Subject: [PATCH] futex2: Add futex2 for 5.15
+Date: Thu, 28 Oct 2021 00:58:51 -0700
+Subject: [PATCH] Squashed commit of the following:
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Squashed commit of the following:
+commit 6f51f4497fbe24738c2228e8da9de76a1a6bd57d
+Author: Yanfei Xu <yanfei.xu@windriver.com>
+Date:   Wed Oct 13 21:41:54 2021 +0800
+
+    locking/rwsem: Fix comments about reader optimistic lock stealing conditions
+
+    After the commit 617f3ef95177 ("locking/rwsem: Remove reader
+    optimistic spinning"), reader doesn't support optimistic spinning
+    anymore, there is no need meet the condition which OSQ is empty.
+
+    BTW, add an unlikely() for the max reader wakeup check in the loop.
+
+    Signed-off-by: Yanfei Xu <yanfei.xu@windriver.com>
+    Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+    Acked-by: Waiman Long <longman@redhat.com>
+    Link: https://lore.kernel.org/r/20211013134154.1085649-4-yanfei.xu@windriver.com
+
+commit b2ad5cec5add49a3a93cd1d21a223da36ad3e9b2
+Author: Yanfei Xu <yanfei.xu@windriver.com>
+Date:   Wed Oct 13 21:41:52 2021 +0800
+
+    locking: Remove rcu_read_{,un}lock() for preempt_{dis,en}able()
+
+    preempt_disable/enable() is equal to RCU read-side crital section, and
+    the spinning codes in mutex and rwsem could ensure that the preemption
+    is disabled. So let's remove the unnecessary rcu_read_lock/unlock for
+    saving some cycles in hot codes.
+
+    Signed-off-by: Yanfei Xu <yanfei.xu@windriver.com>
+    Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+    Acked-by: Waiman Long <longman@redhat.com>
+    Link: https://lore.kernel.org/r/20211013134154.1085649-2-yanfei.xu@windriver.com
+
+commit 6b6af8d90c3074daf68d9a6a66ef38731e64345e
+Author: Yanfei Xu <yanfei.xu@windriver.com>
+Date:   Wed Oct 13 21:41:53 2021 +0800
+
+    locking/rwsem: Disable preemption for spinning region
+
+    The spinning region rwsem_spin_on_owner() should not be preempted,
+    however the rwsem_down_write_slowpath() invokes it and don't disable
+    preemption. Fix it by adding a pair of preempt_disable/enable().
+
+    Signed-off-by: Yanfei Xu <yanfei.xu@windriver.com>
+    [peterz: Fix CONFIG_RWSEM_SPIN_ON_OWNER=n build]
+    Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+    Acked-by: Waiman Long <longman@redhat.com>
+    Link: https://lore.kernel.org/r/20211013134154.1085649-3-yanfei.xu@windriver.com
+
+commit e0c8270789b9820649a4923dc13a112502bd5b25
+Author: André Almeida <andrealmeid@collabora.com>
+Date:   Tue Oct 12 10:55:49 2021 -0300
+
+    docs: futex: Fix kernel-doc references
+
+    Since the futex code was restructured, there's no futex.c file anymore
+    and the implementation is split in various files. Point kernel-doc
+    references to the new files.
+
+    Signed-off-by: André Almeida <andrealmeid@collabora.com>
+    Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+    Link: https://lkml.kernel.org/r/20211012135549.14451-1-andrealmeid@collabora.com
+
+commit de969d4c3e508896ccf0bc4c18785cdce8638e21
+Author: Peter Zijlstra <peterz@infradead.org>
+Date:   Fri Oct 15 12:05:59 2021 +0200
+
+    futex: Fix PREEMPT_RT build
+
+    Mike reported that rcuwait went walk-about and is causing failures on
+    the PREEMPT_RT builds, restore it.
+
+    Reported-by: Mike Galbraith <efault@gmx.de>
+    Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 
 commit b2e45ef5782f5d9ecc0e0f043774266b91c84d94
 Author: André Almeida <andrealmeid@collabora.com>
@@ -781,6 +854,8 @@ Date:   Thu Sep 9 11:32:18 2021 +0200
     Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
     Link: https://lkml.kernel.org/r/YUBGPdDDjKlxAuXJ@hirez.programming.kicks-ass.net
 ---
+ Documentation/kernel-hacking/locking.rst      |   14 +-
+ .../it_IT/kernel-hacking/locking.rst          |   14 +-
  Documentation/userspace-api/futex2.rst        |   86 +
  Documentation/userspace-api/index.rst         |    1 +
  MAINTAINERS                                   |    3 +-
@@ -805,15 +880,16 @@ Date:   Thu Sep 9 11:32:18 2021 +0200
  kernel/futex.c                                | 4272 -----------------
  kernel/futex/Makefile                         |    3 +
  kernel/futex/core.c                           | 1176 +++++
- kernel/futex/futex.h                          |  295 ++
+ kernel/futex/futex.h                          |  299 ++
  kernel/futex/pi.c                             | 1233 +++++
  kernel/futex/requeue.c                        |  897 ++++
  kernel/futex/syscalls.c                       |  398 ++
  kernel/futex/waitwake.c                       |  708 +++
  kernel/locking/lockdep.c                      |    4 +-
- kernel/locking/mutex.c                        |   41 +
+ kernel/locking/mutex.c                        |   63 +-
  kernel/locking/rtmutex.c                      |   23 +-
  kernel/locking/rwbase_rt.c                    |   11 +-
+ kernel/locking/rwsem.c                        |   70 +-
  kernel/locking/spinlock_rt.c                  |   17 +-
  kernel/locking/test-ww_mutex.c                |   87 +-
  kernel/locking/ww_rt_mutex.c                  |   25 +
@@ -829,7 +905,7 @@ Date:   Thu Sep 9 11:32:18 2021 +0200
  .../selftests/futex/functional/futex_waitv.c  |  237 +
  .../testing/selftests/futex/functional/run.sh |    3 +
  .../selftests/futex/include/futex2test.h      |   22 +
- 48 files changed, 5426 insertions(+), 4388 deletions(-)
+ 51 files changed, 5511 insertions(+), 4427 deletions(-)
  create mode 100644 Documentation/userspace-api/futex2.rst
  delete mode 100644 kernel/futex.c
  create mode 100644 kernel/futex/Makefile
@@ -842,6 +918,56 @@ Date:   Thu Sep 9 11:32:18 2021 +0200
  create mode 100644 tools/testing/selftests/futex/functional/futex_waitv.c
  create mode 100644 tools/testing/selftests/futex/include/futex2test.h
 
+diff --git a/Documentation/kernel-hacking/locking.rst b/Documentation/kernel-hacking/locking.rst
+index 90bc3f51eda9..e6cd40663ea5 100644
+--- a/Documentation/kernel-hacking/locking.rst
++++ b/Documentation/kernel-hacking/locking.rst
+@@ -1352,7 +1352,19 @@ Mutex API reference
+ Futex API reference
+ ===================
+ 
+-.. kernel-doc:: kernel/futex.c
++.. kernel-doc:: kernel/futex/core.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/futex.h
++   :internal:
++
++.. kernel-doc:: kernel/futex/pi.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/requeue.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/waitwake.c
+    :internal:
+ 
+ Further reading
+diff --git a/Documentation/translations/it_IT/kernel-hacking/locking.rst b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+index 1efb8293bf1f..163f1bd4e857 100644
+--- a/Documentation/translations/it_IT/kernel-hacking/locking.rst
++++ b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+@@ -1396,7 +1396,19 @@ Riferimento per l'API dei Mutex
+ Riferimento per l'API dei Futex
+ ===============================
+ 
+-.. kernel-doc:: kernel/futex.c
++.. kernel-doc:: kernel/futex/core.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/futex.h
++   :internal:
++
++.. kernel-doc:: kernel/futex/pi.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/requeue.c
++   :internal:
++
++.. kernel-doc:: kernel/futex/waitwake.c
+    :internal:
+ 
+ Approfondimenti
 diff --git a/Documentation/userspace-api/futex2.rst b/Documentation/userspace-api/futex2.rst
 new file mode 100644
 index 000000000000..9693f47a7e62
@@ -6810,16 +6936,20 @@ index 000000000000..25d8a88b32e5
 +core_initcall(futex_init);
 diff --git a/kernel/futex/futex.h b/kernel/futex/futex.h
 new file mode 100644
-index 000000000000..948fcf317681
+index 000000000000..040ae4277cb0
 --- /dev/null
 +++ b/kernel/futex/futex.h
-@@ -0,0 +1,295 @@
+@@ -0,0 +1,299 @@
 +/* SPDX-License-Identifier: GPL-2.0 */
 +#ifndef _FUTEX_H
 +#define _FUTEX_H
 +
 +#include <linux/futex.h>
 +#include <linux/sched/wake_q.h>
++
++#ifdef CONFIG_PREEMPT_RT
++#include <linux/rcuwait.h>
++#endif
 +
 +#include <asm/futex.h>
 +
@@ -10392,7 +10522,7 @@ index bf1c00c881e4..4e6312977ffb 100644
  
  			return LOCK_STATE_NOT_HELD;
 diff --git a/kernel/locking/mutex.c b/kernel/locking/mutex.c
-index d456579d0952..2fede72b6af5 100644
+index d456579d0952..db1913611192 100644
 --- a/kernel/locking/mutex.c
 +++ b/kernel/locking/mutex.c
 @@ -94,6 +94,9 @@ static inline unsigned long __owner_flags(unsigned long owner)
@@ -10405,7 +10535,64 @@ index d456579d0952..2fede72b6af5 100644
  static inline struct task_struct *__mutex_trylock_common(struct mutex *lock, bool handoff)
  {
  	unsigned long owner, curr = (unsigned long)current;
-@@ -736,6 +739,44 @@ __ww_mutex_lock(struct mutex *lock, unsigned int state, unsigned int subclass,
+@@ -348,13 +351,16 @@ bool mutex_spin_on_owner(struct mutex *lock, struct task_struct *owner,
+ {
+ 	bool ret = true;
+ 
+-	rcu_read_lock();
++	lockdep_assert_preemption_disabled();
++
+ 	while (__mutex_owner(lock) == owner) {
+ 		/*
+ 		 * Ensure we emit the owner->on_cpu, dereference _after_
+-		 * checking lock->owner still matches owner. If that fails,
+-		 * owner might point to freed memory. If it still matches,
+-		 * the rcu_read_lock() ensures the memory stays valid.
++		 * checking lock->owner still matches owner. And we already
++		 * disabled preemption which is equal to the RCU read-side
++		 * crital section in optimistic spinning code. Thus the
++		 * task_strcut structure won't go away during the spinning
++		 * period
+ 		 */
+ 		barrier();
+ 
+@@ -374,7 +380,6 @@ bool mutex_spin_on_owner(struct mutex *lock, struct task_struct *owner,
+ 
+ 		cpu_relax();
+ 	}
+-	rcu_read_unlock();
+ 
+ 	return ret;
+ }
+@@ -387,19 +392,25 @@ static inline int mutex_can_spin_on_owner(struct mutex *lock)
+ 	struct task_struct *owner;
+ 	int retval = 1;
+ 
++	lockdep_assert_preemption_disabled();
++
+ 	if (need_resched())
+ 		return 0;
+ 
+-	rcu_read_lock();
++	/*
++	 * We already disabled preemption which is equal to the RCU read-side
++	 * crital section in optimistic spinning code. Thus the task_strcut
++	 * structure won't go away during the spinning period.
++	 */
+ 	owner = __mutex_owner(lock);
+ 
+ 	/*
+ 	 * As lock holder preemption issue, we both skip spinning if task is not
+ 	 * on cpu or its cpu is preempted
+ 	 */
++
+ 	if (owner)
+ 		retval = owner->on_cpu && !vcpu_is_preempted(task_cpu(owner));
+-	rcu_read_unlock();
+ 
+ 	/*
+ 	 * If lock->owner is not set, the mutex has been released. Return true
+@@ -736,6 +747,44 @@ __ww_mutex_lock(struct mutex *lock, unsigned int state, unsigned int subclass,
  	return __mutex_lock_common(lock, state, subclass, NULL, ip, ww_ctx, true);
  }
  
@@ -10532,6 +10719,164 @@ index 88191f6e252c..6fd3162e4098 100644
  	 */
  	(void)atomic_add_return_release(READER_BIAS - bias, &rwb->readers);
  	raw_spin_unlock_irqrestore(&rtm->wait_lock, flags);
+diff --git a/kernel/locking/rwsem.c b/kernel/locking/rwsem.c
+index 000e8d5a2884..c51387a43265 100644
+--- a/kernel/locking/rwsem.c
++++ b/kernel/locking/rwsem.c
+@@ -56,7 +56,6 @@
+  *
+  * A fast path reader optimistic lock stealing is supported when the rwsem
+  * is previously owned by a writer and the following conditions are met:
+- *  - OSQ is empty
+  *  - rwsem is not currently writer owned
+  *  - the handoff isn't set.
+  */
+@@ -485,7 +484,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
+ 		/*
+ 		 * Limit # of readers that can be woken up per wakeup call.
+ 		 */
+-		if (woken >= MAX_READERS_WAKEUP)
++		if (unlikely(woken >= MAX_READERS_WAKEUP))
+ 			break;
+ 	}
+ 
+@@ -577,6 +576,24 @@ static inline bool rwsem_try_write_lock(struct rw_semaphore *sem,
+ 	return true;
+ }
+ 
++/*
++ * The rwsem_spin_on_owner() function returns the following 4 values
++ * depending on the lock owner state.
++ *   OWNER_NULL  : owner is currently NULL
++ *   OWNER_WRITER: when owner changes and is a writer
++ *   OWNER_READER: when owner changes and the new owner may be a reader.
++ *   OWNER_NONSPINNABLE:
++ *		   when optimistic spinning has to stop because either the
++ *		   owner stops running, is unknown, or its timeslice has
++ *		   been used up.
++ */
++enum owner_state {
++	OWNER_NULL		= 1 << 0,
++	OWNER_WRITER		= 1 << 1,
++	OWNER_READER		= 1 << 2,
++	OWNER_NONSPINNABLE	= 1 << 3,
++};
++
+ #ifdef CONFIG_RWSEM_SPIN_ON_OWNER
+ /*
+  * Try to acquire write lock before the writer has been put on wait queue.
+@@ -617,7 +634,10 @@ static inline bool rwsem_can_spin_on_owner(struct rw_semaphore *sem)
+ 	}
+ 
+ 	preempt_disable();
+-	rcu_read_lock();
++	/*
++	 * Disable preemption is equal to the RCU read-side crital section,
++	 * thus the task_strcut structure won't go away.
++	 */
+ 	owner = rwsem_owner_flags(sem, &flags);
+ 	/*
+ 	 * Don't check the read-owner as the entry may be stale.
+@@ -625,30 +645,12 @@ static inline bool rwsem_can_spin_on_owner(struct rw_semaphore *sem)
+ 	if ((flags & RWSEM_NONSPINNABLE) ||
+ 	    (owner && !(flags & RWSEM_READER_OWNED) && !owner_on_cpu(owner)))
+ 		ret = false;
+-	rcu_read_unlock();
+ 	preempt_enable();
+ 
+ 	lockevent_cond_inc(rwsem_opt_fail, !ret);
+ 	return ret;
+ }
+ 
+-/*
+- * The rwsem_spin_on_owner() function returns the following 4 values
+- * depending on the lock owner state.
+- *   OWNER_NULL  : owner is currently NULL
+- *   OWNER_WRITER: when owner changes and is a writer
+- *   OWNER_READER: when owner changes and the new owner may be a reader.
+- *   OWNER_NONSPINNABLE:
+- *		   when optimistic spinning has to stop because either the
+- *		   owner stops running, is unknown, or its timeslice has
+- *		   been used up.
+- */
+-enum owner_state {
+-	OWNER_NULL		= 1 << 0,
+-	OWNER_WRITER		= 1 << 1,
+-	OWNER_READER		= 1 << 2,
+-	OWNER_NONSPINNABLE	= 1 << 3,
+-};
+ #define OWNER_SPINNABLE		(OWNER_NULL | OWNER_WRITER | OWNER_READER)
+ 
+ static inline enum owner_state
+@@ -670,12 +672,13 @@ rwsem_spin_on_owner(struct rw_semaphore *sem)
+ 	unsigned long flags, new_flags;
+ 	enum owner_state state;
+ 
++	lockdep_assert_preemption_disabled();
++
+ 	owner = rwsem_owner_flags(sem, &flags);
+ 	state = rwsem_owner_state(owner, flags);
+ 	if (state != OWNER_WRITER)
+ 		return state;
+ 
+-	rcu_read_lock();
+ 	for (;;) {
+ 		/*
+ 		 * When a waiting writer set the handoff flag, it may spin
+@@ -693,7 +696,9 @@ rwsem_spin_on_owner(struct rw_semaphore *sem)
+ 		 * Ensure we emit the owner->on_cpu, dereference _after_
+ 		 * checking sem->owner still matches owner, if that fails,
+ 		 * owner might point to free()d memory, if it still matches,
+-		 * the rcu_read_lock() ensures the memory stays valid.
++		 * our spinning context already disabled preemption which is
++		 * equal to RCU read-side crital section ensures the memory
++		 * stays valid.
+ 		 */
+ 		barrier();
+ 
+@@ -704,7 +709,6 @@ rwsem_spin_on_owner(struct rw_semaphore *sem)
+ 
+ 		cpu_relax();
+ 	}
+-	rcu_read_unlock();
+ 
+ 	return state;
+ }
+@@ -878,12 +882,11 @@ static inline bool rwsem_optimistic_spin(struct rw_semaphore *sem)
+ 
+ static inline void clear_nonspinnable(struct rw_semaphore *sem) { }
+ 
+-static inline int
++static inline enum owner_state
+ rwsem_spin_on_owner(struct rw_semaphore *sem)
+ {
+-	return 0;
++	return OWNER_NONSPINNABLE;
+ }
+-#define OWNER_NULL	1
+ #endif
+ 
+ /*
+@@ -1095,9 +1098,16 @@ rwsem_down_write_slowpath(struct rw_semaphore *sem, int state)
+ 		 * In this case, we attempt to acquire the lock again
+ 		 * without sleeping.
+ 		 */
+-		if (wstate == WRITER_HANDOFF &&
+-		    rwsem_spin_on_owner(sem) == OWNER_NULL)
+-			goto trylock_again;
++		if (wstate == WRITER_HANDOFF) {
++			enum owner_state owner_state;
++
++			preempt_disable();
++			owner_state = rwsem_spin_on_owner(sem);
++			preempt_enable();
++
++			if (owner_state == OWNER_NULL)
++				goto trylock_again;
++		}
+ 
+ 		/* Block until there are no active lockers. */
+ 		for (;;) {
 diff --git a/kernel/locking/spinlock_rt.c b/kernel/locking/spinlock_rt.c
 index d2912e44d61f..b2e553f9255b 100644
 --- a/kernel/locking/spinlock_rt.c
