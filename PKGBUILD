@@ -60,7 +60,7 @@ source=(
   #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"                  # TODO: not yet compatible with 5.15
 
   # AMD pstate cpufreq driver
-  "amd-pstate-v2.patch"
+  "squashed-amd-pstate-v3-for-5.14.patch"
 
   # Updated zstd: v1.4.10
   "zstd-v1.4.10-v12.patch"
@@ -109,7 +109,7 @@ sha256sums=('SKIP'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
-            '9025ca0788fbacea25200e6ac17036960000424843f544cdd781052231da7903'
+            '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
             'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
             'f839d4d43a20d5506357e860cf23bcd354d091afb4a6bcda411a7daa1cc48f00'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
