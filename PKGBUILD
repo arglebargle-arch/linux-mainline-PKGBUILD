@@ -51,6 +51,9 @@ source=(
   # squelch overly zealous wifi regdomain not set warnings
   "cfg80211-dont-WARN-if-a-self-managed-device.patch"
 
+  # optionally disallow unprivileged USER_NS clone
+  "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
+
   ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
   # Google's TCP BBRv2
@@ -108,6 +111,7 @@ sha256sums=('SKIP'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
+            '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
             '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
             'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
