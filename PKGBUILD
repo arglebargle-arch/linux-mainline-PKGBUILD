@@ -192,10 +192,11 @@ prepare() {
 
   ## HACK: forcibly fixup CONFIG_CMDLINE as scripts/config mangles quote escapes
 
-  # note the double escaped quotes here, sed strips one;
-  # the final result in .config needs to look like CONFIG_CMDLINE="foo.dyndbg=\"+p\"" to avoid dyndbg parse errors at boot
-
   sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
+
+  # note the double escaped quotes above, sed strips one; the final result in .config needs to contain
+  # single slash escaped quotes (eg: `CONFIG_CMDLINE="foo.dyndbg=\"+p\""`) to avoid dyndbg parse errors at boot
+  # this is impossible with the kernel config script.
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
@@ -215,7 +216,7 @@ _package() {
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
-  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE ${_pkgbase})
+  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE "${_pkgbase}" linux-rog)
   replaces=(virtualbox-guest-modules-mainline wireguard-maineline)
 
   cd $_srcname
@@ -240,7 +241,7 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
   depends=(pahole)
-  provides=(${_pkgbase}-headers)
+  provides=("${_pkgbase}-headers" linux-rog-headers)
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"

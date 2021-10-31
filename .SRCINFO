@@ -97,6 +97,7 @@ pkgname = linux-mainline-amd-s0ix
 	provides = VIRTUALBOX-GUEST-MODULES
 	provides = WIREGUARD-MODULE
 	provides = linux-mainline
+	provides = linux-rog
 	replaces = virtualbox-guest-modules-mainline
 	replaces = wireguard-maineline
 
@@ -104,3 +105,4 @@ pkgname = linux-mainline-amd-s0ix-headers
 	pkgdesc = Headers and scripts for building modules for the Linux Mainline kernel
 	depends = pahole
 	provides = linux-mainline-headers
+	provides = linux-rog-headers
