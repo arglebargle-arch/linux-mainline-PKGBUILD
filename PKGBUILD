@@ -48,13 +48,13 @@ source=(
 
   # k10temp support for Zen3 APUs                                           # included in 5.14/5.15
 
+  ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
+
   # squelch overly zealous wifi regdomain not set warnings
   "cfg80211-dont-WARN-if-a-self-managed-device.patch"
 
   # optionally disallow unprivileged USER_NS clone
   "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
-
-  ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
   # Google's TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
