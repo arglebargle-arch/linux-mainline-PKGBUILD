@@ -26,45 +26,44 @@ options=('!strip')
 #_srcname=linux-mainline
 _srcname=linux-stable-s0ix
 source=(
-  #"$_srcname::git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=$_tag"
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config              # the main kernel config file
+
+  ## NOTE: we pull from a stable kernel mirror with all upstream s0ix (and adjacent) work included, no need for patches
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/4b184fc25abff605d47695713471fddc8292cd94/more-uarches-for-kernel-5.15%2B.patch"
 
-  # optimization flags
+  # compiler optimization flag changes from Xanmod; allow -O3, safer -O3
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
-  ## NOTE: We now pull from a kernel tree with all s0ix related patches included; all patches current as of PKGBUILD release
+  # 5.16: AMD; don't drop shared caches on C3 state transitions
+  "x86-ACPI-State-Optimize-C3-entry-on-AMD-CPUs.patch"
+
+  # k10temp support for Zen3 APUs included in 5.15
+
+  # Arch: optionally disallow unprivileged USER_NS clone
+  "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
+
+  # 5.16: change default spec_store_bypass_disable=prctl spectre_v2_user=prctl
+  # see: https://git.kernel.org/kees/linux/c/id=h=for-next/seccomp&id=2f46993d83ff4abb310ef7b4beced56ba96f0d9d
+  "x86-change-default-to-spec_store_bypass_disable-prct.patch"
+
+  # squelch overly zealous wifi regdomain not set warnings; this removes spurious module "crashes" from the klog when using iwd
+  "cfg80211-dont-WARN-if-a-self-managed-device.patch"
 
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
 
-  # AMD; don't drop shared caches on C3 state transitions
-  "x86-ACPI-State-Optimize-C3-entry-on-AMD-CPUs.patch"
-
-  # k10temp support for Zen3 APUs                                           # included in 5.14/5.15
-
   ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
-
-  # from 5.16: change default spec_store_bypass_disable=prctl spectre_v2_user=prctl
-  # see: https://git.kernel.org/kees/linux/c/id=h=for-next/seccomp&id=2f46993d83ff4abb310ef7b4beced56ba96f0d9d
-  "x86-change-default-to-spec_store_bypass_disable-prct.patch"
-
-  # squelch overly zealous wifi regdomain not set warnings
-  "cfg80211-dont-WARN-if-a-self-managed-device.patch"
-
-  # optionally disallow unprivileged USER_NS clone
-  "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
 
   # Google's TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
 
-  # Multigenerational LRU v4
-  #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"                  # TODO: not yet compatible with 5.15
+  # Multigenerational LRU v4                                                    # TODO: not yet compatible with 5.15
+  #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
 
   # AMD pstate cpufreq driver
   "squashed-amd-pstate-v3-for-5.14.patch"
@@ -75,13 +74,13 @@ source=(
   # futex2 work backported from 5.16
   "futex2-backports-from-tip-5.16.patch"
 
-  ## NOTE: All patches below this line can be removed if you're not using an ASUS laptop; though they won't cause problems if left in
+  ## NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
   "v16-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
-  # improve mediatek mt7921 bt/wifi support
+  # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
   "mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
   "mt76-mt7921-Add-mt7922-support.patch"
   #"1-1-Bluetooth-btusb-Enable-MSFT-extension-for-Mediatek-Chip-MT7921.patch"   # 5.15
@@ -112,11 +111,11 @@ sha256sums=('SKIP'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
-            'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '923230ed8367e28adfdeed75d3cdba9eec6b781818c37f6f3d3eb64101d2e716'
+            '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             'cc401107f1bf7b7d8e8a78ee594f9db4b6fa252b7239b6aa88f678aef84d935c'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
-            '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
+            'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
             '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
             'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
