@@ -32,9 +32,6 @@ scripts/config --module CONFIG_BINFMT_MISC
 scripts/config --module CONFIG_ZBUD
 scripts/config --module CONFIG_ZSMALLOC
 
-# enable module versioning
-scripts/config --enable CONFIG_MODVERSIONS
-
 # use a smaller connection tracking table
 scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
 
@@ -48,9 +45,6 @@ scripts/config --set-str CONFIG_DEFAULT_NET_SCH "fq_pie"
 
 # enable bluetooth high speed
 scripts/config --enable CONFIG_BT_HS
-
-# enable zram memory tracking
-scripts/config --enable CONFIG_ZRAM_MEMORY_TRACKING
 
 ## use tcp_bbr by default; uncomment if not using bbr2
 #scripts/config --module CONFIG_TCP_CONG_CUBIC
