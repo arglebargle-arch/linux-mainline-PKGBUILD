@@ -9,9 +9,9 @@
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.15-s0ix
-pkgver=5.15
-pkgrel=2
+_tag=v5.15.1-s0ix
+pkgver=5.15.1
+pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
@@ -105,6 +105,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
+  -> host > makepkg.conf: using 14 threads
 sha256sums=('SKIP'
             'be9551f441bb1c01678d3877785666715b92c3874f19eab9cf766dacac15fcd7'
             '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
