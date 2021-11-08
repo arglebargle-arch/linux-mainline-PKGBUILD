@@ -55,13 +55,13 @@ scripts/config --enable CONFIG_BT_HS
 
 ## added features; comment these if removing from PKGBUILD
 
-# use tcp_bbr2 by default
-scripts/config --module CONFIG_TCP_CONG_CUBIC
-scripts/config --module CONFIG_TCP_CONG_BBR
-scripts/config --enable CONFIG_TCP_CONG_BBR2
-scripts/config --disable CONFIG_DEFAULT_CUBIC
-scripts/config --enable CONFIG_DEFAULT_BBR2
-scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+## use tcp_bbr2 by default
+#scripts/config --module CONFIG_TCP_CONG_CUBIC
+#scripts/config --module CONFIG_TCP_CONG_BBR
+#scripts/config --enable CONFIG_TCP_CONG_BBR2
+#scripts/config --disable CONFIG_DEFAULT_CUBIC
+#scripts/config --enable CONFIG_DEFAULT_BBR2
+#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
 ## enable multigen LRU by default                        # TODO:
 #scripts/config --enable CONFIG_LRU_GEN
@@ -70,6 +70,6 @@ scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 #scripts/config --set-val TIERS_PER_GEN 4
 #scripts/config --enable CONFIG_LRU_GEN_ENABLED
 
-# AMD pstate
-scripts/config --enable CONFIG_X86_AMD_PSTATE
+## AMD pstate
+#scripts/config --enable CONFIG_X86_AMD_PSTATE
 

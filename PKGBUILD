@@ -10,7 +10,7 @@
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.15.1-s0ix
-pkgver=5.15.1
+pkgver=5.15.1+test1
 pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
@@ -59,46 +59,46 @@ source=(
 
   ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
-  # Google's TCP BBRv2
-  "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
+  ## Google's TCP BBRv2
+  #"squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
 
-  # Multigenerational LRU v4                                                    # TODO: not yet compatible with 5.15
-  #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
+  ## Multigenerational LRU v4                                                    # TODO: not yet compatible with 5.15
+  ##"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
 
-  # AMD pstate cpufreq driver
-  "squashed-amd-pstate-v3-for-5.14.patch"
+  ## AMD pstate cpufreq driver
+  #"squashed-amd-pstate-v3-for-5.14.patch"
 
-  # Updated zstd: v1.4.10
-  "zstd-v1.4.10-v12.patch"
+  ## Updated zstd: v1.4.10
+  #"zstd-v1.4.10-v12.patch"
 
-  # futex2 work backported from 5.16
-  "futex2-backports-from-tip-5.16.patch"
+  ## futex2 work backported from 5.16
+  #"futex2-backports-from-tip-5.16.patch"
 
   ## NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
-  "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
+  #"HID-asus-Reduce-object-size-by-consolidating-calls.patch"
   "v16-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
-  # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
-  "mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
-  "mt76-mt7921-Add-mt7922-support.patch"
-  #"1-1-Bluetooth-btusb-Enable-MSFT-extension-for-Mediatek-Chip-MT7921.patch"   # 5.15
-  "1-2-mt76-mt7915-send-EAPOL-frames-at-lowest-rate.patch"
-  "2-2-mt76-mt7921-send-EAPOL-frames-at-lowest-rate.patch"
-  "mt76-mt7921-enable-VO-tx-aggregation.patch"
-  "mt76-mt7921-fix-dma-hang-in-rmmod.patch"
-  "mt76-mt7921-fix-firmware-usage-of-RA-info-using-legacy-rates.patch"
-  "mt76-mt7921-fix-the-inconsistent-state-between-bind-and-unbind.patch"
-  "mt76-mt7921-report-HE-MU-radiotap.patch"
-  "v2-mt76-mt7921-fix-kernel-warning-from-cfg80211_calculate_bitrate.patch"
-  "1-2-mt76-mt7921-robustify-hardware-initialization-flow.patch"
-  "2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch"
-  "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
-  "2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch"
-  "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch"
-  "Bluetooth-btusb-Add-support-for-Foxconn-Mediatek-Chip.patch"
-  "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip-MT7921.patch"
+  ## cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
+  #"mt76-mt7921-Fix-out-of-order-process-by-invalid-even.patch"
+  #"mt76-mt7921-Add-mt7922-support.patch"
+  ##"1-1-Bluetooth-btusb-Enable-MSFT-extension-for-Mediatek-Chip-MT7921.patch"   # 5.15
+  #"1-2-mt76-mt7915-send-EAPOL-frames-at-lowest-rate.patch"
+  #"2-2-mt76-mt7921-send-EAPOL-frames-at-lowest-rate.patch"
+  #"mt76-mt7921-enable-VO-tx-aggregation.patch"
+  #"mt76-mt7921-fix-dma-hang-in-rmmod.patch"
+  #"mt76-mt7921-fix-firmware-usage-of-RA-info-using-legacy-rates.patch"
+  #"mt76-mt7921-fix-the-inconsistent-state-between-bind-and-unbind.patch"
+  #"mt76-mt7921-report-HE-MU-radiotap.patch"
+  #"v2-mt76-mt7921-fix-kernel-warning-from-cfg80211_calculate_bitrate.patch"
+  #"1-2-mt76-mt7921-robustify-hardware-initialization-flow.patch"
+  #"2-2-mt76-mt7921-fix-retrying-release-semaphore-without-end.patch"
+  #"1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
+  #"2-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-IMC-Network.patch"
+  #"Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch"
+  #"Bluetooth-btusb-Add-support-for-Foxconn-Mediatek-Chip.patch"
+  #"Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip-MT7921.patch"
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -116,29 +116,7 @@ sha256sums=('SKIP'
             'cc401107f1bf7b7d8e8a78ee594f9db4b6fa252b7239b6aa88f678aef84d935c'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
-            'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
-            '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
-            'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
-            'f839d4d43a20d5506357e860cf23bcd354d091afb4a6bcda411a7daa1cc48f00'
-            '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
-            '0c422d8f420c1518aab1b980c6cdb6e029a4fa9cde1fd99a63670bb105a44f36'
-            '2163cb2e394a013042a40cd3b00dae788603284b20d71e262995366c5534e480'
-            'a01cf700d79b983807e2285be1b30df6e02db6adfd9c9027fe2dfa8ca5a74bc9'
-            '4bfbff4eba07fc9de2ce78097a4a269509468ba0e24c15a82905cd94e093ad55'
-            '021f8539ab2fb722b46937b95fdab22a2308236a24ecc1a9ea8db4853721dd39'
-            '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
-            'e7e37c7c433c58e2f5a79e2a7724823bef1dccaa01e857584397b4e3c837d991'
-            'f075ac354acfd65dff4db49dc9798747cb9b7a3dd9839987bc46495bdbbd22dc'
-            '1770fec49335bc93194e9e55ced49e1cb67f2df4bf6948e80712a0b2ba50fa49'
-            '6da4010f86a74125969fd3dbc953da7b45209d33ff3d216474c3399e82e893ff'
-            'eb391b6d1ebf7ef99ece00b23609b94180a1f3c0149bcf05f6bbeb74d0b724c7'
-            'c368cc4eefff20b7ae904eec686b7e72b46ff02b32c8a4fbd6bd4039f087e7ba'
-            '1a8639167a1ee1b66f580c0c6f8304e6ef359a68cfa3eb869d9200a9f0234098'
-            '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
-            'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
-            '292a7e32b248c7eee6e2f5407d609d03d985f367d329adb02b9d6dba1f85b44c'
-            '7dbfdd120bc155cad1879579cb9dd1185eb5e37078c8c93fef604a275a163812'
-            '1444af2e125080934c67b6adb4561fd354a72ce47d3de393b24f53832ee492ac')
+            '0c422d8f420c1518aab1b980c6cdb6e029a4fa9cde1fd99a63670bb105a44f36')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
