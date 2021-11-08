@@ -1,8 +1,13 @@
-archlinux-linux/
-src/
-pkg/
-src-cache/
+archlinux-linux
 src-cache
+release-pkg
+src
+pkg
+*/
 *log
 *.pkg.tar.*
+*.sig
+myconfig
 config.last
+oldconfig*
+*build.sh
