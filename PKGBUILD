@@ -6,6 +6,8 @@
 # Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
+# --
+# shellcheck disable=SC2034,SC2164
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
@@ -157,7 +159,7 @@ prepare() {
   make olddefconfig
 
   # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
-  sh ${srcdir}/choose-gcc-optimization.sh $_microarchitecture
+  sh "${srcdir}/choose-gcc-optimization.sh" "$_microarchitecture"
 
   ## CONFIG_STACK_VALIDATION gives better stack traces. Also is enabled in all official kernel packages by Archlinux team
   scripts/config --enable CONFIG_STACK_VALIDATION
@@ -169,7 +171,7 @@ prepare() {
   ## apply any user config customizations
   if [[ -s ${startdir}/myconfig-fragment ]]; then
     msg2 "Applying config fragment..."
-    bash -x ${startdir}/myconfig-fragment
+    bash -x "${startdir}/myconfig-fragment"
   fi
 
   ## bake in s0ix debugging parameters
@@ -290,18 +292,18 @@ _package-headers() {
   while read -rd '' file; do
     case "$(file -bi "$file")" in
       application/x-sharedlib\;*)      # Libraries (.so)
-        strip -v $STRIP_SHARED "$file" ;;
+        strip -v "$STRIP_SHARED" "$file" ;;
       application/x-archive\;*)        # Libraries (.a)
-        strip -v $STRIP_STATIC "$file" ;;
+        strip -v "$STRIP_STATIC" "$file" ;;
       application/x-executable\;*)     # Binaries
-        strip -v $STRIP_BINARIES "$file" ;;
+        strip -v "$STRIP_BINARIES" "$file" ;;
       application/x-pie-executable\;*) # Relocatable binaries
-        strip -v $STRIP_SHARED "$file" ;;
+        strip -v "$STRIP_SHARED" "$file" ;;
     esac
   done < <(find "$builddir" -type f -perm -u+x ! -name vmlinux -print0)
 
   echo "Stripping vmlinux..."
-  strip -v $STRIP_STATIC "$builddir/vmlinux"
+  strip -v "$STRIP_STATIC" "$builddir/vmlinux"
 
   echo "Adding symlink..."
   mkdir -p "$pkgdir/usr/src"
@@ -331,8 +333,8 @@ _package-headers() {
 pkgname=("$pkgbase" "$pkgbase-headers")
 for _p in "${pkgname[@]}"; do
   eval "package_$_p() {
-    $(declare -f "_package${_p#$pkgbase}")
-    _package${_p#$pkgbase}
+    $(declare -f "_package${_p#"$pkgbase"}")
+    _package${_p#"$pkgbase"}
   }"
 done
 
