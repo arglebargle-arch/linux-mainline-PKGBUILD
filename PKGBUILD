@@ -232,7 +232,7 @@ _package() {
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
-  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE "${_pkgbase}" linux-rog)
+  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE ASUS-WMI-FAN-CONTROL linux-rog)
   replaces=(virtualbox-guest-modules-mainline wireguard-maineline)
 
   cd $_srcname
@@ -257,7 +257,6 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
   depends=(pahole)
-  provides=("${_pkgbase}-headers" linux-rog-headers)
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
