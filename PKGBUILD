@@ -9,6 +9,12 @@
 # --
 # shellcheck disable=SC2034,SC2164
 
+## Choose between GCC and CLANG at build-time (default is GCC)
+case "${_compiler,,}" in
+  "clang" | "gcc") _compiler=${_compiler,,} ;; # tolower, simplifes later checks
+                *) _compiler=gcc            ;; # default to GCC
+esac
+
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
 _tag=v5.15.1-s0ix
@@ -24,6 +30,11 @@ makedepends=(
   git
   "gcc>=11.0"
 )
+if [ "$_compiler" = "clang" ]; then
+  pkgver="${pkgver}+clang"
+  makedepends+=(clang llvm lld python)
+  _LLVM=1
+fi
 options=('!strip')
 #_srcname=linux-mainline
 _srcname=linux-stable-s0ix
@@ -156,7 +167,23 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
-  make olddefconfig
+
+  # Apply LTO_CLANG_THIN configuration
+  if [[ "$_compiler" == "clang" ]]; then
+    msg2 "Applying Clang ThinLTO configuration ..."
+    scripts/config  --module  CONFIG_LTO \
+                    --enable  CONFIG_LTO_CLANG \
+                    --enable  CONFIG_HAS_LTO_CLANG \
+                    --disable CONFIG_LTO_NONE \
+                    --disable CONFIG_LTO_CLANG_FULL \
+                    --enable  CONFIG_LTO_CLANG_THIN \
+                    --disable CONFIG_INIT_STACK_ALL_PATTERN \
+                    --disable CONFIG_INIT_STACK_ALL_ZERO \
+                    --disable CONFIG_REGULATOR_DA903X 
+                    # this module is incompatible with clang, disable to avoid a warning
+  fi
+
+  make LLVM=$_LLVM LLVM_IAS=$_LLVM olddefconfig
 
   # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
   sh "${srcdir}/choose-gcc-optimization.sh" "$_microarchitecture"
@@ -196,7 +223,7 @@ prepare() {
 
 build() {
   cd $_srcname
-  make all
+  make LLVM=$_LLVM LLVM_IAS=$_LLVM all
   #make htmldocs
 }
 
