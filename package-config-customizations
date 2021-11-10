@@ -1,8 +1,19 @@
 #!/hint/bash
 
-## tune kernel config here:
+## this script fragment tunes kernel config during prepare(), it runs from src/linux.../ before
+## makeolddefconfig is called
 
-## s0ix debugging moved into PKGBUILD
+## bake in s0ix debugging parameters
+scripts/config  --enable CONFIG_CMDLINE_BOOL \
+                --set-str CONFIG_CMDLINE "makepkgplaceholderyolo" \
+                --disable CMDLINE_OVERRIDE
+
+## HACK: forcibly fixup CONFIG_CMDLINE as scripts/config mangles quote escapes
+sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
+
+# note the double escaped quotes above, sed strips one; the final result in .config needs to contain
+# single slash escaped quotes (eg: `CONFIG_CMDLINE="foo.dyndbg=\"+p\""`) to avoid dyndbg parse errors at boot
+# this is impossible with the kernel config script.
 
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
@@ -13,8 +24,7 @@ scripts/config --module CONFIG_ACPI_EC_DEBUGFS \
                --module CONFIG_ACPI_APEI_ERST_DEBUG
 
 # enable scheduler autogrouping
-scripts/config --enable CONFIG_SCHED_AUTOGROUP \
-               --enable CONFIG_SCHED_AUTOGROUP_DEFAULT_ENABLED
+scripts/config --enable CONFIG_SCHED_AUTOGROUP
 
 # larger log buffer
 scripts/config --set-val CONFIG_LOG_BUF_SHIFT 18

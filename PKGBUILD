@@ -170,7 +170,7 @@ prepare() {
 
   # Apply LTO_CLANG_THIN configuration
   if [[ "$_compiler" == "clang" ]]; then
-    msg2 "Applying Clang ThinLTO configuration ..."
+    msg2 "Applying Clang ThinLTO configuration..."
     scripts/config  --module  CONFIG_LTO \
                     --enable  CONFIG_LTO_CLANG \
                     --enable  CONFIG_HAS_LTO_CLANG \
@@ -183,11 +183,6 @@ prepare() {
                     # this module is incompatible with clang, disable to avoid a warning
   fi
 
-  make LLVM=$_LLVM LLVM_IAS=$_LLVM olddefconfig
-
-  # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
-  sh "${srcdir}/choose-gcc-optimization.sh" "$_microarchitecture"
-
   ## CONFIG_STACK_VALIDATION gives better stack traces. Also is enabled in all official kernel packages by Archlinux team
   scripts/config --enable CONFIG_STACK_VALIDATION
 
@@ -195,24 +190,23 @@ prepare() {
   scripts/config --enable CONFIG_IKCONFIG \
                  --enable CONFIG_IKCONFIG_PROC
 
-  ## apply any user config customizations
-  if [[ -s ${startdir}/myconfig-fragment ]]; then
-    msg2 "Applying config fragment..."
-    bash -x "${startdir}/myconfig-fragment"
+  ## apply package kernel config customizations
+  if [[ -s ${startdir}/package-config-customizations ]]; then
+    msg2 "Applying package config customizations..."
+    bash -x "${startdir}/package-config-customizations"
   fi
 
-  ## bake in s0ix debugging parameters
-  scripts/config  --enable CONFIG_CMDLINE_BOOL \
-                  --set-str CONFIG_CMDLINE "makepkgplaceholderyolo" \
-                  --disable CMDLINE_OVERRIDE
+  ## apply any user config customizations
+  if [[ -s ${startdir}/myconfig ]]; then
+    msg2 "Applying user supplied config customizations..."
+    bash -x "${startdir}/myconfig"
+  fi
 
-  ## HACK: forcibly fixup CONFIG_CMDLINE as scripts/config mangles quote escapes
+  echo "Finalizing kernel config..."
+  make LLVM=$_LLVM LLVM_IAS=$_LLVM olddefconfig
 
-  sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
-
-  # note the double escaped quotes above, sed strips one; the final result in .config needs to contain
-  # single slash escaped quotes (eg: `CONFIG_CMDLINE="foo.dyndbg=\"+p\""`) to avoid dyndbg parse errors at boot
-  # this is impossible with the kernel config script.
+  # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
+  sh "${srcdir}/choose-gcc-optimization.sh" "$_microarchitecture"
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
