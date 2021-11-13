@@ -17,8 +17,8 @@ esac
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
-_tag=v5.15.1-s0ix
-pkgver=5.15.1
+_tag=v5.15.2-s0ix
+pkgver=5.15.2
 pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
