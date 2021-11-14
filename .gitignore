@@ -1,10 +1,13 @@
 archlinux-linux
 src-cache
-release-pkg
+release*
+clang*
+build*
 src
 pkg
 */
 *log
+*log.[0-9]
 *.pkg.tar.*
 *.sig
 myconfig
