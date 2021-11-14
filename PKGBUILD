@@ -75,8 +75,8 @@ source=(
   # Google's TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
 
-  # Multigenerational LRU v4                                                    # TODO: not yet compatible with 5.15
-  #"squashed-mm-multigenerational-lru-v4-for-5.14.y.patch"
+  # Multigenerational LRU v5
+  "squashed-mm-multigenerational-lru-v5-for-5.15.y.patch"
 
   # AMD pstate cpufreq driver
   "squashed-amd-pstate-v3-for-5.14.patch"
@@ -133,6 +133,7 @@ sha256sums=('SKIP'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             'ce15527dd8a3553d239ef4ff089b5b3a99076d306cf0f87a971e1fecbc6ac476'
+            '7675116fc7da55cfb9c6ceaaf120c5ebd285a13b1f1641ca810dd05516c88e0b'
             '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
             'bcd501bdb51c4774b0470729ab64008e129a59200fb4bc8eb2dd2a6bce2e9223'
             'f839d4d43a20d5506357e860cf23bcd354d091afb4a6bcda411a7daa1cc48f00'
