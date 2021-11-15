@@ -3,22 +3,10 @@
 ## this script fragment tunes kernel config during prepare(), it runs from src/linux.../ before
 ## makeolddefconfig is called
 
-## bake in s0ix debugging parameters
-scripts/config  --enable CONFIG_CMDLINE_BOOL \
-                --set-str CONFIG_CMDLINE "makepkgplaceholderyolo" \
-                --disable CMDLINE_OVERRIDE
-
-## HACK: forcibly fixup CONFIG_CMDLINE as scripts/config mangles quote escapes
-sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
-
-# note the double escaped quotes above, sed strips one; the final result in .config needs to contain
-# single slash escaped quotes (eg: `CONFIG_CMDLINE="foo.dyndbg=\"+p\""`) to avoid dyndbg parse errors at boot
-# this is impossible with the kernel config script.
-
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
 
-# enable ACPI debugging; this helps with PM/s0ix diagnosis
+# enable ACPI debugging features
 scripts/config --module CONFIG_ACPI_EC_DEBUGFS \
                --enable CONFIG_ACPI_DEBUG \
                --module CONFIG_ACPI_APEI_ERST_DEBUG
@@ -36,7 +24,6 @@ scripts/config --module CONFIG_X86_MSR
 scripts/config --enable CONFIG_EFI_VARS
 
 # turn a few non-default options into modules
-scripts/config --module CONFIG_MQ_IOSCHED_DEADLINE
 scripts/config --module CONFIG_MQ_IOSCHED_KYBER
 scripts/config --module CONFIG_BINFMT_MISC
 scripts/config --module CONFIG_ZBUD
@@ -53,27 +40,22 @@ scripts/config --disable CONFIG_DEFAULT_FQ_CODEL
 scripts/config --enable CONFIG_DEFAULT_FQ_PIE
 scripts/config --set-str CONFIG_DEFAULT_NET_SCH "fq_pie"
 
-# enable bluetooth high speed
-scripts/config --enable CONFIG_BT_HS
-
-## use tcp_bbr by default; uncomment if not using bbr2
-#scripts/config --module CONFIG_TCP_CONG_CUBIC
-#scripts/config --enable CONFIG_TCP_CONG_BBR
-#scripts/config --disable CONFIG_DEFAULT_CUBIC
-#scripts/config --enable CONFIG_DEFAULT_BBR
-#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
-
-## added features; comment these if removing from PKGBUILD
-
-# use tcp_bbr2 by default
+# use tcp_bbr by default; uncomment if not using bbr2
 scripts/config --module CONFIG_TCP_CONG_CUBIC
-scripts/config --module CONFIG_TCP_CONG_BBR
-scripts/config --enable CONFIG_TCP_CONG_BBR2
+scripts/config --enable CONFIG_TCP_CONG_BBR
 scripts/config --disable CONFIG_DEFAULT_CUBIC
-scripts/config --enable CONFIG_DEFAULT_BBR2
-scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+scripts/config --enable CONFIG_DEFAULT_BBR
+scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
 
-## enable multigen LRU by default                        # TODO:
+## use tcp_bbr2 by default (pending patch update)
+#scripts/config --module CONFIG_TCP_CONG_CUBIC
+#scripts/config --module CONFIG_TCP_CONG_BBR
+#scripts/config --enable CONFIG_TCP_CONG_BBR2
+#scripts/config --disable CONFIG_DEFAULT_CUBIC
+#scripts/config --enable CONFIG_DEFAULT_BBR2
+#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+
+## enable multigen LRU by default (pending patch update)
 #scripts/config --enable CONFIG_LRU_GEN
 #scripts/config --disable LRU_GEN_STATS
 #scripts/config --set-val NR_LRU_GENS 7
@@ -82,4 +64,16 @@ scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
 # AMD pstate
 scripts/config --enable CONFIG_X86_AMD_PSTATE
+
+# bake in s0ix debugging parameters so we get useful problem reports re: suspend
+scripts/config  --enable CONFIG_CMDLINE_BOOL \
+                --set-str CONFIG_CMDLINE "makepkgplaceholderyolo" \
+                --disable CMDLINE_OVERRIDE
+
+# HACK: forcibly fixup CONFIG_CMDLINE here as using scripts/config mangles escaped quotes
+sed -i 's#makepkgplaceholderyolo#pm_debug_messages amd_pmc.enable_stb=1 amd_pmc.dyndbg=\\"+p\\" acpi.dyndbg=\\"file drivers/acpi/x86/s2idle.c +p\\"#' .config
+
+# Note the double escaped quotes above, sed strips one; the final result in .config needs to contain single slash
+# escaped quotes (eg: `CONFIG_CMDLINE="foo.dyndbg=\"+p\""`) to avoid dyndbg parse errors at boot. This is impossible
+# with the current kernel config script.
 
