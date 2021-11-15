@@ -1,22 +1,22 @@
 #
-# Maintainer: Arglebargle <arglebargle AT arglebargle DOT dev>
+# Maintainer: Arglebargle <arglebargle@arglebargle.dev>
 #
-# Based on the linux package by:
-# Maintainer: Mikael Eriksson <mikael_eriksson@miffe.org>
-# Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Maintainer: Tobias Powalowski <tpowa@archlinux.org>
-# Maintainer: Thomas Baechler <thomas@archlinux.org>
-# --
+# Based on the linux and linux-mainline packages by:
+# Contributor: Mikael Eriksson <mikael_eriksson@miffe.org>
+# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+# Contributor: Tobias Powalowski <tpowa@archlinux.org>
+# Contributor: Thomas Baechler <thomas@archlinux.org>
+#
 # shellcheck disable=SC2034,SC2164
 
-## Choose between GCC and CLANG at build-time (default is GCC)
+# Choose between GCC or CLANG compilation (default is GCC)
 case "${_compiler,,}" in
   "clang" | "gcc") _compiler=${_compiler,,} ;; # tolower, simplifes later checks
                 *) _compiler=gcc            ;; # default to GCC
 esac
 
 _pkgbase=linux-mainline
-pkgbase=linux-mainline-amd-s0ix   # rename to custom pkgbase
+pkgbase=linux-mainline-amd-s0ix
 _tag=v5.15.2-s0ix
 pkgver=5.15.2
 pkgrel=1
@@ -36,13 +36,12 @@ if [ "$_compiler" = "clang" ]; then
   _LLVM=1
 fi
 options=('!strip')
-#_srcname=linux-mainline
 _srcname=linux-stable-s0ix
 source=(
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
-  config              # the main kernel config file
+  config
 
-  ## NOTE: we pull from a stable kernel mirror with all upstream s0ix (and adjacent) work included, no need for patches
+  #   NOTE: We pull from a stable kernel mirror with all upstream s0ix work included
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -70,7 +69,7 @@ source=(
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
 
-  ## NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
+  #   NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
   # Google's TCP BBRv2
   "squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
@@ -87,7 +86,7 @@ source=(
   # futex2 work backported from 5.16
   "futex2-backports-from-tip-5.16.patch"
 
-  ## NOTE: All patches below this line support ASUS ROG laptops
+  #   NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
