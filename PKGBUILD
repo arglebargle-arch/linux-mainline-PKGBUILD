@@ -183,7 +183,7 @@ prepare() {
     src="${src%%::*}"
     src="${src##*/}"
     [[ "$src" =~ .*(patch|diff)$ ]] || continue
-    echo "Applying patch $src..."
+    echo "  ${BLUE}-> ${ALL_OFF}${BOLD}Applying patch: ${ALL_OFF}$src"
     patch -Np1 < "../$src"
   done
 
