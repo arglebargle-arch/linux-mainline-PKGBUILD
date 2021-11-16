@@ -104,8 +104,6 @@ pkgname = linux-mainline-amd-s0ix
 	provides = WIREGUARD-MODULE
 	provides = ASUS-WMI-FAN-CONTROL
 	provides = linux-rog
-	replaces = virtualbox-guest-modules-mainline
-	replaces = wireguard-maineline
 
 pkgname = linux-mainline-amd-s0ix-headers
 	pkgdesc = Headers and scripts for building modules for the Linux Mainline kernel

@@ -248,7 +248,6 @@ _package() {
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
   provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE ASUS-WMI-FAN-CONTROL linux-rog)
-  replaces=(virtualbox-guest-modules-mainline wireguard-maineline)
 
   cd $_srcname
   local kernver="$(<version)"
