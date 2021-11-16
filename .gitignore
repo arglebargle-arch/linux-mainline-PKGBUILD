@@ -6,8 +6,8 @@ build*
 src
 pkg
 */
-*log
-*log.[0-9]
+*.log
+*.log.*
 *.pkg.tar.*
 *.sig
 myconfig
