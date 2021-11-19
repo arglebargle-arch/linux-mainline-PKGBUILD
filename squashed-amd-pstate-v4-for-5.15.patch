@@ -1,11 +1,22 @@
-From 912a070f821961eb38f68d954c0c3ad51ac9e644 Mon Sep 17 00:00:00 2001
+From 17d7d23d10f8c1633c04e42162a1acbcdaa05067 Mon Sep 17 00:00:00 2001
 From: Scott B <arglebargle@arglebargle.dev>
-Date: Fri, 29 Oct 2021 14:15:00 -0700
-Subject: [PATCH] amd-pstate v3 for 5.14
+Date: Fri, 19 Nov 2021 11:22:15 -0800
+Subject: [PATCH] squashed amd-pstate v4 for 5.15
 
 Squashed commit of the following:
 
-commit af3fee29bd0ee05dc8d93095202da29b5ddece8c
+commit d6d2439bbbc3632c507eb598d171ba12ec7d76a3
+Author: Jinzhou Su <Jinzhou.Su@amd.com>
+Date:   Fri Nov 12 11:00:42 2021 +0800
+
+    ACPI: CPPC: Add setting MIN/MAX perf in cppc_set_perf
+
+    Except for desire perf, sometimes need to update the min/max perf
+    in CPC table. So reuse the code in cppc_set_perf.
+
+    Signed-off-by: Jinzhou Su <Jinzhou.Su@amd.com>
+
+commit 06c2d215a2a6c142528c57184f1a0be238b7672b
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jun 10 23:40:18 2021 +0800
 
@@ -15,7 +26,7 @@ Date:   Thu Jun 10 23:40:18 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 555d3c7a15abc01fe816ee536e304bca639d57ed
+commit fd04adb59f5652e60a9d9e8cc60dcf6aa88fdf9d
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jun 10 23:48:03 2021 +0800
 
@@ -27,7 +38,7 @@ Date:   Thu Jun 10 23:48:03 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 7905fa91ff40e0dfd7edd65c2797310d832822c1
+commit 9755c1b747b5b78acc5c5627d63b61626a43ec99
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Sep 26 16:26:06 2021 +0800
 
@@ -38,7 +49,7 @@ Date:   Sun Sep 26 16:26:06 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit b5cfa8b42264287fc02bb1c38b7e8cfacaf630fe
+commit 42d694d0580ef222c7adce6244d2512ddc60cf51
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 20 17:35:45 2021 +0800
 
@@ -63,7 +74,7 @@ Date:   Sun Jun 20 17:35:45 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 224404badfdb59c6f82da86aeb9c0e9055f3ed47
+commit 5b1e7b429abff86fb58e37cc603681fe07577676
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 20 17:07:25 2021 +0800
 
@@ -76,7 +87,7 @@ Date:   Sun Jun 20 17:07:25 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit bb8ac8884ef40931690a6cbd6ee601ef995daedb
+commit 5928c99135752de8263cbc7b35320cc3bc58c6bc
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Sep 26 10:55:53 2021 +0800
 
@@ -87,7 +98,7 @@ Date:   Sun Sep 26 10:55:53 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit c6b259f9874c80f653036d26d4a22ce17a13d749
+commit 4a7abac990d6dce5ef98d781498204ed192c57c9
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 27 22:40:14 2021 +0800
 
@@ -100,7 +111,7 @@ Date:   Sun Jun 27 22:40:14 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit a8f1f16860230d5e3824683fc14d5461e185657b
+commit 05bc63c7be388bf939f8b97684ed1c242e1e7c01
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 27 22:25:39 2021 +0800
 
@@ -115,7 +126,7 @@ Date:   Sun Jun 27 22:25:39 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit fc35dbad6da1f7416bdf665ced010ef791fb5347
+commit dadbd9b137f1c985649b4319b045144be07701a9
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Mon Jun 14 22:52:01 2021 +0800
 
@@ -126,7 +137,7 @@ Date:   Mon Jun 14 22:52:01 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 5d3b1ac5d02a4816645cd589e3c3950b5f43528c
+commit fbb4ae2347d5182d1fc98b2530b57992243e3f8a
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 20 15:01:08 2021 +0800
 
@@ -137,7 +148,7 @@ Date:   Sun Jun 20 15:01:08 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit ea280c1f3d3ac68c277ffac580c848ee395f4730
+commit c1089d257734a7671893ecc7e7316a2a1b5c0677
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Sun Jun 20 13:26:01 2021 +0800
 
@@ -148,7 +159,7 @@ Date:   Sun Jun 20 13:26:01 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit b29a8da4660e2c9f1add252d3b64f66d8a64cf32
+commit 68e484a961047057bfe6ebca8b16fe3663c8c532
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jun 10 23:13:00 2021 +0800
 
@@ -159,7 +170,7 @@ Date:   Thu Jun 10 23:13:00 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 0e6647f08ac70ce928e3422b359fb5698cc06041
+commit e4ddb12f2df38d8f05d3a32b455658d403e779a0
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jun 10 20:24:00 2021 +0800
 
@@ -170,7 +181,7 @@ Date:   Thu Jun 10 20:24:00 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit d8e49e0ea3438ac31a31d711d95072e5d1016328
+commit 4896e1e8044d887eebfccf51b4a3621bda70958a
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Mon Aug 9 19:06:51 2021 +0800
 
@@ -182,7 +193,7 @@ Date:   Mon Aug 9 19:06:51 2021 +0800
     Signed-off-by: Jinzhou Su <Jinzhou.Su@amd.com>
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 04104b8427e4fbcf15f3e279a7c7c01fb3083206
+commit a04f0d65d21470d60b011e4d63c4720b61f79c57
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Fri Aug 13 18:43:47 2021 +0800
 
@@ -194,7 +205,7 @@ Date:   Fri Aug 13 18:43:47 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 74a19fa5d8e5c643f446fd6615ded86cdc783479
+commit c8b60cdcdeed47fa1d78df95b4bb1f9ebf9ca62c
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jun 10 18:04:45 2021 +0800
 
@@ -218,7 +229,7 @@ Date:   Thu Jun 10 18:04:45 2021 +0800
 
     There are two types of hardware implementations for amd-pstate: one is full
     MSR support and another is shared memory support. It can use
-    X86_FEATURE_AMD_CPPC_EXT feature flag to distinguish the different types.
+    X86_FEATURE_CPPC feature flag to distinguish the different types.
 
     Using the new AMD P-States method + kernel governors (*schedutil*,
     *ondemand*, ...) to manage the frequency update is the most appropriate
@@ -310,7 +321,7 @@ Date:   Thu Jun 10 18:04:45 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 60155c87491f7e74883c2fc90a1a10c1a5ba87c0
+commit fad952704f167c9ae8c4254df1f870533850a601
 Author: Jinzhou Su <Jinzhou.Su@amd.com>
 Date:   Mon Aug 9 19:04:17 2021 +0800
 
@@ -333,7 +344,7 @@ Date:   Mon Aug 9 19:04:17 2021 +0800
     Signed-off-by: Jinzhou Su <Jinzhou.Su@amd.com>
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 9ff1102a12e6d9bc3870e61e54c4840f2458c342
+commit d995363a09adc216d9f6d30fdaaeeba1f3abbd30
 Author: Mario Limonciello <mario.limonciello@amd.com>
 Date:   Wed Jul 28 05:48:34 2021 +0800
 
@@ -352,7 +363,7 @@ Date:   Wed Jul 28 05:48:34 2021 +0800
     Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 8c037499dba2dbe8b7f02d7b556aa731c8c58678
+commit 664330769a48c0699102748f25ea22a42e0ab73a
 Author: Steven Noonan <steven@valvesoftware.com>
 Date:   Wed Oct 27 01:11:54 2021 -0700
 
@@ -369,7 +380,7 @@ Date:   Wed Oct 27 01:11:54 2021 -0700
     Signed-off-by: Steven Noonan <steven@valvesoftware.com>
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 2ddfdc720f927c448562c0270923ddd240f5f8a1
+commit 6d701c90560845ebcb245ba9d8b4bc40956f5bb5
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Mon Jan 25 15:50:24 2021 +0800
 
@@ -381,7 +392,7 @@ Date:   Mon Jan 25 15:50:24 2021 +0800
 
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 
-commit 8abddcb46f0a78981d902f9e43cb2b209a316985
+commit a52e705f391ac57a50a0992e98f4d87a2e68bdac
 Author: Huang Rui <ray.huang@amd.com>
 Date:   Thu Jan 28 10:50:26 2021 +0800
 
@@ -396,18 +407,20 @@ Date:   Thu Jan 28 10:50:26 2021 +0800
     MSR Support" and another is "Shared Memory Support". The feature flag
     indicates the current processors with "Full MSR Support".
 
+    Acked-by: Borislav Petkov <bp@suse.de>
     Signed-off-by: Huang Rui <ray.huang@amd.com>
 ---
  Documentation/admin-guide/pm/amd-pstate.rst   | 373 ++++++++++
  .../admin-guide/pm/working-state.rst          |   1 +
  arch/x86/include/asm/cpufeatures.h            |   1 +
  arch/x86/include/asm/msr-index.h              |  17 +
- drivers/acpi/cppc_acpi.c                      |  93 ++-
+ drivers/acpi/cppc_acpi.c                      | 114 ++-
  drivers/cpufreq/Kconfig.x86                   |  17 +
- drivers/cpufreq/Makefile                      |   1 +
- drivers/cpufreq/amd-pstate.c                  | 663 ++++++++++++++++++
+ drivers/cpufreq/Makefile                      |   5 +
+ drivers/cpufreq/amd-pstate-trace.c            |   2 +
+ drivers/cpufreq/amd-pstate-trace.h            |  91 +++
+ drivers/cpufreq/amd-pstate.c                  | 662 ++++++++++++++++++
  include/acpi/cppc_acpi.h                      |   5 +
- include/trace/events/power.h                  |  46 ++
  tools/power/cpupower/lib/cpufreq.c            |  21 +-
  tools/power/cpupower/lib/cpufreq.h            |  12 +
  tools/power/cpupower/utils/cpufreq-info.c     |  68 +-
@@ -415,13 +428,15 @@ Date:   Thu Jan 28 10:50:26 2021 +0800
  tools/power/cpupower/utils/helpers/cpuid.c    |  13 +
  tools/power/cpupower/utils/helpers/helpers.h  |  22 +
  tools/power/cpupower/utils/helpers/misc.c     |  62 ++
- 17 files changed, 1441 insertions(+), 61 deletions(-)
+ 18 files changed, 1503 insertions(+), 70 deletions(-)
  create mode 100644 Documentation/admin-guide/pm/amd-pstate.rst
+ create mode 100644 drivers/cpufreq/amd-pstate-trace.c
+ create mode 100644 drivers/cpufreq/amd-pstate-trace.h
  create mode 100644 drivers/cpufreq/amd-pstate.c
 
 diff --git a/Documentation/admin-guide/pm/amd-pstate.rst b/Documentation/admin-guide/pm/amd-pstate.rst
 new file mode 100644
-index 000000000000..375374e3eb80
+index 000000000000..24a88476fc69
 --- /dev/null
 +++ b/Documentation/admin-guide/pm/amd-pstate.rst
 @@ -0,0 +1,373 @@
@@ -622,7 +637,7 @@ index 000000000000..375374e3eb80
 +
 +There are two types of hardware implementations for ``amd-pstate``: one is
 +`Full MSR Support <perf_cap_>`_ and another is `Shared Memory Support
-+<perf_cap_>`_. It can use :c:macro:`X86_FEATURE_AMD_CPPC` feature flag (for
++<perf_cap_>`_. It can use :c:macro:`X86_FEATURE_CPPC` feature flag (for
 +details refer to Processor Programming Reference (PPR) for AMD Family
 +19h Model 21h, Revision B0 Processors [3]_) to indicate the different
 +types. ``amd-pstate`` is to register different ``amd_pstate_perf_funcs``
@@ -635,7 +650,7 @@ index 000000000000..375374e3eb80
 +-----------------
 +
 +Some new Zen3 processors such as Cezanne provide the MSR registers directly
-+while the :c:macro:`X86_FEATURE_AMD_CPPC` CPU feature flag is set.
++while the :c:macro:`X86_FEATURE_CPPC` CPU feature flag is set.
 +``amd-pstate`` can handle the MSR register to implement the fast switch
 +function in ``CPUFreq`` that can shrink latency of frequency control on the
 +interrupt context.
@@ -643,8 +658,8 @@ index 000000000000..375374e3eb80
 +Shared Memory Support
 +----------------------
 +
-+If :c:macro:`X86_FEATURE_AMD_CPPC` CPU feature flag is not set, that means
-+the processor supports shared memory solution. In this case, ``amd-pstate``
++If :c:macro:`X86_FEATURE_CPPC` CPU feature flag is not set, that means the
++processor supports shared memory solution. In this case, ``amd-pstate``
 +uses the ``cppc_acpi`` helper methods to implement the callback functions
 +of ``amd_pstate_perf_funcs``.
 +
@@ -811,14 +826,14 @@ index f40994c422dc..5d2757e2de65 100644
     intel_epb
     intel-speed-select
 diff --git a/arch/x86/include/asm/cpufeatures.h b/arch/x86/include/asm/cpufeatures.h
-index d0ce5cfd3ac1..f23dc1abd485 100644
+index d0ce5cfd3ac1..dec4dab82e0c 100644
 --- a/arch/x86/include/asm/cpufeatures.h
 +++ b/arch/x86/include/asm/cpufeatures.h
 @@ -313,6 +313,7 @@
  #define X86_FEATURE_AMD_SSBD		(13*32+24) /* "" Speculative Store Bypass Disable */
  #define X86_FEATURE_VIRT_SSBD		(13*32+25) /* Virtualized Speculative Store Bypass Disable */
  #define X86_FEATURE_AMD_SSB_NO		(13*32+26) /* "" Speculative Store Bypass is fixed in hardware. */
-+#define X86_FEATURE_AMD_CPPC		(13*32+27) /* Collaborative Processor Performance Control */
++#define X86_FEATURE_CPPC		(13*32+27) /* Collaborative Processor Performance Control */
  
  /* Thermal and Power Management Leaf, CPUID level 0x00000006 (EAX), word 14 */
  #define X86_FEATURE_DTHERM		(14*32+ 0) /* Digital Thermal Sensor */
@@ -851,7 +866,7 @@ index a7c413432b33..ce42e15cf303 100644
  #define MSR_F17H_IRPERF			0xc00000e9
  
 diff --git a/drivers/acpi/cppc_acpi.c b/drivers/acpi/cppc_acpi.c
-index a4d4eebba1da..9d25341fdfc5 100644
+index bd482108310c..fc9d0f330eb3 100644
 --- a/drivers/acpi/cppc_acpi.c
 +++ b/drivers/acpi/cppc_acpi.c
 @@ -411,7 +411,7 @@ bool acpi_cpc_valid(void)
@@ -932,7 +947,7 @@ index a4d4eebba1da..9d25341fdfc5 100644
  		vaddr = GET_PCC_VADDR(reg->address, pcc_ss_id);
  	else if (reg->space_id == ACPI_ADR_SPACE_SYSTEM_MEMORY)
  		vaddr = reg_res->sys_mem_vaddr;
-@@ -1220,6 +1260,51 @@ int cppc_get_perf_ctrs(int cpunum, struct cppc_perf_fb_ctrs *perf_fb_ctrs)
+@@ -1235,6 +1275,51 @@ int cppc_get_perf_ctrs(int cpunum, struct cppc_perf_fb_ctrs *perf_fb_ctrs)
  }
  EXPORT_SYMBOL_GPL(cppc_get_perf_ctrs);
  
@@ -984,8 +999,65 @@ index a4d4eebba1da..9d25341fdfc5 100644
  /**
   * cppc_set_perf - Set a CPU's performance controls.
   * @cpu: CPU for which to set performance controls.
+@@ -1245,7 +1330,7 @@ EXPORT_SYMBOL_GPL(cppc_get_perf_ctrs);
+ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+ {
+ 	struct cpc_desc *cpc_desc = per_cpu(cpc_desc_ptr, cpu);
+-	struct cpc_register_resource *desired_reg;
++	struct cpc_register_resource *desired_reg, *min_reg, *max_reg;
+ 	int pcc_ss_id = per_cpu(cpu_pcc_subspace_idx, cpu);
+ 	struct cppc_pcc_data *pcc_ss_data = NULL;
+ 	int ret = 0;
+@@ -1256,6 +1341,8 @@ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+ 	}
+ 
+ 	desired_reg = &cpc_desc->cpc_regs[DESIRED_PERF];
++	min_reg = &cpc_desc->cpc_regs[MIN_PERF];
++	max_reg = &cpc_desc->cpc_regs[MAX_PERF];
+ 
+ 	/*
+ 	 * This is Phase-I where we want to write to CPC registers
+@@ -1264,7 +1351,7 @@ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+ 	 * Since read_lock can be acquired by multiple CPUs simultaneously we
+ 	 * achieve that goal here
+ 	 */
+-	if (CPC_IN_PCC(desired_reg)) {
++	if (CPC_IN_PCC(desired_reg) && CPC_IN_PCC(min_reg) && CPC_IN_PCC(max_reg)) {
+ 		if (pcc_ss_id < 0) {
+ 			pr_debug("Invalid pcc_ss_id\n");
+ 			return -ENODEV;
+@@ -1287,13 +1374,14 @@ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+ 		cpc_desc->write_cmd_status = 0;
+ 	}
+ 
+-	/*
+-	 * Skip writing MIN/MAX until Linux knows how to come up with
+-	 * useful values.
+-	 */
+-	cpc_write(cpu, desired_reg, perf_ctrls->desired_perf);
++	if (perf_ctrls->desired_perf)
++		cpc_write(cpu, desired_reg, perf_ctrls->desired_perf);
++	if (perf_ctrls->min_perf)
++		cpc_write(cpu, min_reg, perf_ctrls->min_perf);
++	if (perf_ctrls->max_perf)
++		cpc_write(cpu, max_reg, perf_ctrls->max_perf);
+ 
+-	if (CPC_IN_PCC(desired_reg))
++	if (CPC_IN_PCC(desired_reg) && CPC_IN_PCC(min_reg) && CPC_IN_PCC(max_reg))
+ 		up_read(&pcc_ss_data->pcc_lock);	/* END Phase-I */
+ 	/*
+ 	 * This is Phase-II where we transfer the ownership of PCC to Platform
+@@ -1341,7 +1429,7 @@ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+ 	 * case during a CMD_READ and if there are pending writes it delivers
+ 	 * the write command before servicing the read command
+ 	 */
+-	if (CPC_IN_PCC(desired_reg)) {
++	if (CPC_IN_PCC(desired_reg) && CPC_IN_PCC(min_reg) && CPC_IN_PCC(max_reg)) {
+ 		if (down_write_trylock(&pcc_ss_data->pcc_lock)) {/* BEGIN Phase-II */
+ 			/* Update only if there are pending write commands */
+ 			if (pcc_ss_data->pending_pcc_write_cmd)
 diff --git a/drivers/cpufreq/Kconfig.x86 b/drivers/cpufreq/Kconfig.x86
-index 92701a18bdd9..2e798b2c0bdb 100644
+index 92701a18bdd9..56620437b443 100644
 --- a/drivers/cpufreq/Kconfig.x86
 +++ b/drivers/cpufreq/Kconfig.x86
 @@ -34,6 +34,23 @@ config X86_PCC_CPUFREQ
@@ -993,10 +1065,10 @@ index 92701a18bdd9..2e798b2c0bdb 100644
  	  If in doubt, say N.
  
 +config X86_AMD_PSTATE
-+	bool "AMD Processor P-State driver"
++	tristate "AMD Processor P-State driver"
 +	depends on X86
 +	select ACPI_PROCESSOR if ACPI
-+	select ACPI_CPPC_LIB if X86_64 && ACPI && SCHED_MC_PRIO
++	select ACPI_CPPC_LIB if X86_64 && ACPI
 +	select CPU_FREQ_GOV_SCHEDUTIL if SMP
 +	help
 +	  This driver adds a CPUFreq driver which utilizes a fine grain
@@ -1013,23 +1085,139 @@ index 92701a18bdd9..2e798b2c0bdb 100644
  	tristate "ACPI Processor P-States driver"
  	depends on ACPI_PROCESSOR
 diff --git a/drivers/cpufreq/Makefile b/drivers/cpufreq/Makefile
-index 27d3bd7ea9d4..5c9a2a1ee8dc 100644
+index 48ee5859030c..285de70af877 100644
 --- a/drivers/cpufreq/Makefile
 +++ b/drivers/cpufreq/Makefile
-@@ -25,6 +25,7 @@ obj-$(CONFIG_CPUFREQ_DT_PLATDEV)	+= cpufreq-dt-platdev.o
+@@ -17,6 +17,10 @@ obj-$(CONFIG_CPU_FREQ_GOV_ATTR_SET)	+= cpufreq_governor_attr_set.o
+ obj-$(CONFIG_CPUFREQ_DT)		+= cpufreq-dt.o
+ obj-$(CONFIG_CPUFREQ_DT_PLATDEV)	+= cpufreq-dt-platdev.o
+ 
++# Traces
++CFLAGS_amd-pstate-trace.o               := -I$(src)
++amd_pstate-y				:= amd-pstate.o amd-pstate-trace.o
++
+ ##################################################################################
+ # x86 drivers.
+ # Link order matters. K8 is preferred to ACPI because of firmware bugs in early
+@@ -25,6 +29,7 @@ obj-$(CONFIG_CPUFREQ_DT_PLATDEV)	+= cpufreq-dt-platdev.o
  # speedstep-* is preferred over p4-clockmod.
  
  obj-$(CONFIG_X86_ACPI_CPUFREQ)		+= acpi-cpufreq.o
-+obj-$(CONFIG_X86_AMD_PSTATE)		+= amd-pstate.o
++obj-$(CONFIG_X86_AMD_PSTATE)		+= amd_pstate.o
  obj-$(CONFIG_X86_POWERNOW_K8)		+= powernow-k8.o
  obj-$(CONFIG_X86_PCC_CPUFREQ)		+= pcc-cpufreq.o
  obj-$(CONFIG_X86_POWERNOW_K6)		+= powernow-k6.o
+diff --git a/drivers/cpufreq/amd-pstate-trace.c b/drivers/cpufreq/amd-pstate-trace.c
+new file mode 100644
+index 000000000000..891b696dcd69
+--- /dev/null
++++ b/drivers/cpufreq/amd-pstate-trace.c
+@@ -0,0 +1,2 @@
++#define CREATE_TRACE_POINTS
++#include "amd-pstate-trace.h"
+diff --git a/drivers/cpufreq/amd-pstate-trace.h b/drivers/cpufreq/amd-pstate-trace.h
+new file mode 100644
+index 000000000000..cf978a7d53dd
+--- /dev/null
++++ b/drivers/cpufreq/amd-pstate-trace.h
+@@ -0,0 +1,91 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * amd-pstate-trace.h - AMD Processor P-state Frequency Driver Tracer
++ *
++ * Copyright (C) 2021 Advanced Micro Devices, Inc. All Rights Reserved.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
++ *
++ * Author: Huang Rui <ray.huang@amd.com>
++ */
++
++#if !defined(_AMD_PSTATE_TRACE_H) || defined(TRACE_HEADER_MULTI_READ)
++#define _AMD_PSTATE_TRACE_H
++
++#include <linux/cpufreq.h>
++#include <linux/tracepoint.h>
++#include <linux/trace_events.h>
++
++#undef TRACE_SYSTEM
++#define TRACE_SYSTEM amd_cpu
++
++#undef TRACE_INCLUDE_FILE
++#define TRACE_INCLUDE_FILE amd-pstate-trace
++
++#define TPS(x)  tracepoint_string(x)
++
++TRACE_EVENT(amd_pstate_perf,
++
++	TP_PROTO(unsigned long min_perf,
++		 unsigned long target_perf,
++		 unsigned long capacity,
++		 unsigned int cpu_id,
++		 bool changed,
++		 bool fast_switch
++		 ),
++
++	TP_ARGS(min_perf,
++		target_perf,
++		capacity,
++		cpu_id,
++		changed,
++		fast_switch
++		),
++
++	TP_STRUCT__entry(
++		__field(unsigned long, min_perf)
++		__field(unsigned long, target_perf)
++		__field(unsigned long, capacity)
++		__field(unsigned int, cpu_id)
++		__field(bool, changed)
++		__field(bool, fast_switch)
++		),
++
++	TP_fast_assign(
++		__entry->min_perf = min_perf;
++		__entry->target_perf = target_perf;
++		__entry->capacity = capacity;
++		__entry->cpu_id = cpu_id;
++		__entry->changed = changed;
++		__entry->fast_switch = fast_switch;
++		),
++
++	TP_printk("amd_min_perf=%lu amd_des_perf=%lu amd_max_perf=%lu cpu_id=%u changed=%s fast_switch=%s",
++		  (unsigned long)__entry->min_perf,
++		  (unsigned long)__entry->target_perf,
++		  (unsigned long)__entry->capacity,
++		  (unsigned int)__entry->cpu_id,
++		  (__entry->changed) ? "true" : "false",
++		  (__entry->fast_switch) ? "true" : "false"
++		 )
++);
++
++#endif /* _AMD_PSTATE_TRACE_H */
++
++/* This part must be outside protection */
++#undef TRACE_INCLUDE_PATH
++#define TRACE_INCLUDE_PATH .
++
++#include <trace/define_trace.h>
 diff --git a/drivers/cpufreq/amd-pstate.c b/drivers/cpufreq/amd-pstate.c
 new file mode 100644
-index 000000000000..58ee50bf492b
+index 000000000000..4ab2c4f20b1c
 --- /dev/null
 +++ b/drivers/cpufreq/amd-pstate.c
-@@ -0,0 +1,663 @@
+@@ -0,0 +1,662 @@
 +/*
 + * amd-pstate.c - AMD Processor P-state Frequency Driver
 + *
@@ -1068,7 +1256,6 @@ index 000000000000..58ee50bf492b
 +#include <linux/delay.h>
 +#include <linux/uaccess.h>
 +#include <linux/static_call.h>
-+#include <trace/events/power.h>
 +
 +#include <acpi/processor.h>
 +#include <acpi/cppc_acpi.h>
@@ -1077,6 +1264,7 @@ index 000000000000..58ee50bf492b
 +#include <asm/processor.h>
 +#include <asm/cpufeature.h>
 +#include <asm/cpu_device_id.h>
++#include "amd-pstate-trace.h"
 +
 +#define AMD_PSTATE_TRANSITION_LATENCY	0x20000
 +#define AMD_PSTATE_TRANSITION_DELAY	500
@@ -1224,8 +1412,8 @@ index 000000000000..58ee50bf492b
 +	value &= ~REQ_MAX_PERF(~0L);
 +	value |= REQ_MAX_PERF(max_perf);
 +
-+	trace_amd_pstate_perf(min_perf, des_perf, max_perf, cpudata->cpu,
-+			      (value != prev), fast_switch);
++	trace_amd_pstate_perf(min_perf, des_perf, max_perf,
++			      cpudata->cpu, (value != prev), fast_switch);
 +
 +	if (value == prev)
 +		return;
@@ -1467,7 +1655,7 @@ index 000000000000..58ee50bf492b
 +	/* It will be updated by governor */
 +	policy->cur = policy->cpuinfo.min_freq;
 +
-+	if (boot_cpu_has(X86_FEATURE_AMD_CPPC))
++	if (boot_cpu_has(X86_FEATURE_CPPC))
 +		policy->fast_switch_possible = true;
 +
 +	ret = freq_qos_add_request(&policy->constraints, &cpudata->req[0],
@@ -1496,7 +1684,6 @@ index 000000000000..58ee50bf492b
 +
 +	return 0;
 +
-+	freq_qos_remove_request(&cpudata->req[1]);
 +free_cpudata2:
 +	freq_qos_remove_request(&cpudata->req[0]);
 +free_cpudata1:
@@ -1661,7 +1848,7 @@ index 000000000000..58ee50bf492b
 +		return -EEXIST;
 +
 +	/* capability check */
-+	if (boot_cpu_has(X86_FEATURE_AMD_CPPC)) {
++	if (boot_cpu_has(X86_FEATURE_CPPC)) {
 +		pr_debug("%s, AMD CPPC MSR based functionality is supported\n",
 +			 __func__);
 +		amd_pstate_driver.adjust_perf = amd_pstate_adjust_perf;
@@ -1694,18 +1881,18 @@ index 000000000000..58ee50bf492b
 +MODULE_DESCRIPTION("AMD Processor P-state Frequency Driver");
 +MODULE_LICENSE("GPL");
 diff --git a/include/acpi/cppc_acpi.h b/include/acpi/cppc_acpi.h
-index 9f4985b4d64d..550fa88cff86 100644
+index bc159a9b4a73..92b7ea8d8f5e 100644
 --- a/include/acpi/cppc_acpi.h
 +++ b/include/acpi/cppc_acpi.h
-@@ -137,6 +137,7 @@ struct cppc_cpudata {
- extern int cppc_get_desired_perf(int cpunum, u64 *desired_perf);
+@@ -138,6 +138,7 @@ extern int cppc_get_desired_perf(int cpunum, u64 *desired_perf);
+ extern int cppc_get_nominal_perf(int cpunum, u64 *nominal_perf);
  extern int cppc_get_perf_ctrs(int cpu, struct cppc_perf_fb_ctrs *perf_fb_ctrs);
  extern int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls);
 +extern int cppc_set_enable(int cpu, bool enable);
  extern int cppc_get_perf_caps(int cpu, struct cppc_perf_caps *caps);
  extern bool acpi_cpc_valid(void);
  extern int acpi_get_psd_map(unsigned int cpu, struct cppc_cpudata *cpu_data);
-@@ -157,6 +158,10 @@ static inline int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
+@@ -162,6 +163,10 @@ static inline int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
  {
  	return -ENOTSUPP;
  }
@@ -1716,63 +1903,6 @@ index 9f4985b4d64d..550fa88cff86 100644
  static inline int cppc_get_perf_caps(int cpu, struct cppc_perf_caps *caps)
  {
  	return -ENOTSUPP;
-diff --git a/include/trace/events/power.h b/include/trace/events/power.h
-index af5018aa9517..c95c0b8d443d 100644
---- a/include/trace/events/power.h
-+++ b/include/trace/events/power.h
-@@ -173,6 +173,52 @@ TRACE_EVENT(cpu_frequency_limits,
- 		  (unsigned long)__entry->cpu_id)
- );
- 
-+TRACE_EVENT(amd_pstate_perf,
-+
-+	TP_PROTO(unsigned long min_perf,
-+		 unsigned long target_perf,
-+		 unsigned long capacity,
-+		 unsigned int cpu_id,
-+		 bool changed,
-+		 bool fast_switch
-+		 ),
-+
-+	TP_ARGS(min_perf,
-+		target_perf,
-+		capacity,
-+		cpu_id,
-+		changed,
-+		fast_switch
-+		),
-+
-+	TP_STRUCT__entry(
-+		__field(unsigned long, min_perf)
-+		__field(unsigned long, target_perf)
-+		__field(unsigned long, capacity)
-+		__field(unsigned int, cpu_id)
-+		__field(bool, changed)
-+		__field(bool, fast_switch)
-+		),
-+
-+	TP_fast_assign(
-+		__entry->min_perf = min_perf;
-+		__entry->target_perf = target_perf;
-+		__entry->capacity = capacity;
-+		__entry->cpu_id = cpu_id;
-+		__entry->changed = changed;
-+		__entry->fast_switch = fast_switch;
-+		),
-+
-+	TP_printk("amd_min_perf=%lu amd_des_perf=%lu amd_max_perf=%lu cpu_id=%u changed=%s fast_switch=%s",
-+		  (unsigned long)__entry->min_perf,
-+		  (unsigned long)__entry->target_perf,
-+		  (unsigned long)__entry->capacity,
-+		  (unsigned int)__entry->cpu_id,
-+		  (__entry->changed) ? "true" : "false",
-+		  (__entry->fast_switch) ? "true" : "false"
-+		 )
-+);
-+
- TRACE_EVENT(device_pm_callback_start,
- 
- 	TP_PROTO(struct device *dev, const char *pm_ops, int event),
 diff --git a/tools/power/cpupower/lib/cpufreq.c b/tools/power/cpupower/lib/cpufreq.c
 index c3b56db8b921..02719cc400a1 100644
 --- a/tools/power/cpupower/lib/cpufreq.c
@@ -2269,5 +2399,5 @@ index fc6e34511721..d693c96cd09c 100644
 +	return;
 +}
 -- 
-2.33.1
+2.34.0
 

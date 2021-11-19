@@ -72,7 +72,7 @@ source=(
   #"squashed-mm-multigenerational-lru-v5-for-5.15.y.patch"
 
   # AMD pstate cpufreq driver
-  "squashed-amd-pstate-v3-for-5.14.patch"
+  "squashed-amd-pstate-v4-for-5.15.patch"
 
   # 5.16: Updated zstd: v1.4.10
   # 5.16: futex2 waitv
@@ -105,7 +105,7 @@ sha256sums=('SKIP'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
-            '4968c6118011e07b34d925f064c65eb4fc007f470c3fb839f074c8dee4715ff6'
+            '8592fc434cc7d52b0fefe478de19d0af3d7e06406d8d09bd1bc85e6805738e68'
             'd532550f62a4b7d93bd39777bf57961f73b6330c4ebf5af9e1ddfa689d2cd704'
             '0c422d8f420c1518aab1b980c6cdb6e029a4fa9cde1fd99a63670bb105a44f36'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
