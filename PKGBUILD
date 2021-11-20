@@ -17,8 +17,8 @@ esac
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
-_tag=v5.16-rc1-s0ix
-pkgver=5.16rc1
+_tag=v5.16-rc2-s0ix
+pkgver=5.16rc2
 pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)
