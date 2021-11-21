@@ -1,7 +1,7 @@
 pkgbase = linux-mainline-amd-s0ix
 	pkgdesc = Linux Mainline
 	pkgver = 5.16rc1
-	pkgrel = 3
+	pkgrel = 4
 	url = https://kernel.org/
 	arch = x86_64
 	license = GPL2
