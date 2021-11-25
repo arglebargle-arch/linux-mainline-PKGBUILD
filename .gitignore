@@ -1,16 +1,19 @@
-archlinux-linux
-src-cache
-release*
-clang*
-build*
+# kernel source
+linux-*-s0ix
+
+# build artifacts
 src
 pkg
-*/
 *.log
 *.log.*
 *.pkg.tar.*
 *.sig
+
+# local directories
+*/
+
+# user config customizations
 myconfig
+
+# last-run kernel config
 config.last
-oldconfig*
-*build.sh
