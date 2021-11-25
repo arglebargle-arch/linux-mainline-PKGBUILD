@@ -101,7 +101,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '0eecdc29b3bde4bccda282c4c04ef114250fedddcf3dbf07a3cc201dce35838f'
-            '1ac18cad2578df4a70f9346f7c6fccbb62f042a0ee0594817fdef9f2704904ee'
+            '5b8eddb90671f3e8469a023b7ed0d3c5a9521f662affa1d541063e273b64dba8'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
