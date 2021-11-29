@@ -1,47 +1,41 @@
-From e797db310ea37b3d4052ce3fbe75937b032dbacc Mon Sep 17 00:00:00 2001
-From: Scott B <arglebargle@arglebargle.dev>
-Date: Sun, 14 Nov 2021 17:36:44 -0800
+From patchwork Sat May 29 16:29:48 2021
+Message-ID: <56767df55117cc5834b0021ba2c056272e686804.camel@perches.com>
 Subject: [PATCH] HID: asus: Reduce object size by consolidating calls
+From: Joe Perches <joe@perches.com>
+To: Jiri Kosina <jikos@kernel.org>,
+        Benjamin Tissoires <benjamin.tissoires@redhat.com>
+Cc: linux-input <linux-input@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>
+Date: Sat, 29 May 2021 09:29:48 -0700
+List-ID: <linux-input.vger.kernel.org>
+X-Mailing-List: linux-input@vger.kernel.org
 
-commit b93b3cb4167cc9abaf9323d4befe65ebbd419bfb
-Author: Scott B <arglebargle@arglebargle.dev>
-Date:   Sun Nov 14 17:29:48 2021 -0800
+Add intermediating lookup functions to avoid repetitive calls.
 
-    fix: HID: asus: Reduce object size by consolidating calls
+Reduces object size ~4kb (x86-64 defconfig w/ hid-asus)
 
-    Update Joe Perches 'Reduce object size' patch to apply after
-    2ea5999d07d2a0ab6ad92ccf65524707f2c5e456 which switched KEY_DISPLAY_OFF
-    for KEY_SCREENLOCK.
+$ size drivers/hid/hid-asus.o*
+   text	   data	    bss	    dec	    hex	filename
+  10442	    468	      0	  10910	   2a9e	drivers/hid/hid-asus.o.bew
+  14523	    468	      0	  14991	   3a8f	drivers/hid/hid-asus.o.old
 
-commit 03133f9890dfc970f1804411e0fd93e40a5145c1
-Author: Joe Perches <joe@perches.com>
-Date:   Sat May 29 09:29:48 2021 -0700
+Miscellanea:
 
-    HID: asus: Reduce object size by consolidating calls
+o Remove now unused asus_map_kay_clear macro
 
-    Add intermediating lookup functions to avoid repetitive calls.
-
-    Reduces object size ~4kb (x86-64 defconfig w/ hid-asus)
-
-    $ size drivers/hid/hid-asus.o*
-       text	   data	    bss	    dec	    hex	filename
-      10442	    468	      0	  10910	   2a9e	drivers/hid/hid-asus.o.bew
-      14523	    468	      0	  14991	   3a8f	drivers/hid/hid-asus.o.old
-
-    Miscellanea:
-
-    o Remove now unused asus_map_kay_clear macro
-
-    Signed-off-by: Joe Perches <joe@perches.com>
+Signed-off-by: Joe Perches <joe@perches.com>
 ---
- drivers/hid/hid-asus.c | 130 ++++++++++++++++++++---------------------
- 1 file changed, 65 insertions(+), 65 deletions(-)
+
+untested, no hardware
+
+ drivers/hid/hid-asus.c | 128 ++++++++++++++++++++++++-------------------------
+ 1 file changed, 64 insertions(+), 64 deletions(-)
 
 diff --git a/drivers/hid/hid-asus.c b/drivers/hid/hid-asus.c
-index 5d57214d8dee..d1c9556b0ddc 100644
+index fca8fc78a78a3..5b78e6c3bb5d9 100644
 --- a/drivers/hid/hid-asus.c
 +++ b/drivers/hid/hid-asus.c
-@@ -820,8 +820,58 @@ static int asus_input_configured(struct hid_device *hdev, struct hid_input *hi)
+@@ -811,8 +811,58 @@ static int asus_input_configured(struct hid_device *hdev, struct hid_input *hi)
  	return 0;
  }
  
@@ -52,7 +46,7 @@ index 5d57214d8dee..d1c9556b0ddc 100644
 +	switch (use) {
 +	case 0x10: return KEY_BRIGHTNESSDOWN;
 +	case 0x20: return KEY_BRIGHTNESSUP;
-+	case 0x35: return KEY_SCREENLOCK;
++	case 0x35: return KEY_DISPLAY_OFF;
 +	case 0x6c: return KEY_SLEEP;
 +	case 0x7c: return KEY_MICMUTE;
 +	case 0x82: return KEY_CAMERA;
@@ -92,7 +86,7 @@ index 5d57214d8dee..d1c9556b0ddc 100644
 +	case 0x00f1: return KEY_WLAN;
 +	case 0x00f2: return KEY_BRIGHTNESSDOWN;
 +	case 0x00f3: return KEY_BRIGHTNESSUP;
-+	case 0x00f4: return KEY_SCREENLOCK;
++	case 0x00f4: return KEY_DISPLAY_OFF;
 +	case 0x00f7: return KEY_CAMERA;
 +	case 0x00f8: return KEY_PROG1;
 +	}
@@ -102,14 +96,14 @@ index 5d57214d8dee..d1c9556b0ddc 100644
  static int asus_input_mapping(struct hid_device *hdev,
  		struct hid_input *hi, struct hid_field *field,
  		struct hid_usage *usage, unsigned long **bit,
-@@ -851,50 +901,16 @@ static int asus_input_mapping(struct hid_device *hdev,
+@@ -842,50 +892,16 @@ static int asus_input_mapping(struct hid_device *hdev,
  
  	/* ASUS-specific keyboard hotkeys and led backlight */
  	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_ASUSVENDOR) {
 -		switch (usage->hid & HID_USAGE) {
 -		case 0x10: asus_map_key_clear(KEY_BRIGHTNESSDOWN);	break;
 -		case 0x20: asus_map_key_clear(KEY_BRIGHTNESSUP);		break;
--		case 0x35: asus_map_key_clear(KEY_SCREENLOCK);		break;
+-		case 0x35: asus_map_key_clear(KEY_DISPLAY_OFF);		break;
 -		case 0x6c: asus_map_key_clear(KEY_SLEEP);		break;
 -		case 0x7c: asus_map_key_clear(KEY_MICMUTE);		break;
 -		case 0x82: asus_map_key_clear(KEY_CAMERA);		break;
@@ -117,8 +111,7 @@ index 5d57214d8dee..d1c9556b0ddc 100644
 -		case 0xb5: asus_map_key_clear(KEY_CALC);			break;
 -		case 0xc4: asus_map_key_clear(KEY_KBDILLUMUP);		break;
 -		case 0xc5: asus_map_key_clear(KEY_KBDILLUMDOWN);		break;
-+		int btn = asus_map_use_to_btn(usage->hid & HID_USAGE);
- 
+-
 -		/* ASUS touchpad toggle */
 -		case 0x6b: asus_map_key_clear(KEY_F21);			break;
 -
@@ -127,7 +120,8 @@ index 5d57214d8dee..d1c9556b0ddc 100644
 -
 -		/* Fn+C ASUS Splendid */
 -		case 0xba: asus_map_key_clear(KEY_PROG2);		break;
--
++		int btn = asus_map_use_to_btn(usage->hid & HID_USAGE);
+ 
 -		/* Fn+Space Power4Gear Hybrid */
 -		case 0x5c: asus_map_key_clear(KEY_PROG3);		break;
 -
@@ -161,7 +155,7 @@ index 5d57214d8dee..d1c9556b0ddc 100644
  
  		/*
  		 * Check and enable backlight only on devices with UsagePage ==
-@@ -910,28 +926,12 @@ static int asus_input_mapping(struct hid_device *hdev,
+@@ -901,28 +917,12 @@ static int asus_input_mapping(struct hid_device *hdev,
  	}
  
  	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_MSVENDOR) {
@@ -184,17 +178,13 @@ index 5d57214d8dee..d1c9556b0ddc 100644
 -		case 0x00f7: asus_map_key_clear(KEY_CAMERA);	break;
 -		case 0x00f8: asus_map_key_clear(KEY_PROG1);	break;
 -		default:
--			return 0;
--		}
 +		int btn = ms_map_use_to_btn(usage->hid & HID_USAGE);
- 
-+		if (!btn)
-+			return 0;
 +
++		if (!btn)
+ 			return 0;
+-		}
+ 
 +		hid_map_usage_clear(hi, usage, bit, max, EV_KEY, btn);
  		set_bit(EV_REP, hi->input->evbit);
  		return 1;
  	}
--- 
-2.33.1
-

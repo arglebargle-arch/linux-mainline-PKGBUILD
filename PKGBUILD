@@ -86,7 +86,7 @@ source=(
   #   NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
-  "HID-asus-Reduce-object-size-by-consolidating-calls+5.16.patch"
+  "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
   "v16-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
@@ -114,7 +114,7 @@ sha256sums=('SKIP'
             '8592fc434cc7d52b0fefe478de19d0af3d7e06406d8d09bd1bc85e6805738e68'
             'b21bcd87911d78ad9d21aef427505d9ecfac7a8a46e96e9eb47612d4a46ffe95'
             '261807a9bc838709bd04e65a83eba2fefd8554699e5dfc8da9a1ee8499807813'
-            'd532550f62a4b7d93bd39777bf57961f73b6330c4ebf5af9e1ddfa689d2cd704'
+            '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '0c422d8f420c1518aab1b980c6cdb6e029a4fa9cde1fd99a63670bb105a44f36'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
