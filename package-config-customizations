@@ -40,20 +40,20 @@ scripts/config --disable CONFIG_DEFAULT_FQ_CODEL
 scripts/config --enable CONFIG_DEFAULT_FQ_PIE
 scripts/config --set-str CONFIG_DEFAULT_NET_SCH "fq_pie"
 
-# use tcp_bbr by default; uncomment if not using bbr2
-scripts/config --module CONFIG_TCP_CONG_CUBIC
-scripts/config --enable CONFIG_TCP_CONG_BBR
-scripts/config --disable CONFIG_DEFAULT_CUBIC
-scripts/config --enable CONFIG_DEFAULT_BBR
-scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
-
-## use tcp_bbr2 by default (pending patch update)
+## use tcp_bbr by default; uncomment if not using bbr2
 #scripts/config --module CONFIG_TCP_CONG_CUBIC
-#scripts/config --module CONFIG_TCP_CONG_BBR
-#scripts/config --enable CONFIG_TCP_CONG_BBR2
+#scripts/config --enable CONFIG_TCP_CONG_BBR
 #scripts/config --disable CONFIG_DEFAULT_CUBIC
-#scripts/config --enable CONFIG_DEFAULT_BBR2
-#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
+#scripts/config --enable CONFIG_DEFAULT_BBR
+#scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
+
+# use tcp_bbr2 by default
+scripts/config --module CONFIG_TCP_CONG_CUBIC
+scripts/config --module CONFIG_TCP_CONG_BBR
+scripts/config --enable CONFIG_TCP_CONG_BBR2
+scripts/config --disable CONFIG_DEFAULT_CUBIC
+scripts/config --enable CONFIG_DEFAULT_BBR2
+scripts/config --set-str CONFIG_DEFAULT_TCP_CONG "bbr2"
 
 ## enable multigen LRU by default (pending patch update)
 #scripts/config --enable CONFIG_LRU_GEN

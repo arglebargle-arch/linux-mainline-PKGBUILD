@@ -68,8 +68,8 @@ source=(
 
   #   NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
 
-  # (needs update) Google's TCP BBRv2
-  #"squashed-net-tcp_bbr-bbr2-for-5.14.y.patch"
+  # Google's TCP BBRv2
+  "squashed-TCP-BBR-v2-for-5.16.y.patch"
 
   # (needs update) Multigenerational LRU v5
   #"squashed-mm-multigenerational-lru-v5-for-5.15.y.patch"
@@ -115,6 +115,7 @@ sha256sums=('SKIP'
             'c5e2ce10bf003d48f87c4aa21368fc863531b5886ee03a666e9dc39c771dbf08'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
+            '70f4c71b7993d80274c29a8076f59b4c15dbd8ce6d7b1334006bf9b82316b780'
             '852fcf5454985dc8169ab0034ee2a80c8f536c666081ddaa53eb1c98a64c838d'
             '1a0452c49f498a6ff6e21791da662b498d0a746ea0d849f000bdc3c1e993450c'
             '261807a9bc838709bd04e65a83eba2fefd8554699e5dfc8da9a1ee8499807813'
