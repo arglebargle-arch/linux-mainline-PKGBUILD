@@ -57,6 +57,9 @@ source=(
   # Arch: optionally disallow unprivileged USER_NS clone
   "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
 
+  # Arch: misc fixes
+  "Bluetooth-btintel-Fix-bdaddress-comparison-with-garb.patch"
+
   # squelch overly zealous wifi regdomain not set warnings; this removes spurious module "crashes" from the klog when using iwd
   "cfg80211-dont-WARN-if-a-self-managed-device.patch"
 
@@ -109,6 +112,7 @@ sha256sums=('SKIP'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
+            'c5e2ce10bf003d48f87c4aa21368fc863531b5886ee03a666e9dc39c771dbf08'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '852fcf5454985dc8169ab0034ee2a80c8f536c666081ddaa53eb1c98a64c838d'
