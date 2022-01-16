@@ -254,10 +254,10 @@ _package-headers() {
   install -Dt "$builddir/arch/x86" -m644 arch/x86/Makefile
   cp -t "$builddir" -a scripts
 
-  # add objtool for external module building and enabled VALIDATION_STACK option
+  # required when STACK_VALIDATION is enabled
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
 
-  # if configured add resolve_btfids for external module building
+  # required when DEBUG_INFO_BTF_MODULES is enabled
   [[ -x tools/bpf/resolve_btfids/resolve_btfids ]] &&
     install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
 
