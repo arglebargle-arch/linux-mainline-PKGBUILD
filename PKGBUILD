@@ -51,6 +51,9 @@ source=(
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
+  # hotfix: fix graphical corruption during boot
+  "v2-drm-amdgpu-Use-correct-VIEWPORT_DIMENSION-for-DCN2.patch"
+
   # 5.16: AMD; don't drop shared caches on C3 state transitions
   # 5.15: k10temp support for Zen3 APUs
 
@@ -111,6 +114,7 @@ sha256sums=('SKIP'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
+            'abfc143482bb993f12bc1e8b94b98e419a09641c68e8be7ece29b5a1f0b0f43b'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             'c5e2ce10bf003d48f87c4aa21368fc863531b5886ee03a666e9dc39c771dbf08'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
