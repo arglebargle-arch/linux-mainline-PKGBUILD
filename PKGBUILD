@@ -54,9 +54,6 @@ source=(
   # hotfix: fix graphical corruption during boot
   "v2-drm-amdgpu-Use-correct-VIEWPORT_DIMENSION-for-DCN2.patch"
 
-  # 5.16: AMD; don't drop shared caches on C3 state transitions
-  # 5.15: k10temp support for Zen3 APUs
-
   # Arch: optionally disallow unprivileged USER_NS clone
   "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
 
@@ -79,9 +76,6 @@ source=(
 
   # AMD pstate cpufreq driver
   "squashed-amd-pstate-v7-on-5.16.y.patch"
-
-  # 5.16: Updated zstd: v1.4.10
-  # 5.16: futex2 waitv
 
   # 5.17: TCP performance improvements
   "squashed-TCP-Optimizations-from-5.17.patch"
@@ -180,20 +174,13 @@ prepare() {
                     # this module is incompatible with clang, disable to avoid a warning
   fi
 
-  ## CONFIG_STACK_VALIDATION gives better stack traces. Also is enabled in all official kernel packages by Archlinux team
-  scripts/config --enable CONFIG_STACK_VALIDATION
-
-  ## Enable IKCONFIG following Arch's philosophy
-  scripts/config --enable CONFIG_IKCONFIG \
-                 --enable CONFIG_IKCONFIG_PROC
-
-  ## apply package kernel config customizations
+  # apply package kernel config customizations
   if [[ -s ${startdir}/package-config-customizations ]]; then
     msg2 "Applying package config customizations..."
     bash -x "${startdir}/package-config-customizations"
   fi
 
-  ## apply any user config customizations
+  # apply any user config customizations
   if [[ -s ${startdir}/myconfig ]]; then
     msg2 "Applying user supplied config customizations..."
     bash -x "${startdir}/myconfig"
@@ -202,13 +189,13 @@ prepare() {
   echo "Finalizing kernel config..."
   make LLVM=$_LLVM LLVM_IAS=$_LLVM olddefconfig
 
-  # let user choose microarchitecture optimization in GCC; run *after* make olddefconfig so our new uarch macros exist
+  # Apply selected microarchitecture optimization; run *after* make olddefconfig so our new uarch macros exist
   sh "${srcdir}/choose-gcc-optimization.sh" "$_microarchitecture"
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 
-  # retain config for re-use
+  # retain config for re-use or inspection
   cat .config > "${startdir}/config.last"
 }
 
