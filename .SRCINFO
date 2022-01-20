@@ -17,6 +17,7 @@ pkgbase = linux-mainline-amd-s0ix
 	makedepends = git
 	makedepends = gcc>=11.0
 	options = !strip
+	options = !ccache
 	source = linux-stable-s0ix::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=v5.16.2-s0ix
 	source = config
 	source = choose-gcc-optimization.sh

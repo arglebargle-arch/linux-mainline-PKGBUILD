@@ -35,7 +35,7 @@ if [ "$_compiler" = "clang" ]; then
   makedepends+=(clang llvm lld python)
   _LLVM=1
 fi
-options=('!strip')
+options=('!strip' '!ccache')
 _srcname=linux-stable-s0ix
 source=(
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
