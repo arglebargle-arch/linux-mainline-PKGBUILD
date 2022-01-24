@@ -51,14 +51,8 @@ source=(
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
-  # hotfix: fix graphical corruption during boot
-  "v2-drm-amdgpu-Use-correct-VIEWPORT_DIMENSION-for-DCN2.patch"
-
   # Arch: optionally disallow unprivileged USER_NS clone
   "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
-
-  # Arch: misc fixes
-  "Bluetooth-btintel-Fix-bdaddress-comparison-with-garb.patch"
 
   # squelch overly zealous wifi regdomain not set warnings; this removes spurious module "crashes" from the klog when using iwd
   "cfg80211-dont-WARN-if-a-self-managed-device.patch"
@@ -74,20 +68,15 @@ source=(
   # Multigenerational LRU v6
   "squashed-mm-multigenerational-lru-v6-for-5.16.patch"
 
-  # AMD pstate cpufreq driver
-  "squashed-amd-pstate-v7-on-5.16.y.patch"
-
+  # 5.17: AMD pstate cpufreq driver
   # 5.17: TCP performance improvements
-  "squashed-TCP-Optimizations-from-5.17.patch"
-
   # 5.17: TCP csum optimization
-  "x86-csum-Rewrite-optimize-csum_partial.patch"
+  # 5.17: ASUS ROG custom fan curves
 
   #   NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
-  "v16-asus-wmi-Add-support-for-custom-fan-curves.patch"
 
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
   "mt76-mt7921-enable-VO-tx-aggregation.patch"
@@ -108,18 +97,12 @@ sha256sums=('SKIP'
             '14baea3bc9ffbe41737cfce6f0c5e6b536021571de7b5c7a9e39b31b94b23668'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
-            'abfc143482bb993f12bc1e8b94b98e419a09641c68e8be7ece29b5a1f0b0f43b'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
-            'c5e2ce10bf003d48f87c4aa21368fc863531b5886ee03a666e9dc39c771dbf08'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '70f4c71b7993d80274c29a8076f59b4c15dbd8ce6d7b1334006bf9b82316b780'
             'bd61c315edca3b3ffd99f4830864fcfa6793be195369629506a730d71b8c858e'
-            '852fcf5454985dc8169ab0034ee2a80c8f536c666081ddaa53eb1c98a64c838d'
-            '1a0452c49f498a6ff6e21791da662b498d0a746ea0d849f000bdc3c1e993450c'
-            '261807a9bc838709bd04e65a83eba2fefd8554699e5dfc8da9a1ee8499807813'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
-            '0c422d8f420c1518aab1b980c6cdb6e029a4fa9cde1fd99a63670bb105a44f36'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
             'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
