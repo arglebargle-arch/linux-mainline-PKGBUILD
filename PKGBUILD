@@ -15,6 +15,9 @@ case "${_compiler,,}" in
                 *) _compiler=gcc            ;; # default to GCC
 esac
 
+# '_O3': Enable -O3 optimization
+[[ -v _O3 ]] && _O3='y'
+
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
 _tag=v5.16.2-s0ix
@@ -155,6 +158,13 @@ prepare() {
                     --disable CONFIG_INIT_STACK_ALL_ZERO \
                     --disable CONFIG_REGULATOR_DA903X 
                     # this module is incompatible with clang, disable to avoid a warning
+  fi
+
+  # enable -O3 build config
+  if [[ "$_O3" == "y" ]]; then
+    msg2 "Enabling -O3 optimizations ..."
+    scripts/config --disable CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE \
+                   --enable CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
   fi
 
   # apply package kernel config customizations
