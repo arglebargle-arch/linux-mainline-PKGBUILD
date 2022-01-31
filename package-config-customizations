@@ -3,6 +3,9 @@
 ## this script fragment tunes kernel config during prepare(), it runs from src/linux.../ before
 ## makeolddefconfig is called
 
+# Disable localversion_auto so kernel version tracks package version
+scripts/config --disable LOCALVERSION_AUTO
+
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
 

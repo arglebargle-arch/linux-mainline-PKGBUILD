@@ -134,6 +134,8 @@ prepare() {
 
   echo "Setting version..."
   scripts/setlocalversion --save-scmversion
+  # HACK: clear the .scmversion file so that our patches don't dirty the kernel version
+  echo "" > .scmversion
   echo "-$pkgrel" > localversion.99-pkgrel
   echo "${pkgbase#linux}" > localversion.20-pkgname
 
