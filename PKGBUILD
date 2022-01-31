@@ -9,14 +9,22 @@
 #
 # shellcheck disable=SC2034,SC2164
 
-# Choose between GCC or CLANG compilation (default is GCC)
+## Kernel optimization controls:
+
+# '_compiler': Support build via default toolchain or LLVM/Clang
+#              default: 'gcc' and standard toolchain, set _compiler='clang' for LLVM/Clang and thin LTO
 case "${_compiler,,}" in
   "clang" | "gcc") _compiler=${_compiler,,} ;; # tolower, simplifes later checks
                 *) _compiler=gcc            ;; # default to GCC
 esac
 
-# '_O3': Enable -O3 optimization
-[[ -v _O3 ]] && _O3='y'
+# '_O3':  Optional -O3 compiler optimizations
+#         default: no -O3 optimization, set _O3=<anything> to enable
+_O3=${_O3:+'y'}
+
+# '_microarchitecture': Optional compiler uArch optimization, see choose-gcc-optimization.sh
+#                       default: x86-64-v3, requires gcc >= 11.0
+_microarchitecture=${_microarchitecture:-'93'}  
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
@@ -29,9 +37,9 @@ url="https://kernel.org/"
 license=(GPL2)
 makedepends=(
   bc kmod libelf pahole cpio perl tar xz
-  xmlto
-  git
-  "gcc>=11.0"
+  # NOTE: -docs package is disabled, thus we don't need these deps.
+  xmlto # python-sphinx python-sphinx_rtd_theme graphviz imagemagick
+  git "gcc>=11.0"
 )
 if [ "$_compiler" = "clang" ]; then
   pkgver="${pkgver}+clang"
@@ -50,7 +58,7 @@ source=(
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
 
-  # compiler optimization flag changes from Xanmod; allow -O3, safer -O3
+  # compiler optimization flag patches from Xanmod; allow -O3 for all architectures, safer -O3
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
@@ -120,14 +128,6 @@ sha256sums=('SKIP'
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
-
-# default to x86-64-v3 microarch if not set
-# other notable values:
-#  Zen2: 14
-#  Zen3: 15
-#  Skylake & Comet Lake: 38
-#  Intel/AMD Native: 98/99
-_microarchitecture=${_microarchitecture:-'93'}
 
 prepare() {
   cd $_srcname
