@@ -56,7 +56,7 @@ source=(
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
-  "more-uarches-for-kernel-5.15+.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
+  "more-uarches-for-kernel-5.15+9c9c7e.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
 
   # compiler optimization flag patches from Xanmod; allow -O3 for all architectures, safer -O3
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
