@@ -28,9 +28,9 @@ _microarchitecture=${_microarchitecture:-'93'}
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
-_tag=v5.17-rc2-s0ix
+_tag=v5.17-rc2-s0ix-2
 pkgver=5.17rc2
-pkgrel=1
+pkgrel=2
 pkgdesc="Linux Mainline"
 arch=(x86_64)
 url="https://kernel.org/"
