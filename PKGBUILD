@@ -100,6 +100,9 @@ source=(
   # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
+  # ASUS ROG laptop hardware enablement
+  "ALSA-hda-realtek-Add-quirk-for-ASUS-M16-GU603H.patch"
+
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
   "mt76-mt7921-enable-VO-tx-aggregation.patch"
   "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
@@ -129,6 +132,7 @@ sha256sums=('SKIP'
             'bd61c315edca3b3ffd99f4830864fcfa6793be195369629506a730d71b8c858e'
             '67b7c5d754698b3f07ae49ed65a11d220b34a7940cebfdb79ae6928d852802a0'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
+            '3bdfbd0f053aba9f8875d3cfa7763765762bbfeab579f52a62f3ea0e436fe546'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
             'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
