@@ -9,7 +9,10 @@
 #
 # shellcheck disable=SC2034,SC2164
 
-## Kernel optimization controls:
+## Kernel build options, use the environment variables below to control
+##
+## Example usage: `_compiler=clang _microarchitecture=15 _O3=y makepkg ...`
+##            or  `makepkg <flags> -- _compiler=clang _O3=y ...`
 
 # '_compiler': Support build via default toolchain or LLVM/Clang
 #              default: 'gcc' and standard toolchain, set _compiler='clang' for LLVM/Clang and thin LTO
@@ -18,13 +21,19 @@ case "${_compiler,,}" in
                 *) _compiler=gcc            ;; # default to GCC
 esac
 
+# '_microarchitecture': Optional compiler uArch optimizations, see choose-gcc-optimization.sh for values
+#                       default: x86-64-v3, requires gcc >= 11.0
+_microarchitecture=${_microarchitecture:-'93'}
+
+# Other uArch values:
+#   Zen2 -> 14, Zen3 -> 15, Skylake & Comet Lake -> 38, Tiger Lake -> 44
+#   Intel Native -> 98, AMD Native -> 99
+#
+# Generic x86-64-v3 strongly recommended if you intend to use one kernel package on multiple machines
+
 # '_O3':  Optional -O3 compiler optimizations
 #         default: no -O3 optimization, set _O3=<anything> to enable
 _O3=${_O3:+'y'}
-
-# '_microarchitecture': Optional compiler uArch optimization, see choose-gcc-optimization.sh
-#                       default: x86-64-v3, requires gcc >= 11.0
-_microarchitecture=${_microarchitecture:-'93'}  
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
@@ -52,13 +61,13 @@ source=(
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config
 
-  #   NOTE: We pull from a stable kernel mirror with all upstream s0ix work included
+  # NOTE: We pull from a stable kernel mirror with all upstream s0ix work included
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+9c9c7e.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
 
-  # compiler optimization flag patches from Xanmod; allow -O3 for all architectures, safer -O3
+  # compiler optimization patches from Xanmod; allow -O3 for all architectures, safer -O3
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
@@ -71,7 +80,7 @@ source=(
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
 
-  #   NOTE: Optional features; feel free to comment these out (make changes to myconfig script as needed)
+  # NOTE: Optional features; feel free to comment these out (make changes to package-config script as needed)
 
   # Google's TCP BBRv2
   "squashed-TCP-BBR-v2-for-5.16.y.patch"
@@ -88,9 +97,7 @@ source=(
   # see: https://lore.kernel.org/lkml/20220201205328.123066-1-dwmw2@infradead.org/
   "Parallel-boot-v4-on-5.17-rc2.patch"
 
-  #   NOTE: All patches below this line support ASUS ROG laptops
-
-  # ROG enablement patches; commented patches have hit upstream already
+  # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
