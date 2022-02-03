@@ -84,6 +84,10 @@ source=(
   # 5.17: TCP csum optimization
   # 5.17: ASUS ROG custom fan curves
 
+  # 5.??: Parallelize x86_64 CPU bringup (v4 patchset) for faster bootup
+  # see: https://lore.kernel.org/lkml/20220201205328.123066-1-dwmw2@infradead.org/
+  "Parallel-boot-v4-on-5.17-rc2.patch"
+
   #   NOTE: All patches below this line support ASUS ROG laptops
 
   # ROG enablement patches; commented patches have hit upstream already
@@ -116,6 +120,7 @@ sha256sums=('SKIP'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
             '70f4c71b7993d80274c29a8076f59b4c15dbd8ce6d7b1334006bf9b82316b780'
             'bd61c315edca3b3ffd99f4830864fcfa6793be195369629506a730d71b8c858e'
+            '67b7c5d754698b3f07ae49ed65a11d220b34a7940cebfdb79ae6928d852802a0'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
