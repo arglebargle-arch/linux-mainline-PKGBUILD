@@ -58,10 +58,9 @@ fi
 options=('!strip' '!ccache')
 _srcname=linux-stable-s0ix
 source=(
+  # NOTE: We pull from a stable kernel mirror with all s0ix patches included
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config
-
-  # NOTE: We pull from a stable kernel mirror with all upstream s0ix work included
 
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
@@ -79,8 +78,6 @@ source=(
 
   # patch from Chromium developers; more accurately report battery state changes
   "acpi-battery-Always-read-fresh-battery-state-on-update.patch"
-
-  # NOTE: Optional features; feel free to comment these out (make changes to package-config script as needed)
 
   # Google's TCP BBRv2
   "squashed-TCP-BBR-v2-for-5.16.y.patch"
@@ -107,8 +104,6 @@ source=(
   "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip.patch"
   "Bluetooth-btusb-Add-support-for-Foxconn-Mediatek-Chip.patch"
   "Bluetooth-btusb-Add-support-for-IMC-Networks-Mediatek-Chip-MT7921.patch"
-
-  # WARNING: hotfix for mt76 reboot issues; only use this when building mt76 as a module
   "mt76-mt7921e-fix-possible-probe-failure-after-reboot.patch"
 )
 validpgpkeys=(
@@ -175,7 +170,7 @@ prepare() {
                     --disable CONFIG_INIT_STACK_ALL_PATTERN \
                     --disable CONFIG_INIT_STACK_ALL_ZERO \
                     --disable CONFIG_REGULATOR_DA903X 
-                    # this module is incompatible with clang, disable to avoid a warning
+                    # this module is incompatible with Clang, disable to avoid a warning
   fi
 
   # enable -O3 build config
