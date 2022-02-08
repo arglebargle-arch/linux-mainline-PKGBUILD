@@ -9,31 +9,17 @@ scripts/config --disable LOCALVERSION_AUTO
 ## Disallow unprivileged namespaces
 #scripts/config --disable USER_NS_UNPRIVILEGED
 
-# enable ACPI debugging features
-scripts/config --module CONFIG_ACPI_EC_DEBUGFS \
-               --enable CONFIG_ACPI_DEBUG \
-               --module CONFIG_ACPI_APEI_ERST_DEBUG
+# enable ACPI debugging
+scripts/config --enable CONFIG_ACPI_DEBUG
 
 # enable scheduler autogrouping
 scripts/config --enable CONFIG_SCHED_AUTOGROUP
 
-# larger log buffer
+# set a larger kernel log buffer (18 -> 256KB)
 scripts/config --set-val CONFIG_LOG_BUF_SHIFT 18
-
-# msr as a module
-scripts/config --module CONFIG_X86_MSR
 
 # enable EFI var access
 scripts/config --enable CONFIG_EFI_VARS
-
-# turn a few non-default options into modules
-scripts/config --module CONFIG_MQ_IOSCHED_KYBER
-scripts/config --module CONFIG_BINFMT_MISC
-scripts/config --module CONFIG_ZBUD
-scripts/config --module CONFIG_ZSMALLOC
-
-# use a smaller connection tracking table
-scripts/config --set-val CONFIG_IP_VS_TAB_BITS 12
 
 # use fq_pie by default
 scripts/config --module CONFIG_NET_SCH_FQ_CODEL
