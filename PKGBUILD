@@ -100,6 +100,9 @@ source=(
   # implement threaded console printing
   "implement-threaded-console-printing-on-5.17rc3.patch"
 
+  # crypto: xor auto-vectorization for Clang
+  "xor-enable-auto-vectorization-in-Clang.patch"
+
   # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
@@ -131,6 +134,7 @@ sha256sums=('SKIP'
             '56f8f93a38ed7236c2504c79645a33123ee7bdf3c0cbb97dfd90600df06be7dd'
             '67b7c5d754698b3f07ae49ed65a11d220b34a7940cebfdb79ae6928d852802a0'
             '8abaca7f14af96b2e176ed836eca64e4e6d5bb53e01e444f3899354513382f6c'
+            'f7d543db2e57414a31f222998aa38861fa6a25aac9adbbbf37379b4a4fcb3826'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
