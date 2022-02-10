@@ -70,6 +70,9 @@ source=(
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
+  # Xanmod: ignore fixed AP power limits
+  "mac80211-ignore-AP-power-level-when-tx-power-type-is.patch"
+
   # Arch: optionally disallow unprivileged USER_NS clone
   "ZEN-Add-sysctl-and-CONFIG-to-disallow-unpriv-USER_NS.patch"
 
@@ -126,6 +129,7 @@ sha256sums=('SKIP'
             '380bcf40cc8396e97bd1d7f2577ab2ace51885858d3f155b1fb2dd5469efd00d'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
+            '3a3cf61894f36f13ebd06ee20ef9d0b70e1b1d17cc37cfe642c581488fd9c4bf'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
             'f7a4bf6293912bfc4a20743e58a5a266be8c4dbe3c1862d196d3a3b45f2f7c90'
