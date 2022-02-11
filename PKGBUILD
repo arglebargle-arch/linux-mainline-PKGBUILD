@@ -279,11 +279,7 @@ _package-headers() {
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
 
   # required when DEBUG_INFO_BTF_MODULES is enabled
-  [[ -x tools/bpf/resolve_btfids/resolve_btfids ]] &&
-    install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
-
-  # add xfs and shmem for aufs building
-  mkdir -p "$builddir"/{fs/xfs,mm}
+  install -Dt "$builddir/tools/bpf/resolve_btfids" tools/bpf/resolve_btfids/resolve_btfids
 
   echo "Installing headers..."
   cp -t "$builddir" -a include
