@@ -115,6 +115,9 @@ source=(
   # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
+  # -- ASUS ROG Flow X13 tablet mode
+  "HID-asus-wmi-ROG-x13-flow-tablet-mode-support.patch"
+
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
   "mt76-mt7921-enable-VO-tx-aggregation.patch"
   "1-2-Bluetooth-btusb-Add-Mediatek-MT7921-support-for-Foxconn.patch"
@@ -148,6 +151,7 @@ sha256sums=('SKIP'
             '8abaca7f14af96b2e176ed836eca64e4e6d5bb53e01e444f3899354513382f6c'
             'f7d543db2e57414a31f222998aa38861fa6a25aac9adbbbf37379b4a4fcb3826'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
+            '38ec0dd8a20bae77b677eb65207c61aa4d668741d9b25aea9876d075365b26ef'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
             '236cdadf0b1472945c0d7570caeed7b95929aabed6872319c9d0969a819689e9'
             'cc2aa580d69801aa1afb0d72ecf094fe13c797363d3d5928c868d3a389910b7b'
