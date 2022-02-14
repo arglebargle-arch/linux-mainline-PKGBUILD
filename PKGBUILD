@@ -112,6 +112,9 @@ source=(
   # crypto: xor auto-vectorization for Clang
   "xor-enable-auto-vectorization-in-Clang.patch"
 
+  # cpufreq: CPPC: Fix performance/frequency conversion
+  "cpufreq-CPPC-Fix-performance-frequency-conversion.patch"
+
   # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
@@ -150,6 +153,7 @@ sha256sums=('SKIP'
             '67b7c5d754698b3f07ae49ed65a11d220b34a7940cebfdb79ae6928d852802a0'
             '8abaca7f14af96b2e176ed836eca64e4e6d5bb53e01e444f3899354513382f6c'
             'f7d543db2e57414a31f222998aa38861fa6a25aac9adbbbf37379b4a4fcb3826'
+            '7dcaa1d5c2c57960fe6590434da7c9b3b403b2d3d3fbecd87361a90d2ccaa0bb'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '38ec0dd8a20bae77b677eb65207c61aa4d668741d9b25aea9876d075365b26ef'
             '1ce9fd988201c4d2e48794c58acda5b768ec0fea1d29555e99d35cd2712281e4'
