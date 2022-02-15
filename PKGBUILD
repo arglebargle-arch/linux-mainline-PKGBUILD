@@ -106,13 +106,13 @@ source=(
   # see: https://lore.kernel.org/lkml/20220201205328.123066-1-dwmw2@infradead.org/
   "Parallel-boot-v4-on-5.17-rc2.patch"
 
-  # implement threaded console printing
+  # 5.18? implement threaded console printing
   "implement-threaded-console-printing-on-5.17rc3.patch"
 
-  # crypto: xor auto-vectorization for Clang
+  # ? crypto: xor auto-vectorization for Clang
   "xor-enable-auto-vectorization-in-Clang.patch"
 
-  # cpufreq: CPPC: Fix performance/frequency conversion
+  # 5.17: cpufreq: CPPC: Fix performance/frequency conversion
   "cpufreq-CPPC-Fix-performance-frequency-conversion.patch"
 
   # reduce hid-asus object size by consolidating calls
@@ -121,7 +121,7 @@ source=(
   # -- ASUS ROG Flow X13 tablet mode
   "HID-asus-wmi-ROG-x13-flow-tablet-mode-support.patch"
 
-  # fix: asus-wmi probe failure on tuf machines
+  # ? fix: asus-wmi probe failure on tuf machines
   "platform-x86-asus-wmi-Fix-regression-when-probing-for-fan-curve-control.patch"
 
   # cherry-picked mediatek mt7921 bt/wifi support from -next and patchwork
