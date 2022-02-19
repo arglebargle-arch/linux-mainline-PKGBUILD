@@ -115,6 +115,9 @@ source=(
   # 5.17: cpufreq: CPPC: Fix performance/frequency conversion
   "cpufreq-CPPC-Fix-performance-frequency-conversion.patch"
 
+  # 5.1?: allow cross vfs reflinks
+  "fs-allow-cross-vfsmount-reflink-dedupe.patch"
+
   # reduce hid-asus object size by consolidating calls
   "HID-asus-Reduce-object-size-by-consolidating-calls.patch"
 
@@ -157,6 +160,7 @@ sha256sums=('SKIP'
             '8abaca7f14af96b2e176ed836eca64e4e6d5bb53e01e444f3899354513382f6c'
             'f7d543db2e57414a31f222998aa38861fa6a25aac9adbbbf37379b4a4fcb3826'
             '7dcaa1d5c2c57960fe6590434da7c9b3b403b2d3d3fbecd87361a90d2ccaa0bb'
+            'b604b4e559347b19ab567fae3d1ba3f897f457566e150c8f7e4b1f2a218b8d5c'
             '544464bf0807b324120767d55867f03014a9fda4e1804768ca341be902d7ade4'
             '38ec0dd8a20bae77b677eb65207c61aa4d668741d9b25aea9876d075365b26ef'
             'fb8103239ac6fa53c9492b63d81cdab4ec0f7b5b1d7dfde362816be768a12a76'
