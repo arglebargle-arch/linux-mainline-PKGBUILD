@@ -62,9 +62,6 @@ source=(
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config
 
-  # hotfix: resolve potential iwlwifi crash at boot
-  "iwlwifi-fix-use-after-free.patch"
-
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+9c9c7e.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
@@ -143,12 +140,11 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '7cbba374356a189faac71001c5344ce8f02434684b1ce1accefc0cc4bd6718e5'
-            '7b6825a43b4173750768a1a50bfd38dcbd326aec6d56cc886490d97e323b7ce9'
             '5b8eddb90671f3e8469a023b7ed0d3c5a9521f662affa1d541063e273b64dba8'
             '380bcf40cc8396e97bd1d7f2577ab2ace51885858d3f155b1fb2dd5469efd00d'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
-            '1673d51a0ae9fccc1b1f1949c019fb5cb2c699394951448f7144be846b0fc1cd'
+            '28102336327d84c495a2fd0c48b85026171c7a38affc09c79d3318b8bc774b4e'
             '3a3cf61894f36f13ebd06ee20ef9d0b70e1b1d17cc37cfe642c581488fd9c4bf'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
             '3d8961438b5c8110588ff0b881d472fc71a4304d306808d78a4055a4150f351e'
