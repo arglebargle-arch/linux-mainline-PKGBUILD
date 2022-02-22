@@ -62,6 +62,9 @@ source=(
   "$_srcname::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=$_tag"
   config
 
+  # fix broken builds in -rc5
+  "netfilter-xt_socket-missing-ifdef-CONFIG_IP6_NF_IPTA.patch"
+
   # graysky's compiler uarch optimization patch, script courtesy of the `linux-xanmod` AUR package
   "choose-gcc-optimization.sh"
   "more-uarches-for-kernel-5.15+9c9c7e.patch"::"https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch"
@@ -140,6 +143,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '7cbba374356a189faac71001c5344ce8f02434684b1ce1accefc0cc4bd6718e5'
+            'ac26a781248e3d1b912cf8a8dba44d9e3e958eab57b167fbdb9ba94d6c758103'
             '5b8eddb90671f3e8469a023b7ed0d3c5a9521f662affa1d541063e273b64dba8'
             '380bcf40cc8396e97bd1d7f2577ab2ace51885858d3f155b1fb2dd5469efd00d'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
