@@ -37,8 +37,8 @@ _O3=${_O3:+'y'}
 
 _pkgbase=linux-mainline
 pkgbase=linux-mainline-amd-s0ix
-_tag=v5.17-rc5-s0ix
-pkgver=5.17rc5
+_tag=v5.17-rc6-s0ix
+pkgver=5.17rc6
 pkgrel=1
 pkgdesc="Linux Mainline"
 arch=(x86_64)

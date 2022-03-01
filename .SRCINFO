@@ -1,6 +1,6 @@
 pkgbase = linux-mainline-amd-s0ix
 	pkgdesc = Linux Mainline
-	pkgver = 5.17rc5
+	pkgver = 5.17rc6
 	pkgrel = 1
 	url = https://kernel.org/
 	arch = x86_64
@@ -18,7 +18,7 @@ pkgbase = linux-mainline-amd-s0ix
 	makedepends = gcc>=11.0
 	options = !strip
 	options = !ccache
-	source = linux-stable-s0ix::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=v5.17-rc5-s0ix
+	source = linux-stable-s0ix::git+https://gitlab.com/smbruce/linux-stable-s0ix.git#tag=v5.17-rc6-s0ix
 	source = config
 	source = choose-gcc-optimization.sh
 	source = more-uarches-for-kernel-5.15+9c9c7e.patch::https://raw.githubusercontent.com/graysky2/kernel_compiler_patch/9c9c7e817dd2718566ec95f7742b162ab125316f/more-uarches-for-kernel-5.15%2B.patch
