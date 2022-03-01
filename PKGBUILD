@@ -70,6 +70,9 @@ source=(
   "Makefile-Turn-off-loop-vectorization-for-GCC-O3.patch"
   "init-Kconfig-Enable-O3-KBUILD_CFLAGS-optimization.patch"
 
+  # Arch Linux hotfixes
+  "Bluetooth-fix-deadlock-for-RFCOMM-sk-state-change.patch"
+
   # -rc3/for-next work; autodefrag, performance, etc
   "btrfs-autodefrag-fixup-and-safe-perf-from-next.patch"
 
@@ -141,6 +144,7 @@ sha256sums=('SKIP'
             '380bcf40cc8396e97bd1d7f2577ab2ace51885858d3f155b1fb2dd5469efd00d'
             '4ed47b049cfc42289897e9f6dc85b548b712ef77bda6f186125f464cfe8aed91'
             '1e9b3c3fccfaba790335b9a83a87e129d66bfba850548f23865b76ea235b8558'
+            'a9647897e59b04cb883dcf649b3108e9397d5a6c672bc545ea0c6bb7bb30d5a9'
             '6335c41dbf89697258fc2d6e963c6517ec31624eb93ec4a1734bc3c93b46bb88'
             '3a3cf61894f36f13ebd06ee20ef9d0b70e1b1d17cc37cfe642c581488fd9c4bf'
             '743001364eb7bf9ee208e60b74b7c68b46c4d03feae26dfcb8f7581d3bf14271'
